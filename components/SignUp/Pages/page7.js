@@ -10,11 +10,11 @@ export default function Page6({navigation}) {
   
   return (
     <View style = {styles.container}>
-        <Text style  = {{fontSize : 20,}}>6단계 - 상세정보 입력 {"\n"}</Text>
+        <Text style  = {{fontSize : 20,fontFamily : 'IBMMe'}}>6단계 - 상세정보 입력 {"\n"}</Text>
         <View>
-        <Text style = {{fontSize : 25}}>혹시 평소 앓고 계신 </Text>
-        <Text style = {{fontSize : 25, borderWidth : 1, borderColor : 'white', borderBottomColor : 'black'}}>질환이 있으세요?  </Text>
-        <Text style = {{fontSize : 15}}>그러시다면, 밑의 선택지를 체크해주세요!  </Text>
+        <Text style = {{fontSize : 25, fontFamily : 'IBMMe'}}>혹시 평소 앓고 계신 </Text>
+        <Text style = {{fontSize : 25,fontFamily : 'IBMMe', borderWidth : 1, borderColor : 'white', borderBottomColor : 'black'}}>질환이 있으세요?  </Text>
+        <Text style = {{fontSize : 15, fontFamily : 'IBMMe'}}>그러시다면, 밑의 선택지를 체크해주세요!  </Text>
         <Text>{"\n"}</Text>
         </View>
        

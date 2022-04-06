@@ -10,12 +10,11 @@ export default function Page4({navigation}) {
   
   return (
     <View style = {styles.container}>
-        <Text style  = {{fontSize : 20,}}>4단계 - 전화번호 입력 {"\n"}</Text>
+        <Text style  = {{fontSize : 20,fontFamily : 'IBMMe'}}>4단계 - 전화번호 입력 {"\n"}</Text>
         <View>
-        <Text style = {{fontSize : 28}}>선생님이 사용하실</Text>
-        <Text style = {{fontSize : 28}}>전화번호를 알려주세요.</Text>
+        <Text style = {{fontSize : 25, fontFamily : 'IBMMe'}}>선생님이 사용하실</Text>
+        <Text style = {{fontSize : 25, fontFamily : 'IBMMe'}}>전화번호를 알려주세요.</Text>
         <Text style = {{fontSize : 15, color : '#B5B5B5'}}>문자로 인증번호를 알려드릴게요.</Text>
-        <Text>{"\n"}</Text>
         </View>
   
     <View style = {{flexDirection : 'row', justifyContent : 'space-between' }}>
@@ -43,7 +42,7 @@ export default function Page4({navigation}) {
        
 
     </View>
-        <Text style = {{fontSize : 15}}>{'\n\t\t'}선생님의 전화번호를 소중히 보관합니다.</Text>
+        <Text style = {{fontSize : 15, fontFamily : 'IBMMe'}}>{'\n\t\t'}선생님의 전화번호를 소중히 보관합니다.</Text>
         <Text>
           {'\n'}
         </Text>   

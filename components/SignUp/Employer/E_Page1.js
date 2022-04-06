@@ -16,11 +16,11 @@ export default function E_Page1({navigation}) {
   return (
     
     <View style = {styles.container}>
-        <Header str = "회원가입" width = "132"></Header>
+        <Header str = "회원가입" width = "136"></Header>
         <View style = {{left : '10%', width : WidthAndHeight.windowWidth*0.8 }}>
-          <Text style  = {{fontSize : 20,}}>6단계 - 상세정보 입력 {"\n"}</Text>
+          <Text style  = {{fontSize : 20,fontFamily : 'IBMMe'}}>6단계 - 상세정보 입력 {"\n"}</Text>
           <View>
-          <Text style = {{fontSize : 25}}>몸 담고 계신 업종/기업은 어떻게 되시나요? </Text>
+          <Text style = {{fontSize : 25, fontFamily : 'IBMMe'}}>몸 담고 계신 업종/기업은 어떻게 되시나요? </Text>
           <Text></Text>
           </View>
         </View>

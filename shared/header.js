@@ -4,10 +4,10 @@ import React from 'react';
 export default function Header(props){
     return (
         <View style = {styles.banner}>
-        <Text style = {{...styles.bannerText, fontSize : 20}}>SilverLining</Text>
+        <Text style = {{...styles.bannerText, fontSize : 30, fontFamily : 'Sans'}}>SilverLining</Text>
         <Text style = {{
           ...styles.bannerText, marginTop : 5, fontSize : 33, fontWeight :"500", color: 'black',
-          borderWidth : 1, borderColor :'white', borderBottomColor : theme.mColor, width : parseInt(props.width),
+           width : parseInt(props.width), fontFamily : 'IBMMe',
           }}>{props.str}</Text>
     </View>
     );
@@ -15,11 +15,11 @@ export default function Header(props){
 
 const styles = StyleSheet.create({
     title : {
-      marginTop : '20%',
+      marginTop : '5%',
       marginLeft : '10%',
     },
     banner : {
-      marginTop : "20%",
+      marginTop : "15%",
     },
     bannerText : {
       marginLeft : "10%",

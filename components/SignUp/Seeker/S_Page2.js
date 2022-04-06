@@ -16,13 +16,13 @@ export default function S_Page2({navigation}) {
   }
   return (
     <View style = {styles.container}>
-        <Header str = "회원가입" width = "132"></Header>
+        <Header str = "회원가입" width = "136"></Header>
       <View style = {{left : '10%'}}>
 
-        <Text style  = {{fontSize : 20,}}>7단계 - (선택)보호자 정보 입력 {"\n"}</Text>
+        <Text style  = {{fontSize : 20,fontFamily : 'IBMMe'}}>7단계 - (선택)보호자 정보 입력 {"\n"}</Text>
         <View>
-        <Text style = {{fontSize : 28}}>선생님의 보호자님의</Text>
-        <Text style = {{fontSize : 28}}>전화번호를 알려주세요.</Text>
+        <Text style = {{fontSize : 28, fontFamily : 'IBMMe'}}>선생님의 보호자님의</Text>
+        <Text style = {{fontSize : 28,fontFamily : 'IBMMe'}}>전화번호를 알려주세요.</Text>
         <Text>{"\n"}</Text>
         </View>
   
@@ -32,7 +32,7 @@ export default function S_Page2({navigation}) {
         >
         </TextInput>
         <View style = {{width : WidthAndHeight.windowWidth*0.9, padding : 15}}> 
-          <Text style = {{fontSize : 20}}>해당 정보 입력은 필수가 아닙니다.</Text>
+          <Text style = {{fontSize : 20, fontFamily : 'IBMMe'}}>해당 정보 입력은 필수가 아닙니다.</Text>
         </View>
   
       </View>

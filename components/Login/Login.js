@@ -10,9 +10,9 @@ export default function Login({navigation}) {
   return (
     <View style={styles.container}>
 
-      <Header str = "로그인" width = "100"></Header>
+      <Header str = "로그인" width = "110"></Header>
 
-      <View style = {{alignItems : "center", marginTop : "20%"}}>
+      <View style = {{alignItems : "center", marginTop : "5%"}}>
         <View style = {{alignSelf : 'flex-start', flexDirection : 'row', marginLeft :'15%'}}>
           <AntDesign name="idcard" size={24} color="black" style = {{alignSelf : 'center'}}/>
           <Text style = {styles.buttonName}>아이디</Text>
@@ -44,7 +44,7 @@ export default function Login({navigation}) {
             <SimpleLineIcons name = "login" size = {40} color = 'black' />
             </View>
             <TouchableOpacity onPress={() => navigation.navigate('메인')}>
-                <Text style = {styles.button}>로그인</Text>
+                <Text style = {{...styles.button, fontFamily : 'IBMMe'}}>로그인</Text>
             </TouchableOpacity>
             
         </View>
@@ -53,14 +53,14 @@ export default function Login({navigation}) {
             <MaterialIcons name="accessibility-new" size={40} color="black" />
             </View>
             <TouchableOpacity onPress={() => navigation.navigate('회원가입')}>
-                    <Text style = {styles.button}>회원 가입</Text>
+                    <Text style = {{...styles.button, fontFamily : 'IBMMe'}}>회원 가입</Text>
             </TouchableOpacity>
         </View>
         <View>
-          <Text style = {styles.welcome}>
+          <Text style = {{...styles.welcome, fontFamily : 'IBMMe'}}>
             어서오세요. 선생님.
           </Text>
-          <Text style = {{fontSize : 20, textAlign : 'center'}}>
+          <Text style = {{fontSize : 20, textAlign : 'center', fontFamily : 'IBMMe'}}>
             좋은 하루 되시길 바랍니다.
           </Text>
         </View>
@@ -102,12 +102,13 @@ const styles = StyleSheet.create({
     color: "black",
     fontSize : 20,
     marginVertical : 5,
+    fontFamily : 'IBMMe'
   },
   buttonPos : {
     marginLeft : '20%',
   },
   buttonName : {
-    alignSelf : 'flex-start', marginLeft : 5, fontSize : 20
+    alignSelf : 'flex-start', marginLeft : 5, fontSize : 20, fontFamily : 'IBMMe'
   },
   welcome : {
     marginTop : 35,

@@ -10,10 +10,10 @@ export default function Page2({navigation}) {
   
   return (
     <View style = {styles.container}>
-        <Text style  = {{fontSize : 20,}}>2단계 - 비밀번호 입력 {"\n"}</Text>
+        <Text style  = {{fontSize : 20, fontFamily : 'IBMMe'}}>2단계 - 비밀번호 입력 {"\n"}</Text>
         <View>
-        <Text style = {{fontSize : 28}}>선생님이 사용하실</Text>
-        <Text style = {{fontSize : 28}}>비밀번호를 입력해주세요.</Text>
+        <Text style = {{fontSize : 25, fontFamily : 'IBMMe'}}>선생님이 사용하실</Text>
+        <Text style = {{fontSize : 25, fontFamily : 'IBMMe'}}>비밀번호를 입력해주세요.</Text>
         <Text>{"\n"}</Text>
         </View>
   
@@ -22,7 +22,7 @@ export default function Page2({navigation}) {
         keyboardType='default'
         >
         </TextInput>
-        <Text style = {{fontSize : 15}}>{'\n\t\t'}선생님의 정보를 소중히 보관합니다.</Text>
+        <Text style = {{fontSize : 15, fontFamily : 'IBMMe'}}>{'\n\t\t'}선생님의 정보를 소중히 보관합니다.</Text>
         <Text>
           {'\n'}
         </Text>   

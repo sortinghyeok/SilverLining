@@ -67,7 +67,7 @@ export default function SignUp({navigation}) {
   
   return (
     <View style = {styles.container}>
-      <Header str = "회원가입" width = "132"></Header>
+      <Header str = "회원가입" width = "136"></Header>
       <View style = {{flexDirection : "row", marginLeft : '10%', marginTop : 10}}>
         <TouchableOpacity  >
           <MaterialCommunityIcons onPress = {() => numberSetter(1)} name="numeric-1-circle-outline" size={45} color="black" style = {{opacity : (pageNum === 1 ? 1 : 0.3)}}/>

@@ -1,33 +1,39 @@
 import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, View, TouchableOpacity } from 'react-native';
 import { theme } from '../../shared/theme';
-import { SimpleLineIcons, AntDesign, MaterialIcons,} from '@expo/vector-icons';
+import { SimpleLineIcons, AntDesign, MaterialIcons, MaterialCommunityIcons} from '@expo/vector-icons';
 export default function Title({navigation}) {
   return (
-    <View style = {styles.container}>
-        <View style = {{...styles.title, alignSelf : 'center'}} >
-            <Text style = {{fontSize:50, color : "black",}}>SilverLining</Text>
-            <Text>통합형 시니어 자립 케어 플랫폼</Text>
+    <View style = {{...styles.container, paddingBottom : '10%'}}>
+        <View style = {{...styles.title, alignSelf : 'center',}} >
+            <Text style = {{fontSize:50, color : "black", fontFamily : 'Sans'}}>SilverLining</Text>
+            <Text style = {{fontFamily : 'IBMMe', fontSize : 14, color : 'black'}}>통합형 시니어 자립 케어 플랫폼</Text>
         </View>
        
 
-        <View style = {{alignItems : 'flex-start', marginVertical : '15%', marginLeft :'20%'}}>
+        <View style = {{alignItems : 'flex-start', marginVertical : '10%', marginLeft :'20%'}}>
           <View style = {{flexDirection : 'row'}}>
           <AntDesign name="login" size={50} color="black" style = {{alignSelf : 'center'}}/>
             <TouchableOpacity style={{marginLeft : 5}} onPress={() => navigation.navigate('로그인')}>
-                    <Text style = {styles.button}>로그인</Text>
+                    <Text style = {{...styles.button, fontFamily : 'IBMMe'}}>로그인</Text>
             </TouchableOpacity>
           </View>
           <View style = {{flexDirection : 'row'}}>
           <AntDesign name="solution1" size={50} color="black" style = {{alignSelf : 'center'}} />
             <TouchableOpacity style={{marginLeft : 5}} onPress={() => navigation.navigate('회원가입')}>
-                <Text style = {styles.button}>회원가입</Text>
+                <Text style = {{...styles.button, fontFamily : 'IBMMe'}}>회원가입</Text>
+            </TouchableOpacity>
+          </View>
+          <View style = {{flexDirection : 'row'}}>
+          <MaterialCommunityIcons name="content-paste" size={50} color="black" style = {{alignSelf : 'center'}}/>
+            <TouchableOpacity style={{marginLeft : 5}} onPress={() => navigation.navigate('메인')}>
+                <Text style = {{...styles.button, fontFamily : 'IBMMe'}}>메인 페이지</Text>
             </TouchableOpacity>
           </View>
         </View>
         <View style  = {styles.description}>
-            <Text>이종혁, 이지율, 임유한</Text>
-            <Text>컴퓨터공학종합설계 001 / 1팀</Text>
+            <Text style = {{fontFamily : 'IBMMe', fontSize : 14, color : 'black'}}>이종혁, 이지율, 임유한</Text>
+            <Text style = {{fontFamily : 'IBMMe', fontSize : 14, color : 'black'}}>컴퓨터공학종합설계 001 / 1팀</Text>
         </View>
       <StatusBar style="auto" />
     </View>

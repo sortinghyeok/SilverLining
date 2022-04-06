@@ -22,16 +22,15 @@ export default function Page5({navigation}) {
   }
   return (
     <View style = {styles.container}>
-        <Text style  = {{fontSize : 20,}}>5단계 - 사용자 분류 {"\n"}</Text>
+        <Text style  = {{fontSize : 20,fontFamily : 'IBMMe'}}>5단계 - 사용자 분류 {"\n"}</Text>
         <View>
-        <Text style = {{fontSize : 28}}>어떤 목적으로 오셨어요?</Text>
-        <Text>{"\n"}</Text>
+        <Text style = {{fontSize : 28,fontFamily : 'IBMMe'}}>어떤 목적으로 오셨어요?</Text>
         </View>
   
     <View style = {{  }}>   
         <TouchableOpacity style = {{marginVertical : 5}} onPress = {() => navi.navigate('일반이용자가입')}>
           <View style = {{borderWidth : 4, borderColor : theme.mColor, borderRadius : 5}}>
-          <Text style = {{fontSize : 20, padding : 5}}>
+          <Text style = {{fontSize : 20, padding : 5, fontFamily : 'IBMMe'}}>
             저는 서비스를 이용하려고 해요.
           </Text>
           </View>
@@ -39,14 +38,14 @@ export default function Page5({navigation}) {
         
         <TouchableOpacity style = {{marginVertical : 5}} onPress = {() => navi.navigate('고용자가입')}>
         <View style = {{borderWidth : 4, borderColor : theme.mColor, borderRadius : 5}}>
-        <Text style = {{fontSize : 20, padding : 5}}>
+        <Text style = {{fontSize : 20, padding : 5, fontFamily : 'IBMMe'}}>
             저는 직원을 뽑고 싶어요.
           </Text>
           </View>
         </TouchableOpacity>
     </View>
         
-        <Text style = {{fontSize : 15}}>{'\n\t\t'}선생님의 방문 목적을 알려주세요.</Text>
+        <Text style = {{fontSize : 15, fontFamily : 'IBMMe'}}>{'\n\t\t'}선생님의 방문 목적을 알려주세요.</Text>
         <Text>
           {'\n'}
         </Text>   
