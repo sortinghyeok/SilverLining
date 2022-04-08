@@ -15,6 +15,8 @@ import S_Page2 from './components/SignUp/Seeker/S_Page2';
 import JobMain from './components/JobSearch/JobMain';
 import JobSearch from './components/JobSearch/JobSearch';
 import JobRecruit from './components/JobSearch/JobRecruit';
+import JobInfo from './components/JobSearch/JobInfo';
+import Resume from './components/JobSearch/Resume';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import * as Font from 'expo-font';
 import AppLoading from 'expo-app-loading'
@@ -62,6 +64,8 @@ export default function App() {
         <Stack.Screen name = '구인메인' component={JobMain} options = {{title : '구인메인', headerShown : false}} ></Stack.Screen>
         <Stack.Screen name = '구인지도' component={JobSearch} options = {{title : '구인지도', headerShown : false}} ></Stack.Screen>
         <Stack.Screen name = '공고' component={JobMain} options = {{title : '구인메인', headerShown : false}} ></Stack.Screen>
+        <Stack.Screen name = '구인상세' component={JobInfo} options = {{title : '구인상세', headerShown : false}} ></Stack.Screen>
+        <Stack.Screen name = '이력서' component={Resume} options = {{title : '이력서', headerShown : false}} ></Stack.Screen>
       </Stack.Navigator>
     </NavigationContainer>
   );

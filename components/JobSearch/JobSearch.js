@@ -1,5 +1,5 @@
 import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View, Button, Dimensions } from 'react-native';
+import { StyleSheet, Text, View, Button, Dimensions, TouchableOpacity } from 'react-native';
 import MapView, {PROVIDER_GOOGLE, Marker} from 'react-native-maps';
 import { WidthAndHeight } from '../../shared/Dimension';
 import * as Location from 'expo-location';
@@ -7,7 +7,7 @@ import { theme } from '../../shared/theme';
 import MyPageIconHeader from '../../shared/MyPageIconHeader';
 import { useState, useEffect } from 'react';
 import { Entypo } from '@expo/vector-icons'; 
-
+import JobInfo from './JobInfo';
 export default function JobRecruit({navigation}) {
   const [location, setLocation] = useState(null);
   const [errorMsg, setErrorMsg] = useState(null);
@@ -17,6 +17,9 @@ export default function JobRecruit({navigation}) {
   const [lati, setLatitude] = useState(0);
   const [longi, setLongitude] = useState(0);
   
+  const [idx, setidx] = useState(0);
+  const [title, setTitle] = useState('');
+
   const getLocation = async() => {
     const {coords : {latitude, longitude},} = await Location.getCurrentPositionAsync({accuracy:5});
     const location = await Location.reverseGeocodeAsync({latitude, longitude}, {useGoogleMaps :false });
@@ -46,6 +49,18 @@ export default function JobRecruit({navigation}) {
     })();
   }, []);
 
+  const titleJumper = (str)=>{
+    setTitle(str);
+    console.log(title);
+    navigation.navigate('구인상세', {'name' : '숭의도서관 관리직 모집'})
+  }
+  const callPage = (param) => { //추후 매개변수에 idx 추가할 것
+    return (
+      <Text>
+        <JobInfo title = {param}></JobInfo>
+      </Text>
+    )
+  }
   return (
     <View style={styles.container}>
       <View style = {{top : '7%'}}>
@@ -107,8 +122,11 @@ export default function JobRecruit({navigation}) {
       
       <StatusBar style="auto" />
     </View>
+    <TouchableOpacity style = {{position : 'absolute', bottom : '5%',}}
+    onPress = {() => titleJumper('숭의동 도서관 관리직')}
+    >
+    <View style = {styles.grid} >
 
-    <View style = {styles.grid}>
         <Text style = {{fontSize : 15, fontFamily : 'IBMMe' }}>
           인천시 미추홀구
         </Text>
@@ -143,6 +161,8 @@ export default function JobRecruit({navigation}) {
         
      
     </View>
+    </TouchableOpacity>
+    
     </View>
   );
 }
@@ -163,8 +183,7 @@ const styles = StyleSheet.create({
     borderWidth : 2,
     borderColor : 'white',
     borderTopColor : theme.mColor,
-    position : 'absolute',
-    bottom : '5%',
+    
   },
   flexRow : {
     flexDirection : 'row',
