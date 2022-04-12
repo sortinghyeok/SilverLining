@@ -2,9 +2,13 @@ import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, View, TextInput, TouchableOpacity } from 'react-native';
 import { theme } from '../../../shared/theme';
 import Header from '../../../shared/header';
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import { Entypo } from '@expo/vector-icons'; 
+import AsyncStorage from '@react-native-async-storage/async-storage';
 export default function Page1({navigation}) {
+  useEffect(() => {
+    AsyncStorage.removeItem('address');
+  }, []);
   return (
     <View style = {styles.container}>
         <Text style  = {{fontSize : 20, fontFamily : 'IBMMe'}}>1단계 - 아이디 입력 {"\n"}</Text>

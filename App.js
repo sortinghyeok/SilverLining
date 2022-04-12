@@ -14,9 +14,10 @@ import S_Page1 from './components/SignUp/Seeker/S_Page1';
 import S_Page2 from './components/SignUp/Seeker/S_Page2';
 import JobMain from './components/JobSearch/JobMain';
 import JobSearch from './components/JobSearch/JobSearch';
-import JobRecruit from './components/JobSearch/JobRecruit';
+import FindEmp from './components/JobSearch/FindEmp';
 import JobInfo from './components/JobSearch/JobInfo';
 import Resume from './components/JobSearch/Resume';
+import FindAddress from './components/Address/FindAddress';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import * as Font from 'expo-font';
 import AppLoading from 'expo-app-loading'
@@ -59,13 +60,15 @@ export default function App() {
         <Stack.Screen name = "메인" component={Main} options = {{title : '메인페이지', headerShown : false}} ></Stack.Screen>
         <Stack.Screen name = '고용자가입' component={E_Page1} options = {{title : '고용자가입', headerShown : false}} ></Stack.Screen>
         <Stack.Screen name = '일반이용자가입' component={S_Page1} options = {{title : '일반이용자 가입', headerShown : false}} ></Stack.Screen>
-        <Stack.Screen name = '가입선택지' component={Page5} options = {{title : '가입선택지', headerShown : false}} ></Stack.Screen>
+        <Stack.Screen name = '주소입력' component={Page5} options = {{title : '가입선택지', headerShown : false}} ></Stack.Screen>
         <Stack.Screen name = '보호자번호' component={S_Page2} options = {{title : '보호자번호', headerShown : false}} ></Stack.Screen>
         <Stack.Screen name = '구인메인' component={JobMain} options = {{title : '구인메인', headerShown : false}} ></Stack.Screen>
         <Stack.Screen name = '구인지도' component={JobSearch} options = {{title : '구인지도', headerShown : false}} ></Stack.Screen>
         <Stack.Screen name = '공고' component={JobMain} options = {{title : '구인메인', headerShown : false}} ></Stack.Screen>
         <Stack.Screen name = '구인상세' component={JobInfo} options = {{title : '구인상세', headerShown : false}} ></Stack.Screen>
         <Stack.Screen name = '이력서' component={Resume} options = {{title : '이력서', headerShown : false}} ></Stack.Screen>
+        <Stack.Screen name = '공고등록' component={FindEmp} options = {{title : '공고 등록', headerShown : false}} ></Stack.Screen>
+        <Stack.Screen name = '주소찾기' component={FindAddress} options = {{title : '주소 찾기', headerShown : false}} ></Stack.Screen>
       </Stack.Navigator>
     </NavigationContainer>
   );

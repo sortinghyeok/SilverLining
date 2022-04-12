@@ -8,7 +8,8 @@ import Page2 from './Pages/page2';
 import Page3 from './Pages/page3';
 import Page4 from './Pages/page4';
 import Page5 from './Pages/page5';
-import Page6 from './Seeker/S_Page2';
+import Page6 from './Pages/page6';
+import  S_Page2 from './Seeker/S_Page2';
 import { MaterialCommunityIcons, Entypo } from '@expo/vector-icons'; 
 
 export default function SignUp({navigation}) {
@@ -30,7 +31,7 @@ export default function SignUp({navigation}) {
 
   const increasePage = () => {
     var n = 1 + (pageNum);
-    if(pageNum < 5)
+    if(pageNum < 6)
     {
       setPageNum(n);
     }
@@ -61,6 +62,8 @@ export default function SignUp({navigation}) {
         return <Text><Page4 /></Text>
       case 5 :
         return <Text><Page5 /></Text>
+      case 6 :
+        return <Text><Page6 /></Text>
     }
   }
     
@@ -83,6 +86,9 @@ export default function SignUp({navigation}) {
         </TouchableOpacity>
         <TouchableOpacity >
           <MaterialCommunityIcons  onPress = {() => numberSetter(5)} name="numeric-5-circle-outline" size={45} color="black" style = {{opacity : (pageNum === 5 ? 1 : 0.3)}}/>
+        </TouchableOpacity>
+        <TouchableOpacity >
+          <MaterialCommunityIcons  onPress = {() => numberSetter(6)} name="numeric-6-circle-outline" size={45} color="black" style = {{opacity : (pageNum === 6 ? 1 : 0.3)}}/>
         </TouchableOpacity>
       </View>
 

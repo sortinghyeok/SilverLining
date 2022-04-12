@@ -33,8 +33,8 @@ export default function JobMain({navigation}) {
         </View>
         </TouchableOpacity>
 
-        <TouchableOpacity>
-        <View style  = {{...styles.gridBox}} onPress = {() => {navigation.navigate('')}}>
+        <TouchableOpacity onPress = {() => navigation.navigate('공고등록')}>
+        <View style  = {{...styles.gridBox}} >
             <View style = {{flexDirection : 'row'}}>
                 <MaterialIcons name="person-search" size={45} color={theme.mColor} /><Text style  = {styles.textStyle}>기업용</Text>
             </View>

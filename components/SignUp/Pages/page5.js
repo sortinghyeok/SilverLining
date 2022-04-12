@@ -1,54 +1,57 @@
 import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View, TextInput, TouchableOpacity, Button } from 'react-native';
+import { StyleSheet, Text, View, TextInput, TouchableOpacity, Button, Alert } from 'react-native';
 import { theme } from '../../../shared/theme';
 import Header from '../../../shared/header';
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
+import { WidthAndHeight } from '../../../shared/Dimension';
+import AsyncStorage from '@react-native-async-storage/async-storage'
 import { useNavigation } from '@react-navigation/native';
+import axios from 'axios';
 
+const windowWidth = WidthAndHeight.windowWidth;
+const windowHeight = WidthAndHeight.windowHeight;
 export default function Page5({navigation}) {
+  const [pageNum, setPageNum] = useState(false);
+  const [userAddress, setAddress] = useState("");
   const navi = useNavigation();
-  const [userType, setUserType] = useState(0);
 
-  const setJumper = (val) => {
-    setUserType(val);
-    console.log(val);
-    if(val == 0)
-    {
-      navi.navigate('일반이용자가입')
-    }
-    else{
-     navi.navigate('고용자가입')
-    }
+
+  const getAddress = () => {
+    let address =  "";
+    AsyncStorage.getItem('address', (err, result) => { //user_id에 담긴 아이디 불러오기
+      console.log(result); // result에 담김 //불러온거 출력
+      setAddress(result);
+    });
+    return userAddress;
   }
+
   return (
     <View style = {styles.container}>
-        <Text style  = {{fontSize : 20,fontFamily : 'IBMMe'}}>5단계 - 사용자 분류 {"\n"}</Text>
+        <Text style  = {{fontSize : 20,fontFamily : 'IBMMe'}}>5단계 - 주소 입력 {"\n"}</Text>
         <View>
-        <Text style = {{fontSize : 28,fontFamily : 'IBMMe'}}>어떤 목적으로 오셨어요?</Text>
+        <Text style = {{fontSize : 25, fontFamily : 'IBMMe'}}>선생님이 거주하시는</Text>
+        <Text style = {{fontSize : 25, fontFamily : 'IBMMe'}}>주소를 알려주세요.</Text>
         </View>
   
-    <View style = {{  }}>   
-        <TouchableOpacity style = {{marginVertical : 5}} onPress = {() => navi.navigate('일반이용자가입')}>
-          <View style = {{borderWidth : 4, borderColor : theme.mColor, borderRadius : 5}}>
-          <Text style = {{fontSize : 20, padding : 5, fontFamily : 'IBMMe'}}>
-            저는 서비스를 이용하려고 해요.
-          </Text>
+        <TouchableOpacity style= {{justifyContent : 'center'}} onPress = {() => navi.navigate('주소찾기')}>
+        <Text style = {{fontSize : 30, fontFamily : 'IBMMe', borderWidth :4, borderColor : 'white', borderBottomColor : theme.mColor}}>
+            {'\n\t\t'}주소 등록하기</Text>
+        </TouchableOpacity>
+        <TouchableOpacity onPress = {() => Alert.alert('등록한 주소로 바뀌지 않았으면, \n몇 초 뒤 다시 눌러주세요', getAddress(), [
+           {
+            text: '확인',
+            onPress: () => console.log('확인 완료'),
+          },
+        ])}>
+          <View style = {{left : '10%',}}>
+            <Text style = {{fontSize : 20, fontFamily :'IBMMe'}}>
+              등록된 주소 확인
+            </Text>
           </View>
         </TouchableOpacity>
-        
-        <TouchableOpacity style = {{marginVertical : 5}} onPress = {() => navi.navigate('고용자가입')}>
-        <View style = {{borderWidth : 4, borderColor : theme.mColor, borderRadius : 5}}>
-        <Text style = {{fontSize : 20, padding : 5, fontFamily : 'IBMMe'}}>
-            저는 직원을 뽑고 싶어요.
-          </Text>
-          </View>
-        </TouchableOpacity>
-    </View>
-        
-        <Text style = {{fontSize : 15, fontFamily : 'IBMMe'}}>{'\n\t\t'}선생님의 방문 목적을 알려주세요.</Text>
-        <Text>
-          {'\n'}
-        </Text>   
+        <Text style = {{fontSize :20, marginLeft : '10%'}}>
+          
+        </Text>  
     </View>
   );
 }
@@ -57,5 +60,15 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: 'white',
+  },
+  gridBox : {
+    borderWidth : 3,
+    borderColor : theme.mColor,
+    borderRadius : 10,
+    backgroundColor : 'white',
+    width : windowWidth/2.7,
+    height : windowHeight / 2,
+    margin : 8,
+    padding : 7
   },
 });
