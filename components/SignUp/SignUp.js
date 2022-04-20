@@ -70,6 +70,8 @@ export default function SignUp({navigation}) {
   
   return (
     <View style = {styles.container}>
+      
+
       <Header str = "회원가입" width = "136"></Header>
       <View style = {{flexDirection : "row", marginLeft : '10%', marginTop : 10}}>
         <TouchableOpacity  >
@@ -96,19 +98,18 @@ export default function SignUp({navigation}) {
         <Text style = {{alignSelf :'center', textAlign : 'left'}}>
           {switcher()}
         </Text>
+
       </View>
+      <View style = {{flexDirection : "row", position :'absolute', bottom: '3%', right : '5%', alignSelf : 'center'}}>
 
-      <View style = {{flexDirection : "row", bottom : '5%', alignSelf : 'center'}}>
+      <TouchableOpacity >
+        <Entypo name="arrow-with-circle-left" size={70} color={theme.mColor} onPress = {decreasePage}/>
+      </TouchableOpacity>
 
-          <TouchableOpacity >
-            <Entypo name="arrow-with-circle-left" size={70} color={theme.mColor} onPress = {decreasePage}/>
-          </TouchableOpacity>
-
-          <TouchableOpacity>
-           <Entypo name="arrow-with-circle-right" size={70} color={theme.mColor} onPress = {increasePage}/>
-          </TouchableOpacity>
+      <TouchableOpacity>
+      <Entypo name="arrow-with-circle-right" size={70} color={theme.mColor} onPress = {increasePage}/>
+      </TouchableOpacity>
       </View>
-       
     
     </View>
   );

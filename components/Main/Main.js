@@ -30,7 +30,7 @@ export default function Home({navigation}) {
             <Entypo name="briefcase" size={45} color="black" style = {styles.iconPos}/>
           </View>
         </TouchableOpacity>
-        <TouchableOpacity>
+        <TouchableOpacity onPress = {() => navigation.navigate('복지메인')}>
           <View style = {styles.gridBox}>
             <Text style = {{fontSize : 18, fontFamily : 'IBMMe'}}>주변 병원 &</Text>
             <Text style = {{fontSize : 18, fontFamily : 'IBMMe'}}>복지시설 찾기</Text>
@@ -40,7 +40,7 @@ export default function Home({navigation}) {
         </View>
        
         <View style = {{flexDirection : 'row'}}>
-        <TouchableOpacity>
+        <TouchableOpacity onPress = {() => navigation.navigate('정책메인')}>
           <View style = {styles.gridBox}>
             <Text style = {{fontSize : 18, fontFamily : 'IBMMe'}}>맞춤형 정책 &</Text>
             <Text style = {{fontSize : 18, fontFamily : 'IBMMe'}}>지원사업</Text>

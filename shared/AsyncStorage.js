@@ -24,7 +24,6 @@ export const getData = async (key) => {
 
 AsyncStorage.getItem('address', (err, result) => { //user_id에 담긴 아이디 불러오기
     console.log(result); // result에 담김 //불러온거 출력
-    setAddress(result);
   })
 /*
   AsyncStorage.setItem('address', data.roadAddress, () => {

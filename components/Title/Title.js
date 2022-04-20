@@ -20,7 +20,7 @@ export default function Title({navigation}) {
           </View>
           <View style = {{flexDirection : 'row'}}>
           <AntDesign name="solution1" size={50} color="black" style = {{alignSelf : 'center'}} />
-            <TouchableOpacity style={{marginLeft : 5}} onPress={() => navigation.navigate('회원가입')}>
+            <TouchableOpacity style={{marginLeft : 5}} onPress={() => navigation.navigate('회원가입1')}>
                 <Text style = {{...styles.button, fontFamily : 'IBMMe'}}>회원가입</Text>
             </TouchableOpacity>
           </View>

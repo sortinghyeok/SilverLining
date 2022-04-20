@@ -5,12 +5,12 @@ import Header from '../../../shared/header';
 import React, {useState} from 'react';
 
 
-export default function Page6({navigation}) {
+export default function Page7({navigation}) {
   const [pageNum, setPageNum] = useState(false);
   
   return (
     <View style = {styles.container}>
-        <Text style  = {{fontSize : 20,fontFamily : 'IBMMe'}}>6단계 - 상세정보 입력 {"\n"}</Text>
+        <Text style  = {{fontSize : 20,fontFamily : 'IBMMe'}}>7단계 - 상세정보 입력 {"\n"}</Text>
         <View>
         <Text style = {{fontSize : 25, fontFamily : 'IBMMe'}}>혹시 평소 앓고 계신 </Text>
         <Text style = {{fontSize : 25,fontFamily : 'IBMMe', borderWidth : 1, borderColor : 'white', borderBottomColor : 'black'}}>질환이 있으세요?  </Text>

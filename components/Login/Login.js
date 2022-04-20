@@ -52,7 +52,7 @@ export default function Login({navigation}) {
             <View style = {{alignSelf : 'center', marginRight : 10}}> 
             <MaterialIcons name="accessibility-new" size={40} color="black" />
             </View>
-            <TouchableOpacity onPress={() => navigation.navigate('회원가입')}>
+            <TouchableOpacity onPress={() => navigation.navigate('회원가입1')}>
                     <Text style = {{...styles.button, fontFamily : 'IBMMe'}}>회원 가입</Text>
             </TouchableOpacity>
         </View>

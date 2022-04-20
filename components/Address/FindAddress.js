@@ -34,7 +34,7 @@ export default function FindAddress({navigation})  {
           if (data.userSelectedType === 'R') {
             // 사용자가 도로명 주소를 선택했을 경우
         
-            AsyncStorage.setItem('address', data.roadAddress, () => {
+            AsyncStorage.setItem('su_address', data.roadAddress, () => {
               console.log(data.roadAddress + "가 저장되었습니다!");
             });   // 저장하는 법
               
@@ -55,7 +55,7 @@ export default function FindAddress({navigation})  {
           } else {
             // 사용자가 지번 주소를 선택했을 경우(J)
             setExtraAddr(data.jibunAddress);
-            AsyncStorage.setItem('address', data.jibunAddress, () => {
+            AsyncStorage.setItem('su_address', data.jibunAddress, () => {
               console.log(data.jibunAddress + "가 저장되었습니다!");
             });  
             navigation.pop();

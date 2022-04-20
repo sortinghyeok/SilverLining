@@ -7,7 +7,7 @@ import MyPageIconHeader from '../../shared/MyPageIconHeader';
 import { MaterialIcons,  MaterialCommunityIcons, Ionicons } from '@expo/vector-icons'; 
 const windowWidth = WidthAndHeight.windowWidth;
 const windowHeight = WidthAndHeight.windowHeight;
-export default function JobSearch({navigation}) {
+export default function FindEmp({navigation}) {
   return (
     <View style={styles.container}>
       <View style = {{position : 'absolute', top : '8%', right : '10%'}}>
@@ -18,32 +18,32 @@ export default function JobSearch({navigation}) {
       </Header>
       <View style = {{flexDirection : 'row', alignSelf : 'center'}}>
 
-      <TouchableOpacity onPress = {() => navigation.navigate('구인지도')}>
+      <TouchableOpacity onPress = {() => navigation.navigate('구인글등록')}>
       <View style  = {{...styles.gridBox, }}>
           <View style = {{flexDirection : 'row'}}>
-              <MaterialCommunityIcons name="shopping-search" size={45} color={theme.mColor} /><Text style  = {styles.textStyle}>구직자용</Text>
+            <MaterialIcons name="person-search" size={45} color={theme.mColor} /><Text style  = {styles.textStyle}></Text> 
           </View>
           
           <Text style = {{fontSize : 20, marginVertical : 15, fontFamily : 'IBMMe'}}>
               구인글 등록
           </Text>
           <Text style  = {{fontSize : 17, marginTop : 5, fontFamily : 'IBMMe'}}>
-          나에게 꼭 맞는{'\n'}맞춤형 구인정보
+          내 직장에 맞는{'\n'}직원 구인
           </Text>
       </View>
       </TouchableOpacity>
 
-      <TouchableOpacity onPress = {() => navigation.navigate('공고등록')}>
+      <TouchableOpacity onPress = {() => navigation.navigate('작성한구인글')}>
       <View style  = {{...styles.gridBox}} >
           <View style = {{flexDirection : 'row'}}>
-              <MaterialIcons name="person-search" size={45} color={theme.mColor} /><Text style  = {styles.textStyle}>기업용</Text>
+            <MaterialCommunityIcons name="shopping-search" size={45} color={theme.mColor} /><Text style  = {styles.textStyle}></Text>
           </View>
 
           <Text style = {{fontSize : 20, marginVertical : 15, fontFamily : 'IBMMe'}}>
               내가 쓴 구인글
           </Text>
           <Text style  = {{fontSize : 17, marginVertical : 5, fontFamily : 'IBMMe'}}>
-          내 구인글 확인{'\n'}지원자 조회
+          내가 쓴{'\n'}구인글 조회
           </Text>
       </View>
       </TouchableOpacity>

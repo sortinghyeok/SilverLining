@@ -1,14 +1,14 @@
 import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, View, Button, Dimensions, TouchableOpacity } from 'react-native';
 import MapView, {PROVIDER_GOOGLE, Marker} from 'react-native-maps';
-import { WidthAndHeight } from '../../shared/Dimension';
 import * as Location from 'expo-location';
-import { theme } from '../../shared/theme';
-import MyPageIconHeader from '../../shared/MyPageIconHeader';
 import { useState, useEffect } from 'react';
 import { Entypo } from '@expo/vector-icons'; 
-import JobInfo from './JobInfo';
-export default function JobRecruit({navigation}) {
+import MyPageIconHeader from '../../../shared/MyPageIconHeader';
+import { theme } from '../../../shared/theme';
+import { WidthAndHeight } from '../../../shared/Dimension';
+
+export default function HospSearch({navigation}) {
   const [location, setLocation] = useState(null);
   const [errorMsg, setErrorMsg] = useState(null);
   const [ok, setOK] = useState(true);
@@ -49,10 +49,10 @@ export default function JobRecruit({navigation}) {
     })();
   }, []);
 
-  const titleJumper = (str)=>{
+  const titleJumper = (str, name)=>{
     setTitle(str);
     console.log(title);
-    navigation.navigate('구인상세', {'name' : '숭의도서관 관리직 모집'})
+    navigation.navigate('병원상세', {'name' : name})
   }
   const callPage = (param) => { //추후 매개변수에 idx 추가할 것
     return (
@@ -66,7 +66,8 @@ export default function JobRecruit({navigation}) {
       <View style = {{top : '7%'}}>
       <View style = {{position : 'absolute', right : '5%',}}><MyPageIconHeader /></View>
       <View style = {{flexDirection : 'row'}}>
-        <Text style = {{fontFamily : 'IBMMe',  alignSelf : 'center', fontSize : 20, top : '2%'}}>구직 정보 찾기</Text>
+        <Text style = {{fontFamily : 'IBMMe',  alignSelf : 'center', fontSize : 20, top : '2%'}}>
+          맞춤 병원 찾기</Text>
       </View>
  
       <View style = {{borderWidth : 3, 
@@ -95,9 +96,9 @@ export default function JobRecruit({navigation}) {
       >
         
         <Marker
-          coordinate={{latitude : 37.465, longitude : 126.67}}
-          title= "숭의도서관"
-          description="도서관 관리직"
+          coordinate={{latitude : 37.485, longitude : 126.57}}
+          title= "강화 노인병원"
+          description="노인병원"
           onPress={() => {console.log('1번 체크 확인')}}
         />
         <Marker
@@ -107,6 +108,13 @@ export default function JobRecruit({navigation}) {
         description="예시2디스크립션"
       />
       <Marker
+        
+        coordinate={{latitude : 37.465, longitude : 126.77}}
+        title= "예시3타이틀"
+        description="예시3디스크립션"
+     
+      />
+       <Marker
         
         coordinate={{latitude : 37.465, longitude : 126.77}}
         title= "예시3타이틀"
@@ -123,39 +131,39 @@ export default function JobRecruit({navigation}) {
       <StatusBar style="auto" />
     </View>
     <TouchableOpacity style = {{position : 'absolute', bottom : '5%',}}
-    onPress = {() => titleJumper('숭의동 도서관 관리직')}
+    onPress = {() => titleJumper('병원상세', '강화 노인 병원')}
     >
     <View style = {styles.grid} >
 
         <Text style = {{fontSize : 15, fontFamily : 'IBMMe' }}>
-          인천시 미추홀구
+          인천시 강화도
         </Text>
         <Text style = {{fontSize : 20, fontFamily : 'IBMMe' }}>
-          숭의도서관 관리직 모집
+          강화 노인병원
         </Text>
         
         <View style= {styles.flexRow}>
         <Entypo name="dot-single" size={24} color="black" />
         <Text> 
-          급여 : 150만원
+          종류 : 노인 요양병원
         </Text>
         </View>
         <View style= {styles.flexRow}>
         <Entypo name="dot-single" size={24} color="black" />
         <Text> 
-          직종 : 도서관 관리직
+          전화번호 : 032-333-3332
         </Text>
         </View>
         <View style= {styles.flexRow}>
         <Entypo name="dot-single" size={24} color="black" />
         <Text> 
-          근무지역 : 미추홀구
+          주소 : 인천광역시 강화군 광화리 53-2
         </Text>
         </View>
         <View style= {styles.flexRow}>
         <Entypo name="dot-single" size={24} color="black" />
         <Text> 
-          연령 : 만 55세 ~
+          개장 시간 : 09:00 ~ 18:00
         </Text>
         </View>
         

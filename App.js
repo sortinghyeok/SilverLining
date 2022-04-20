@@ -8,16 +8,33 @@ import Title from './components/Title/Title';
 import SignUp from './components/SignUp/SignUp';
 import SignedUp from './components/SignUp/SignedUp';
 import Main from './components/Main/Main';
+
+import Page1 from './components/SignUp/Pages/page1';
+import Page2 from './components/SignUp/Pages/page2';
+import Page3 from './components/SignUp/Pages/page3';
+import Page4 from './components/SignUp/Pages/page4';
 import Page5 from './components/SignUp/Pages/page5';
+import Page6 from './components/SignUp/Pages/page6';
 import E_Page1 from './components/SignUp/Employer/E_Page1';
 import S_Page1 from './components/SignUp/Seeker/S_Page1';
 import S_Page2 from './components/SignUp/Seeker/S_Page2';
+
 import JobMain from './components/JobSearch/JobMain';
-import JobSearch from './components/JobSearch/JobSearch';
+import JobMap from './components/JobSearch/JobMap';
 import FindEmp from './components/JobSearch/FindEmp';
 import JobInfo from './components/JobSearch/JobInfo';
 import Resume from './components/JobSearch/Resume';
+
 import FindAddress from './components/Address/FindAddress';
+import FindEmpDetail from './components/JobSearch/FindEmpDetail';
+import Registered from './components/JobSearch/Registered';
+import WelfareMain from './components/Welfare/WelfareMain';
+import HospSearch from './components/Welfare/Hospitals/HospSearch';
+import InstSearch from './components/Welfare/Institutions/InstSearch';
+import HospDetail from './components/Welfare/Hospitals/HospDetail';
+import InstDetail from './components/Welfare/Institutions/InstDetail';
+import PolicyList from './components/Policy/PolicyList';
+import PolicyInfo from './components/Policy/PolicyInfo';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import * as Font from 'expo-font';
 import AppLoading from 'expo-app-loading'
@@ -57,18 +74,33 @@ export default function App() {
         <Stack.Screen name = "로그인" component={Login} options = {{title : '로그인', headerShown : false }}></Stack.Screen>
         <Stack.Screen name = "회원가입" component={SignUp} options = {{title : 'SilverLining', headerShown : false}}></Stack.Screen>
         <Stack.Screen name = "회원가입완료" component={SignedUp} options = {{title : '회원가입 완료!', headerShown : false}} ></Stack.Screen>
+        <Stack.Screen name = "회원가입1" component={Page1} options = {{title : 'SilverLining', headerShown : false}}></Stack.Screen>
+        <Stack.Screen name = "회원가입2" component={Page2} options = {{title : 'SilverLining', headerShown : false}}></Stack.Screen>
+        <Stack.Screen name = "회원가입3" component={Page3} options = {{title : 'SilverLining', headerShown : false}}></Stack.Screen>
+        <Stack.Screen name = "회원가입4" component={Page4} options = {{title : 'SilverLining', headerShown : false}}></Stack.Screen>
+        <Stack.Screen name = "회원가입5" component={Page5} options = {{title : 'SilverLining', headerShown : false}}></Stack.Screen>
+        <Stack.Screen name = "회원가입6" component={Page6} options = {{title : 'SilverLining', headerShown : false}}></Stack.Screen>
         <Stack.Screen name = "메인" component={Main} options = {{title : '메인페이지', headerShown : false}} ></Stack.Screen>
         <Stack.Screen name = '고용자가입' component={E_Page1} options = {{title : '고용자가입', headerShown : false}} ></Stack.Screen>
         <Stack.Screen name = '일반이용자가입' component={S_Page1} options = {{title : '일반이용자 가입', headerShown : false}} ></Stack.Screen>
         <Stack.Screen name = '주소입력' component={Page5} options = {{title : '가입선택지', headerShown : false}} ></Stack.Screen>
         <Stack.Screen name = '보호자번호' component={S_Page2} options = {{title : '보호자번호', headerShown : false}} ></Stack.Screen>
         <Stack.Screen name = '구인메인' component={JobMain} options = {{title : '구인메인', headerShown : false}} ></Stack.Screen>
-        <Stack.Screen name = '구인지도' component={JobSearch} options = {{title : '구인지도', headerShown : false}} ></Stack.Screen>
+        <Stack.Screen name = '구인지도' component={JobMap} options = {{title : '구인지도', headerShown : false}} ></Stack.Screen>
         <Stack.Screen name = '공고' component={JobMain} options = {{title : '구인메인', headerShown : false}} ></Stack.Screen>
         <Stack.Screen name = '구인상세' component={JobInfo} options = {{title : '구인상세', headerShown : false}} ></Stack.Screen>
         <Stack.Screen name = '이력서' component={Resume} options = {{title : '이력서', headerShown : false}} ></Stack.Screen>
         <Stack.Screen name = '공고등록' component={FindEmp} options = {{title : '공고 등록', headerShown : false}} ></Stack.Screen>
         <Stack.Screen name = '주소찾기' component={FindAddress} options = {{title : '주소 찾기', headerShown : false}} ></Stack.Screen>
+        <Stack.Screen name  = '구인글등록' component={FindEmpDetail} options = {{title : '구인글등록', headerShown : false}}></Stack.Screen>
+        <Stack.Screen name  = '작성한구인글' component={Registered} options = {{title : '작성글목록', headerShown : false}}></Stack.Screen>
+        <Stack.Screen name  = '복지메인' component={WelfareMain} options = {{title : '복지메인', headerShown : false}}></Stack.Screen>
+        <Stack.Screen name  = '병원찾기' component={HospSearch} options = {{title : '병원찾기', headerShown : false}}></Stack.Screen>
+        <Stack.Screen name  = '복지찾기' component={InstSearch} options = {{title : '복지찾기', headerShown : false}}></Stack.Screen>
+        <Stack.Screen name  = '병원상세' component={HospDetail} options = {{title : '병원상세', headerShown : false}}></Stack.Screen>
+        <Stack.Screen name  = '복지상세' component={InstDetail} options = {{title : '복지상세', headerShown : false}}></Stack.Screen>
+        <Stack.Screen name  = '정책메인' component={PolicyList} options = {{title : '정책메인', headerShown : false}}></Stack.Screen>
+        <Stack.Screen name  = '정책정보' component={PolicyInfo} options = {{title : '정책정보', headerShown : false}}></Stack.Screen>
       </Stack.Navigator>
     </NavigationContainer>
   );
