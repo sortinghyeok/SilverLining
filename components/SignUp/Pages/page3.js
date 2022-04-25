@@ -6,22 +6,29 @@ import React, {useState} from 'react';
 import { MaterialCommunityIcons, Entypo } from '@expo/vector-icons'; 
 import Arrow from '../../../shared/Arrow';
 import { WidthAndHeight } from '../../../shared/Dimension';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 export default function Page3({navigation}) {
   
-  var pageNum = 3;
   const [name, setName] = useState('');
   const su_name = (val) => {
     setName(val);
     AsyncStorage.setItem('su_name', val, () => {
       console.log('이름 실시간 변화 저장 : ' + val)
-    })
+    });
   };
   const [birthday, setBirth] = useState('');
   const su_birth = (val) => {
-    setBirth(birth);
+    setBirth(val);
     AsyncStorage.setItem('su_birth', val, () => {
       console.log('생년월일 실시간 변화 저장 : ' + val)
-    })
+    });
+  };
+  const [gender, setGender] = useState(3);
+  const su_gender = (val) => {
+    setGender(val);
+    AsyncStorage.setItem('su_gender', val.toString(), () => {
+      console.log('성별 저장 : ' + val)
+    });
   };
   const numberSetter = (val) => {
     switch (val)
@@ -74,10 +81,9 @@ export default function Page3({navigation}) {
           </TouchableOpacity>
         </View>
       
-        <Text style  = {{fontSize : 20,fontFamily : 'IBMMe'}}>3단계 - 성함, 생년월일 입력 {"\n"}</Text>
+        <Text style  = {{fontSize : 20,fontFamily : 'IBMMe'}}>3단계 - 성함, 생년월일, 성별 입력</Text>
         <View>
-        <Text style = {{fontSize : 25,fontFamily : 'IBMMe'}}>선생님의 성함과</Text>
-        <Text style = {{fontSize : 25, fontFamily : 'IBMMe'}}>생년월일을 입력해주세요.</Text>
+        <Text style = {{fontSize : 25,fontFamily : 'IBMMe'}}>선생님의 정보를 알려주세요.</Text>
         </View>
   
         <TextInput style = {{borderWidth : 1, borderColor : 'white', padding : 10, paddingLeft : 15, fontSize : 20, borderBottomColor : theme.mColor, width :  WidthAndHeight.windowWidth*0.73}} 
@@ -92,7 +98,23 @@ export default function Page3({navigation}) {
         onChangeText = {text => su_birth(text)}
         >
         </TextInput>
-        <Text style = {{fontSize : 15, fontFamily : 'IBMMe'}}>{'\n\t\t'}선생님의 정보는 외부에 유출되지 않습니다.</Text>
+
+        <View style = {{flexDirection :'row', marginTop : 15}}>
+        <TouchableOpacity onPress = {() => su_gender(1)}>
+          <View 
+          style = {{
+          backgroundColor : (gender == 1 ? theme.mColor :'white') ,
+          marginHorizontal : 10, borderWidth : 1, borderColor : theme.mColor, borderRadius : 5}}><Text style = {{paddingVertical : 10, fontSize : 20, paddingHorizontal : 10}}>남성</Text>
+          </View>
+          </TouchableOpacity>
+        <TouchableOpacity onPress = {() => su_gender(2)}>
+          <View
+        style = {{
+          backgroundColor : (gender == 2 ? theme.mColor :'white'),
+          marginHorizontal : 10, borderWidth : 1, borderColor : theme.mColor, borderRadius : 5}}><Text style = {{paddingVertical : 10, fontSize : 20, paddingHorizontal : 10}}>여성</Text></View></TouchableOpacity>
+        </View>
+
+        <Text style = {{fontSize : 15, fontFamily : 'IBMMe'}}>{'\n\t\t'}선생님의 정보를 소중히 보관합니다.</Text>
         <Text>
           {'\n'}
         </Text>   

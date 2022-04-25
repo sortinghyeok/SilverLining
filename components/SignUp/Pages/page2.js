@@ -67,11 +67,10 @@ export default function Page2({navigation}) {
             <MaterialCommunityIcons  onPress = {() => numberSetter(6)} name="numeric-6-circle-outline" size={45} color="black" style = {{opacity : 0.3}}/>
           </TouchableOpacity>
         </View>
-        <Text style  = {{fontSize : 20, fontFamily : 'IBMMe'}}>2단계 - 비밀번호 입력 {"\n"}</Text>
+        <Text style  = {{fontSize : 20, fontFamily : 'IBMMe'}}>2단계 - 비밀번호 입력</Text>
         <View>
-        <Text style = {{fontSize : 25, fontFamily : 'IBMMe'}}>선생님이 사용하실</Text>
-        <Text style = {{fontSize : 25, fontFamily : 'IBMMe'}}>비밀번호를 입력해주세요.</Text>
-        <Text>{"\n"}</Text>
+        <Text style = {{fontSize : 24, fontFamily : 'IBMMe'}}>사용하실 비밀번호를 입력하세요.</Text>
+    
         </View>
   
         <TextInput style = {{borderWidth : 1, borderColor : 'white', padding : 10, paddingLeft : 15, fontSize : 20, borderBottomColor : theme.mColor, width : WidthAndHeight.windowWidth*0.5}} 

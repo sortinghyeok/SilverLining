@@ -18,6 +18,9 @@ import Page6 from './components/SignUp/Pages/page6';
 import E_Page1 from './components/SignUp/Employer/E_Page1';
 import S_Page1 from './components/SignUp/Seeker/S_Page1';
 import S_Page2 from './components/SignUp/Seeker/S_Page2';
+import S_Page3 from './components/SignUp/Seeker/S_Page3';
+import S_Page4 from './components/SignUp/Seeker/S_Page4';
+import S_Page5 from './components/SignUp/Seeker/S_Page5';
 
 import JobMain from './components/JobSearch/JobMain';
 import JobMap from './components/JobSearch/JobMap';
@@ -85,6 +88,10 @@ export default function App() {
         <Stack.Screen name = '일반이용자가입' component={S_Page1} options = {{title : '일반이용자 가입', headerShown : false}} ></Stack.Screen>
         <Stack.Screen name = '주소입력' component={Page5} options = {{title : '가입선택지', headerShown : false}} ></Stack.Screen>
         <Stack.Screen name = '보호자번호' component={S_Page2} options = {{title : '보호자번호', headerShown : false}} ></Stack.Screen>
+        <Stack.Screen name = '직업이력' component={S_Page3} options = {{title : '직업이력', headerShown : false}} ></Stack.Screen>
+        <Stack.Screen name = '보험여부' component={S_Page4} options = {{title : '보험여부', headerShown : false}} ></Stack.Screen>
+        <Stack.Screen name = '추가정보' component={S_Page5} options = {{title : '추가정보', headerShown : false}} ></Stack.Screen>
+
         <Stack.Screen name = '구인메인' component={JobMain} options = {{title : '구인메인', headerShown : false}} ></Stack.Screen>
         <Stack.Screen name = '구인지도' component={JobMap} options = {{title : '구인지도', headerShown : false}} ></Stack.Screen>
         <Stack.Screen name = '공고' component={JobMain} options = {{title : '구인메인', headerShown : false}} ></Stack.Screen>

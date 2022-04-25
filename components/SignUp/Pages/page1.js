@@ -10,19 +10,25 @@ import { WidthAndHeight } from '../../../shared/Dimension';
 import Arrow from '../../../shared/Arrow';
 export default function Page1({navigation}) {
   useEffect(() => {
-    AsyncStorage.removeItem('address');
+    AsyncStorage.removeItem('su_address');
     AsyncStorage.removeItem('su_id');
+    AsyncStorage.removeItem('su_pw');
     AsyncStorage.removeItem('su_name');
     AsyncStorage.removeItem('su_birthday');
-    AsyncStorage.removeItem('su_disease');
     AsyncStorage.removeItem('su_phone');
-    AsyncStorage.removeItem('su_status');
+    AsyncStorage.removeItem('su_status');//구인자1, 구직자0
     AsyncStorage.removeItem('su_jobcate');
     AsyncStorage.removeItem('su_disease');
-    AsyncStorage.removeItem('su_siNm');
+    
+    AsyncStorage.removeItem('su_car');
+    AsyncStorage.removeItem('su_lat');
+    AsyncStorage.removeItem('su_lon');
     AsyncStorage.removeItem('su_sggNum');
     AsyncStorage.removeItem('su_streetNm');
-    AsyncStorage.removeItem('su_detailNm')
+    AsyncStorage.removeItem('su_detailNm');
+    AsyncStorage.removeItem('su_ins');
+    AsyncStorage.removeItem('su_guard');
+    AsyncStorage.removeItem('su_guard');
   }, []);
   //const [email, setEmail]= useState("");
   const su_email = (val) => {
@@ -31,7 +37,7 @@ export default function Page1({navigation}) {
       console.log('이메일 실시간 변화 저장 : ' + val)
     })
   };
-  var pageNum = 1;
+  
   const numberSetter = (val) => {
     switch (val)
     {
@@ -85,13 +91,15 @@ export default function Page1({navigation}) {
         
     <Text style  = {{fontSize : 20, fontFamily : 'IBMMe'}}>1단계 - 아이디 입력</Text>
 
-          <Text style = {{fontSize : 25,  fontFamily : 'IBMMe', marginTop : '10%'}}>사용하실 아이디를</Text>
-          <Text style = {{fontSize : 25,  fontFamily : 'IBMMe', marginBottom : '5%'}}>입력해주세요.</Text>
+      <Text style = {{fontSize : 25,  fontFamily : 'IBMMe', marginBottom : '5%'}}>사용하실 아이디를 입력하세요.</Text>
       <TextInput 
           onChangeText={text => su_email(text)}
-          style = {{borderWidth : 1, borderColor : 'white',
-          addingLeft : 15, 
+          style = {{
+          borderWidth : 1,
+          borderColor : 'white',
+          paddingLeft : 15, 
           fontSize : 20, 
+          paddingBottom : 5,
           borderBottomColor : theme.mColor,
           width : WidthAndHeight.windowWidth*0.8
         }} 

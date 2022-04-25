@@ -10,10 +10,14 @@ import axios from 'axios';
 import Arrow from '../../../shared/Arrow';
 import { WidthAndHeight } from '../../../shared/Dimension';
 export default function Page6({navigation}) {
+  const [userAddress, setAddress] = useState("");
   useEffect(() => {
-    AsyncStorage.getItem('address', (err, result) => { //user_id에 담긴 아이디 불러오기
-      console.log(result); // result에 담김 //불러온거 출력
-      setAddress(result);
+    AsyncStorage.getItem('su_address', (err, result) => { //user_id에 담긴 아이디 불러오기
+      if(result != null || result != undefined)
+      {
+        console.log(result); // result에 담김 //불러온거 출력
+        setAddress(result);
+      }
     })
     
     console.log(userAddress);
@@ -22,14 +26,18 @@ export default function Page6({navigation}) {
     axios.get(url,{headers: {'Authorization': 'KakaoAK 141867002e51d852da990f34ec2d53ac'}},)
     .then(function(response) { 
     console.log(JSON.stringify(response.data));
-    console.log(response.data.documents[0].x);
-    console.log(response.data.documents[0].y);
+    AsyncStorage.setItem('su_lat', response.data.documents[0].y, () => {
+      console.log('해당 위치의 위도 좌표 : ' + response.data.documents[0].y);
     })
-  }, [])
+    AsyncStorage.setItem('su_lon', response.data.documents[0].x, () => {
+      console.log('해당 위치의 경도 좌표 : ' + response.data.documents[0].x);
+    })
+    })
+
+  }, [userAddress])
   const navi = useNavigation();
  
-  const [userAddress, setAddress] = useState("");
-  var pageNum = 6;
+
 
   const numberSetter = (val) => {
     switch (val)

@@ -7,7 +7,7 @@ import Header from '../../../shared/header';
 import Arrow from '../../../shared/Arrow';
 import React, {useState} from 'react';
 import { Entypo } from '@expo/vector-icons'; 
-export default function E_Page1({navigation}) {
+export default function S_Page3({navigation}) {
 
   const [clicked, setClicked] = useState([false, false, false, false, false, 
     false, false, false, false, false, 
@@ -49,16 +49,16 @@ export default function E_Page1({navigation}) {
     navigation.pop();
   }
   const rightButton = () => {
-    navigation.navigate('회원가입완료');
+    navigation.navigate('보험여부');
   }
   return (
     
     <View style = {styles.container}>
         <Header str = "회원가입" width = "136"></Header>
         <View style = {{left : '10%', width : WidthAndHeight.windowWidth*0.8 }}>
-          <Text style  = {{fontSize : 20,fontFamily : 'IBMMe'}}>7단계 - 상세정보 입력 {"\n"}</Text>
+          <Text style  = {{fontSize : 20,fontFamily : 'IBMMe'}}>9단계 - 직업정보 입력 {"\n"}</Text>
           <View>
-          <Text style = {{fontSize : 24, fontFamily : 'IBMMe'}}>몸 담고 계신 업종을 알려주세요 </Text>
+          <Text style = {{fontSize : 24, fontFamily : 'IBMMe'}}>몸 담고 계셨던 분야를 알려주세요 </Text>
           <Text></Text>
           </View>
         </View>

@@ -75,15 +75,20 @@ export default function Page5({navigation}) {
             <MaterialCommunityIcons  onPress = {() => numberSetter(6)} name="numeric-6-circle-outline" size={45} color="black" style = {{opacity : 0.3}}/>
           </TouchableOpacity>
         </View>
-        <Text style  = {{fontSize : 20,fontFamily : 'IBMMe'}}>5단계 - 주소 입력 {"\n"}</Text>
+        <Text style  = {{fontSize : 20,fontFamily : 'IBMMe'}}>5단계 - 주소 입력</Text>
         <View>
-        <Text style = {{fontSize : 25, fontFamily : 'IBMMe'}}>선생님이 거주하시는</Text>
-        <Text style = {{fontSize : 25, fontFamily : 'IBMMe'}}>주소를 알려주세요.</Text>
+        <Text style = {{fontSize : 25, fontFamily : 'IBMMe'}}>거주하시는 주소를 알려주세요.</Text>
         </View>
   
         <TouchableOpacity style= {{justifyContent : 'center'}} onPress = {() => navi.navigate('주소찾기')}>
-        <Text style = {{marginVertical : 10, fontSize : 30, fontFamily : 'IBMMe', borderRadius : 7, 
-        width : WidthAndHeight.windowWidth*0.6, textAlign : 'center', paddingTop : 10, borderWidth :4,  borderColor : theme.mColor,}}>
+        <Text style = {{
+          marginVertical : 10, 
+          fontSize : 30, 
+          fontFamily : 'IBMMe', 
+          borderRadius : 7, 
+          width : WidthAndHeight.windowWidth*0.6,
+          textAlign : 'center', paddingTop : 10, borderWidth :4,  borderColor : theme.mColor,
+          }}>
             주소 등록하기</Text>
         </TouchableOpacity>
         <TouchableOpacity onPress = {() => Alert.alert('아래 등록한 주소로 바뀌지 않았으면, \n몇 초 뒤 다시 눌러주세요', getAddress(), [
@@ -93,8 +98,8 @@ export default function Page5({navigation}) {
           },
         ])}>
           <View>
-            <Text style = {{fontSize : 16, fontFamily :'IBMMe'}}>
-              주소확인
+            <Text style = {{fontSize : 20, fontFamily :'IBMMe',}}>
+              눌러서 주소확인
             </Text>
           </View>
         </TouchableOpacity>

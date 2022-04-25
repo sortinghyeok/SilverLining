@@ -4,6 +4,7 @@ import { theme } from '../../../shared/theme';
 import Header from '../../../shared/header';
 import React, {useState} from 'react';
 import Arrow from '../../../shared/Arrow';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 import { MaterialCommunityIcons, Entypo } from '@expo/vector-icons'; 
 import { WidthAndHeight } from '../../../shared/Dimension';
 export default function Page4({navigation}) {
@@ -68,12 +69,10 @@ export default function Page4({navigation}) {
           </TouchableOpacity>
         </View>
         
-        <Text style  = {{fontSize : 20,fontFamily : 'IBMMe'}}>4단계 - 전화번호 입력{'\n'}</Text>
+        <Text style  = {{fontSize : 20,fontFamily : 'IBMMe'}}>4단계 - 전화번호 입력</Text>
  
         <View>
-        <Text style = {{fontSize : 25, fontFamily : 'IBMMe'}}>선생님이 사용하실</Text>
-        <Text style = {{fontSize : 25, fontFamily : 'IBMMe',  marginBottom : '7%'}}>전화번호를 알려주세요.</Text>
-        
+        <Text style = {{fontSize : 25, fontFamily : 'IBMMe'}}>선생님의 전화번호를 알려주세요</Text>
         </View>
   
     <View style = {{flexDirection : 'row', width : WidthAndHeight.windowWidth*0.8, justifyContent : 'space-between' }}>

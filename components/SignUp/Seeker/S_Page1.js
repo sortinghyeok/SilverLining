@@ -13,7 +13,6 @@ const windowHeight = Dimensions.get('window').height;
 export default function S_Page1({navigation}) {
   useEffect(() => {
     AsyncStorage.getItem('su_disease', (err, result) => { //user_id에 담긴 아이디 불러오기
-     
       if(result == undefined || result == '' || result == null)
       {
         console.log('아직 정의되지 않음'); // result에 담김 //불러온거 출력
@@ -24,7 +23,7 @@ export default function S_Page1({navigation}) {
       }
     });
   }, [])
-  const [diseases, setDiseases] = useState("");
+
   const [clicked, setClicked] = useState([false, false, false, false, false, 
     false, false, false, false, false, 
     false, false, false, false, false,
@@ -78,14 +77,12 @@ export default function S_Page1({navigation}) {
           <Text style = {{fontSize : 20, fontFamily : 'IBMMe'}}>혹시 평소 앓고 계신 질환이 있으세요?</Text>
         </View>
         <Text style = {{fontSize : 15, fontFamily : 'IBMMe'}}>그러시다면, 밑의 선택지를 체크해주세요!</Text>
-        <Text style = {{fontSize : 15, fontFamily : 'IBMMe'}}>원하시지 않으신다면 넘어가셔도 좋지만, </Text>
-        <Text style = {{fontSize : 15, fontFamily : 'IBMMe'}}>많이 고르실 수록 더 맞춤 정보를 얻을 수 있어요. </Text>
       </View>
 
-    <View style = {{alignSelf : 'center', height : WidthAndHeight.windowHeight*0.25, marginTop : 15}}>
+    <View style = {{alignSelf : 'center', height : WidthAndHeight.windowHeight*0.28, marginTop : 15}}>
     <SafeAreaView>
         <ScrollView style = {{height : WidthAndHeight.windowHeight*0.43, padding : 10, borderWidth : 1, borderColor : theme.mColor, width : WidthAndHeight.windowWidth*0.8}}>
-        <View style = {styles.gridMargin}>
+          <View style = {styles.gridMargin}>
           <Button title = "고혈압" color = {clicked[1] ? 'gray' : theme.mColor} onPress = {() => setDisease(1)}></Button><Text>{"\t"}</Text>
           <Button title = "류마티스/관절염"  color = {clicked[2] ? 'gray' : theme.mColor} onPress = {() => setDisease(2) } > </Button><Text>{"\t"}</Text>
           <Button title = "폐질환"  color = {clicked[3] ? 'gray' : theme.mColor} onPress = {() =>setDisease(3)} ></Button><Text>{"\t"}</Text>
@@ -102,7 +99,13 @@ export default function S_Page1({navigation}) {
           <Button title = "보행장애"  color = {clicked[10] ? 'gray' : theme.mColor} onPress = {() => setDisease(10)} > </Button><Text>{"\t"}</Text>
           <Button title = "암"  color = {clicked[11] ? 'gray' : theme.mColor}onPress = {() => setDisease(11)} ></Button><Text>{"\t"}</Text>
           <Button title = "치매/알츠하이머"  color = {clicked[12] ? 'gray' : theme.mColor} onPress = {() => setDisease(12)} ></Button>
-        </View>
+         </View>
+         <View style = {styles.gridMargin}>
+          <Button title = "피부질환"  color = {clicked[13] ? 'gray' : theme.mColor}onPress = {() => setDisease(13)} ></Button><Text>{"\t"}</Text>
+          <Button title = "치아질환"  color = {clicked[14] ? 'gray' : theme.mColor}onPress = {() => setDisease(14)} ></Button><Text>{"\t"}</Text>
+          <Button title = "심혈관질환"  color = {clicked[15] ? 'gray' : theme.mColor}onPress = {() => setDisease(15)} ></Button><Text>{"\t"}</Text>
+          <Button title = "뇌질환"  color = {clicked[16] ? 'gray' : theme.mColor}onPress = {() => setDisease(16)} ></Button>
+         </View>
 
         </ScrollView>
         </SafeAreaView>
