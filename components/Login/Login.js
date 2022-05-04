@@ -1,12 +1,67 @@
 import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, View, TextInput, TouchableOpacity, SafeAreaView, ScrollView} from 'react-native';
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import { theme } from '../../shared/theme'
 import Header from '../../shared/header';
 import { SimpleLineIcons, AntDesign, MaterialIcons,} from '@expo/vector-icons';
+import AsyncStorage from '@react-native-async-storage/async-storage'
+import axios from 'axios';
 export default function Login({navigation}) {
   const [id, setId] = useState("");
   const [password, setPassword] = useState("");
+  const [u_jwt, setJWT] = useState("");
+  useEffect(() => {
+    console.log(id + " " + password)
+  }, [id, password])
+  const idSetter = (val) => {
+    setId(val);
+    console.log('아이디 : ' + id);
+  } 
+  const pwSetter = (val) => {
+    setPassword(val);
+    console.log('패스워드 : ' + password);
+  } 
+  const validChecker = () => {
+    axios.post('https://prod.asherchiv.shop/app/users/sign-in', {
+      'user_id' : id,
+      'user_pw' : password
+    })
+    .then(function (response)
+    {
+      console.log('content : ' + response.data.contents);
+    var tjwt = response.data.contents.jwt;
+    setJWT(tjwt);
+    
+    AsyncStorage.setItem('user_jwt',  response.data.contents.jwt, () => {
+      console.log('로그인 성공, jwt : ' + u_jwt);
+    });
+    
+    axios.get('https://prod.asherchiv.shop/app/users?user-id=' + id, {
+    })
+    .then(function (response){
+      console.log(response.data.contents[0]);
+      
+      AsyncStorage.setItem('user_name', response.data.contents[0].user_name, () => {
+        console.log('로그인 성공, 이름 : ' + response.data.contents[0].user_name);
+      });
+      AsyncStorage.setItem('user_id', id, () => {
+        console.log('로그인 성공, id : ' + id);
+      });
+      AsyncStorage.setItem('u_idx', response.data.contents[0].user_idx.toString(), () => {
+        console.log('유저 인덱스, idx : ' + response.data.contents[0].user_idx);
+      });
+
+      navigation.navigate('메인');
+  
+      })
+      .catch(function (error)
+      {
+        console.log(error);
+        setId('로그인 실패! 다시 확인해주세요')
+      })
+    })
+  }
+
   return (
     <View style={styles.container}>
 
@@ -20,7 +75,7 @@ export default function Login({navigation}) {
       
         <TextInput  style = {styles.input}
         placeholder='ID 입력 (이메일 형태로 부탁드릴게요)'
-        onChangeText={setId}
+        onChangeText ={text => idSetter(text)}
         keyboardType = 'email-address'
         maxLength={25}
         value = {id}
@@ -28,14 +83,14 @@ export default function Login({navigation}) {
 
         <View style = {{alignSelf : 'flex-start', flexDirection : 'row', marginLeft :'15%'}}>
           <AntDesign name="lock1" size={24} color="black" style = {{alignSelf : 'center'}} />
-          <Text style = {styles.buttonName}>비밀번호</Text>
+          <Text style = {styles.buttonName} >비밀번호</Text>
         </View>
         <TextInput  style = {styles.input}
         placeholder='비밀번호 입력'
-        onChangeText={setId}
+        onChangeText = {text => pwSetter(text)}
         keyboardType = 'email-address'
         maxLength={25}
-        value = {id}
+        value = {password}
         ></TextInput>
       </View>
 
@@ -43,7 +98,7 @@ export default function Login({navigation}) {
             <View style = {{alignSelf : 'center', marginRight : 10}}> 
             <SimpleLineIcons name = "login" size = {40} color = 'black' />
             </View>
-            <TouchableOpacity onPress={() => navigation.navigate('메인')}>
+            <TouchableOpacity onPress={() => validChecker()}>
                 <Text style = {{...styles.button, fontFamily : 'IBMMe'}}>로그인</Text>
             </TouchableOpacity>
             

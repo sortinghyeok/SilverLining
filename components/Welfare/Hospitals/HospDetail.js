@@ -7,15 +7,37 @@ import MyPageIconHeader from '../../../shared/MyPageIconHeader';
 import { theme } from '../../../shared/theme';
 import { WidthAndHeight } from '../../../shared/Dimension';
 import { useState, useEffect } from 'react';
-
+import * as Linking from 'expo-linking';
+import axios from 'axios';
+import AsyncStorage from '@react-native-async-storage/async-storage'
 const windowHeight = WidthAndHeight.windowHeight;
 const windowWidth = WidthAndHeight.windowWidth;
 export default function HospDetail({route, navigation}) {
-  const [title, setTitle] = useState();
+  const [title, setTitle] = useState('');
   const [lati, setLatitude] = useState(0);
   const [longi, setLongitude] = useState(0);
   const [location, setLocation] = useState(null);
   const [ok, setOK] = useState(true);
+
+  const [name, setName] = useState('')
+  const [kind, setKind] = useState('')
+  const [phone, setPhone] = useState('')
+  const [addr, setAddr] = useState('')
+  const [place, setPlace] = useState('')
+  const [lat, setLat] = useState(0);
+  const [lon, setLon] = useState(0);
+
+  useEffect(() => {
+    //{'name' : hosp_name, 'kind' : hosp_kind, 'phone' : hosp_phone, 'addr' : hosp_addr, 'place' : hosp_placeurl, 'lat' : lat, 'lon' : lon})
+    setName(route.params.name)
+    setKind(route.params.kind)
+    setPhone(route.params.phone)
+    setAddr(route.params.addr)
+    setPlace(route.params.place)
+    setLat(route.params.lat)
+    setLon(route.params.lon)
+  }, [name, kind, phone, addr, place])
+
 
   useEffect(() => {
     setTitle(route.params.name);
@@ -38,6 +60,8 @@ export default function HospDetail({route, navigation}) {
       })();
   }, [title])
 
+ 
+
   const getLocation = async() => {
     const {coords : {latitude, longitude},} = await Location.getCurrentPositionAsync({accuracy:5});
     const location = await Location.reverseGeocodeAsync({latitude, longitude}, {useGoogleMaps :false });
@@ -59,13 +83,12 @@ export default function HospDetail({route, navigation}) {
         </View>
         
         <View style = {{marginVertical : '3%', marginLeft : '7%'}}>
-            <Text style = {{fontSize : 23, fontFamily : 'IBMMe'}}>{title}</Text>
-            <Text style ={{marginTop : 5, }}>요양 병원</Text>
+            <Text style = {{fontSize : 23, fontFamily : 'IBMMe'}}>{name}</Text>
+            <Text style ={{ fontSize : 12, fontFamily : 'IBMMe'}}>{kind}</Text>
         </View>
 
         <View style ={{borderWidth : 3,  borderColor : theme.mColor}}></View>
-        
-
+       
         <View style = {{left : '10%'}}>
         <View style = {{...styles.locaInfo}}>
             <View style = {styles.infoBox}>
@@ -77,7 +100,7 @@ export default function HospDetail({route, navigation}) {
                  fontFamily : 'IBMMe',
                  fontSize : 20
                  }}>
-                    032 435 1950
+                    {phone}
                 </Text>
 
                 <TouchableOpacity style = {{
@@ -109,7 +132,7 @@ export default function HospDetail({route, navigation}) {
                  fontFamily : 'IBMMe',
                  fontSize : 20
                  }}>
-                    인천 강화군 강화로 52번길 1
+                    {addr}
                 </Text>
             </View>
             <View style ={styles.infoBox}>
@@ -120,18 +143,22 @@ export default function HospDetail({route, navigation}) {
                  fontFamily : 'IBMMe',
                  fontSize : 20
                  }}>
-                    강화 211번 정류장 주변
+                    {kind}
                 </Text>
             </View>
-            <View style = {styles.infoBox}>
-            <FontAwesome name="clock-o" size={45} color="black" />
+            <View style ={styles.infoBox}>
+            <FontAwesome name="bus" size={45} color="black" />
                 <Text style = {{alignSelf : 'center',
                  position: 'absolute',
                  left : '20%',
                  fontFamily : 'IBMMe',
-                 fontSize : 20
-                 }}>
-                    오후 17 : 00 까지 영업
+                 fontSize : 14
+                 }}
+                 onPress={() => {
+                  Linking.openURL(`${place}`);
+                }}
+                >
+                    {place}
                 </Text>
             </View>
             
@@ -146,33 +173,31 @@ export default function HospDetail({route, navigation}) {
         width: windowWidth*0.7,
         height: windowHeight*0.25,
         position: 'absolute',
-        bottom : '2%',
+        bottom : '10%',
         }}
         >
       <MapView
         initialRegion={{
-          latitude : 37.532600,
-          longitude : 127.024612,
-          latitudeDelta : 0.7,
-          longitudeDelta : 0.7,
+          latitude : lat,
+          longitude : lon,
+          latitudeDelta : 0.05,
+          longitudeDelta : 0.05,
         }}
         region = {{
-          latitude : lati,
-          longitude : longi, 
-          latitudeDelta : 0.3, 
-          longitudeDelta : 0.3
+          latitude : lat,
+          longitude : lon, 
+          latitudeDelta : 0.05, 
+          longitudeDelta : 0.05
         }}
         style={[styles.map]}
         loadingEnabled={true}
         provider={PROVIDER_GOOGLE}
-        showsUserLocation={true}
-        showsMyLocationButton={true}
       >
         
         <Marker
-          coordinate={{latitude : 37.465, longitude : 126.67}}
-          title= "강화 노인 병원"
-          description="도서관 관리직"
+          coordinate={{latitude : lat, longitude : lon}}
+          title= {name}
+          description= {addr}
           onPress={() => {console.log('1번 체크 확인')}}
         />
       </MapView>

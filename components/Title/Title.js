@@ -1,8 +1,58 @@
 import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, View, TouchableOpacity } from 'react-native';
 import { theme } from '../../shared/theme';
+import { useEffect, useState } from 'react';
+import AppLoading from 'expo-app-loading'
+
+import AsyncStorage from '@react-native-async-storage/async-storage';
 import { SimpleLineIcons, AntDesign, MaterialIcons, MaterialCommunityIcons} from '@expo/vector-icons';
 export default function Title({navigation}) {
+  const [isLoadingReady, setIsReady] = useState(false);
+  const [token, setJwt] = useState(false);
+  const loadFont = async () => {
+    await AsyncStorage.getItem('user_jwt', (err, jwt) => { //구인
+      if(jwt != null && jwt != undefined && jwt != '')
+      {
+        setJwt(jwt)
+      }
+  
+    });
+
+    console.log("로딩 완료");
+    console.log('토큰 : ' + token)
+  }
+
+  useEffect(() => {
+    loadFont();
+  }, [])
+
+/*
+  const onFinish = () => {
+    setIsReady(true);
+  }
+
+  if(!isLoadingReady)
+  {
+    return (
+      <AppLoading 
+      startAsync = {loadFont}
+      onError = {console.warn}
+      onFinish = {onFinish}/>
+    )
+  }*/
+ 
+  
+  /*
+  useEffect(() => {
+    AsyncStorage.getItem('user_jwt', (err, jwt) => { //구인
+      if(jwt != null && jwt != undefined && jwt == '')
+      {
+        setJwt(jwt)
+      }
+      console.log(jwt)
+    });
+  }, [jwt])
+  */
   return (
     <View style = {{...styles.container, paddingBottom : '10%'}}>
         <View style = {{...styles.title, alignSelf : 'center',}} >

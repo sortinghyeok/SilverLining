@@ -9,6 +9,7 @@ import axios from 'axios';
 import { WidthAndHeight } from '../../../shared/Dimension';
 import Arrow from '../../../shared/Arrow';
 export default function Page1({navigation}) {
+  /*
   useEffect(() => {
     AsyncStorage.removeItem('su_address');
     AsyncStorage.removeItem('su_id');
@@ -30,6 +31,7 @@ export default function Page1({navigation}) {
     AsyncStorage.removeItem('su_guard');
     AsyncStorage.removeItem('su_guard');
   }, []);
+  */
   //const [email, setEmail]= useState("");
   const su_email = (val) => {
     //setEmail(val);

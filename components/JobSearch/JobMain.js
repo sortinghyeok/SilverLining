@@ -1,24 +1,89 @@
 import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View, Button, TouchableOpacity } from 'react-native';
+import { StyleSheet, Text, View, Button, TouchableOpacity, Alert } from 'react-native';
 import { theme } from '../../shared/theme';
 import Header from '../../shared/header';
+import { useEffect, useState } from 'react';
 import { WidthAndHeight } from '../../shared/Dimension';
 import { MaterialIcons,  MaterialCommunityIcons, Ionicons } from '@expo/vector-icons'; 
 import MyPageIconHeader from '../../shared/MyPageIconHeader';
+import AsyncStorage from '@react-native-async-storage/async-storage'
+import axios from 'axios';
 const windowWidth = WidthAndHeight.windowWidth;
 const windowHeight = WidthAndHeight.windowHeight;
 export default function JobMain({navigation}) {
+  const [jwt, setJWT] = useState(null);
+  const [name, setName] = useState('');
+  const [userStatus, setStatus] = useState(null);
+  const [id, setId] = useState('');
+  useEffect(async () => {
+    (async () => {
+      AsyncStorage.getItem('user_jwt', (err, result) => { 
+        setJWT(result);
+        console.log('userjwt : ' + result);
+      });
+      AsyncStorage.getItem('user_id', (err, result) => { 
+        setId(result);
+        console.log('userid : ' + result);
+      });
+      AsyncStorage.getItem('user_name', (err, result) => { 
+        setName(result);
+        console.log('username : ' + result);
+      });
+  
+      axios.get('https://prod.asherchiv.shop/app/users?user-id=' + id, {
+      })
+      .then(function (response){
+        console.log(response.data.contents[0]);
+        setStatus(response.data.contents[0].user_company_status)
+        /*AsyncStorage.setItem('user_name', response.data.contents[0].user_name, () => {
+          console.log('로그인 성공, name : ' + response.data.contents[0].user_name);
+        });*/
+      })
+    })();
+   
+  }, [id])
+
+  useEffect(() => {
+    console.log('user status : ' + userStatus);
+  }, [userStatus]);
+
+
+  const moveForward = (val) => {
+    console.log(val);
+    if(userStatus == 0 && val == 0)
+    {
+      navigation.navigate('구인지도')
+    }
+    else if(userStatus == 1 && val == 1)
+    {
+      navigation.navigate('공고등록')
+    }
+    else
+    {
+      Alert.alert('알림', '선생님은 해당 기능을 이용하실 수 없으세요.', [
+      {
+        text : '알겠어요.',
+        onPress : () => console.log('유저 타입 미스매치')
+      }
+      ])
+    }
+   
+  };
+
   return (
     <View style={styles.container}>
     <View style = {{position : 'absolute', top : '8%', right : '10%'}}>
-    <MyPageIconHeader></MyPageIconHeader>
+      <View style = {{flexDirection : 'row'}}>
+      <Text style = {{fontFamily : 'IBMMe', fontSize : 16, paddingTop : 8}}>어서오세요. {name}님</Text><MyPageIconHeader></MyPageIconHeader>
+      </View>
+    
     </View>
         
       <Header str = "구인구직 플랫폼" width = "240"></Header>
       <StatusBar style="auto" />
       <View style = {{flexDirection : 'row', alignSelf : 'center'}}>
 
-        <TouchableOpacity onPress = {() => navigation.navigate('구인지도')}>
+        <TouchableOpacity onPress = {() => moveForward(0)}>
         <View style  = {{...styles.gridBox, }}>
             <View style = {{flexDirection : 'row'}}>
                 <MaterialCommunityIcons name="shopping-search" size={45} color={theme.mColor} /><Text style  = {styles.textStyle}>구직자용</Text>
@@ -33,7 +98,7 @@ export default function JobMain({navigation}) {
         </View>
         </TouchableOpacity>
 
-        <TouchableOpacity onPress = {() => navigation.navigate('공고등록')}>
+        <TouchableOpacity onPress = {() => moveForward(1)}>
         <View style  = {{...styles.gridBox}} >
             <View style = {{flexDirection : 'row'}}>
                 <MaterialIcons name="person-search" size={45} color={theme.mColor} /><Text style  = {styles.textStyle}>기업용</Text>

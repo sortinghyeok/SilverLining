@@ -77,7 +77,8 @@ export default function Page5({navigation}) {
         </View>
         <Text style  = {{fontSize : 20,fontFamily : 'IBMMe'}}>5단계 - 주소 입력</Text>
         <View>
-        <Text style = {{fontSize : 25, fontFamily : 'IBMMe'}}>거주하시는 주소를 알려주세요.</Text>
+        <Text style = {{fontSize : 22, fontFamily : 'IBMMe'}}>거주하시는 주소를 알려주세요.</Text>
+        <Text style = {{fontSize : 15, fontFamily : 'IBMMe'}}>(고용 목적 가입의 경우, 기업 주소를 적어주세요.)</Text>
         </View>
   
         <TouchableOpacity style= {{justifyContent : 'center'}} onPress = {() => navi.navigate('주소찾기')}>

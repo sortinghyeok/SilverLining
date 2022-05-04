@@ -88,7 +88,7 @@ export default function S_Page4({navigation}) {
       
         
     </View>
-    <View style = {{bottom : -10}}><Arrow leftArrow = {() => navigation.pop()} rightArrow = {() =>navigation.navigate('추가정보')}></Arrow></View>
+    <View style = {{bottom : -10}}><Arrow leftArrow = {() => navigation.pop()} rightArrow = {() =>navigation.navigate('소득수준')}></Arrow></View>
     </View>
   );
 }

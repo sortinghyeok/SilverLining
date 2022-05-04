@@ -15,18 +15,23 @@ import Page3 from './components/SignUp/Pages/page3';
 import Page4 from './components/SignUp/Pages/page4';
 import Page5 from './components/SignUp/Pages/page5';
 import Page6 from './components/SignUp/Pages/page6';
+
 import E_Page1 from './components/SignUp/Employer/E_Page1';
+import E_Page2 from './components/SignUp/Employer/E_Page2';
+
 import S_Page1 from './components/SignUp/Seeker/S_Page1';
 import S_Page2 from './components/SignUp/Seeker/S_Page2';
 import S_Page3 from './components/SignUp/Seeker/S_Page3';
 import S_Page4 from './components/SignUp/Seeker/S_Page4';
 import S_Page5 from './components/SignUp/Seeker/S_Page5';
+import S_Page6 from './components/SignUp/Seeker/S_Page6';
 
 import JobMain from './components/JobSearch/JobMain';
 import JobMap from './components/JobSearch/JobMap';
 import FindEmp from './components/JobSearch/FindEmp';
 import JobInfo from './components/JobSearch/JobInfo';
 import Resume from './components/JobSearch/Resume';
+import Applicants from './components/JobSearch/Applicants';
 
 import FindAddress from './components/Address/FindAddress';
 import FindEmpDetail from './components/JobSearch/FindEmpDetail';
@@ -85,12 +90,14 @@ export default function App() {
         <Stack.Screen name = "회원가입6" component={Page6} options = {{title : 'SilverLining', headerShown : false}}></Stack.Screen>
         <Stack.Screen name = "메인" component={Main} options = {{title : '메인페이지', headerShown : false}} ></Stack.Screen>
         <Stack.Screen name = '고용자가입' component={E_Page1} options = {{title : '고용자가입', headerShown : false}} ></Stack.Screen>
+        <Stack.Screen name = '고용자가입2' component={E_Page2} options = {{title : '고용자가입2', headerShown : false}} ></Stack.Screen>
         <Stack.Screen name = '일반이용자가입' component={S_Page1} options = {{title : '일반이용자 가입', headerShown : false}} ></Stack.Screen>
         <Stack.Screen name = '주소입력' component={Page5} options = {{title : '가입선택지', headerShown : false}} ></Stack.Screen>
         <Stack.Screen name = '보호자번호' component={S_Page2} options = {{title : '보호자번호', headerShown : false}} ></Stack.Screen>
         <Stack.Screen name = '직업이력' component={S_Page3} options = {{title : '직업이력', headerShown : false}} ></Stack.Screen>
         <Stack.Screen name = '보험여부' component={S_Page4} options = {{title : '보험여부', headerShown : false}} ></Stack.Screen>
-        <Stack.Screen name = '추가정보' component={S_Page5} options = {{title : '추가정보', headerShown : false}} ></Stack.Screen>
+        <Stack.Screen name = '소득수준' component={S_Page5} options = {{title : '소득수준', headerShown : false}} ></Stack.Screen>
+        <Stack.Screen name = '추가정보' component={S_Page6} options = {{title : '추가정보', headerShown : false}} ></Stack.Screen>
 
         <Stack.Screen name = '구인메인' component={JobMain} options = {{title : '구인메인', headerShown : false}} ></Stack.Screen>
         <Stack.Screen name = '구인지도' component={JobMap} options = {{title : '구인지도', headerShown : false}} ></Stack.Screen>
@@ -101,6 +108,8 @@ export default function App() {
         <Stack.Screen name = '주소찾기' component={FindAddress} options = {{title : '주소 찾기', headerShown : false}} ></Stack.Screen>
         <Stack.Screen name  = '구인글등록' component={FindEmpDetail} options = {{title : '구인글등록', headerShown : false}}></Stack.Screen>
         <Stack.Screen name  = '작성한구인글' component={Registered} options = {{title : '작성글목록', headerShown : false}}></Stack.Screen>
+        <Stack.Screen name  = '지원자목록' component={Applicants} options = {{title : '지원자목록', headerShown : false}}></Stack.Screen>
+
         <Stack.Screen name  = '복지메인' component={WelfareMain} options = {{title : '복지메인', headerShown : false}}></Stack.Screen>
         <Stack.Screen name  = '병원찾기' component={HospSearch} options = {{title : '병원찾기', headerShown : false}}></Stack.Screen>
         <Stack.Screen name  = '복지찾기' component={InstSearch} options = {{title : '복지찾기', headerShown : false}}></Stack.Screen>

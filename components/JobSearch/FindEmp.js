@@ -1,18 +1,34 @@
 import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View, Button, TouchableOpacity } from 'react-native';
+import { StyleSheet, Text, View,  TouchableOpacity } from 'react-native';
 import Header from '../../shared/header';
 import { theme } from '../../shared/theme';
 import { WidthAndHeight } from '../../shared/Dimension';
 import MyPageIconHeader from '../../shared/MyPageIconHeader';
+import axios from 'axios';
+import AsyncStorage from '@react-native-async-storage/async-storage'
 import { MaterialIcons,  MaterialCommunityIcons, Ionicons } from '@expo/vector-icons'; 
+import { useEffect, useState } from 'react';
 const windowWidth = WidthAndHeight.windowWidth;
 const windowHeight = WidthAndHeight.windowHeight;
 export default function FindEmp({navigation}) {
+  const [name, setName] = useState('');
+  useEffect(() => {
+    AsyncStorage.getItem('user_name', (err, result) => { 
+      setName(result);
+      console.log('username : ' + result);
+    });
+  }, [])
+  useEffect(() => {
+    console.log(name);
+  }, [name])
   return (
     <View style={styles.container}>
       <View style = {{position : 'absolute', top : '8%', right : '10%'}}>
-      <MyPageIconHeader></MyPageIconHeader>
+      <View style = {{flexDirection : 'row'}}>
+      <Text style = {{fontFamily : 'IBMMe', fontSize : 16, paddingTop : 8}}>어서오세요. {name}님</Text><MyPageIconHeader></MyPageIconHeader>
       </View>
+    </View>
+
       <Header str = '구인 정보 등록'  width = '240'>
         
       </Header>

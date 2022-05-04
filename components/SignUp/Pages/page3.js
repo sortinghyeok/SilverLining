@@ -100,17 +100,17 @@ export default function Page3({navigation}) {
         </TextInput>
 
         <View style = {{flexDirection :'row', marginTop : 15}}>
-        <TouchableOpacity onPress = {() => su_gender(1)}>
+        <TouchableOpacity onPress = {() => su_gender(0)}>
           <View 
           style = {{
-          backgroundColor : (gender == 1 ? theme.mColor :'white') ,
+          backgroundColor : (gender == 0 ? theme.mColor :'white') ,
           marginHorizontal : 10, borderWidth : 1, borderColor : theme.mColor, borderRadius : 5}}><Text style = {{paddingVertical : 10, fontSize : 20, paddingHorizontal : 10}}>남성</Text>
           </View>
           </TouchableOpacity>
-        <TouchableOpacity onPress = {() => su_gender(2)}>
+        <TouchableOpacity onPress = {() => su_gender(1)}>
           <View
         style = {{
-          backgroundColor : (gender == 2 ? theme.mColor :'white'),
+          backgroundColor : (gender == 1 ? theme.mColor :'white'),
           marginHorizontal : 10, borderWidth : 1, borderColor : theme.mColor, borderRadius : 5}}><Text style = {{paddingVertical : 10, fontSize : 20, paddingHorizontal : 10}}>여성</Text></View></TouchableOpacity>
         </View>
 
