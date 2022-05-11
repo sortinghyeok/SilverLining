@@ -3,13 +3,57 @@ import { StyleSheet, Text, View, Button, SafeAreaView, TouchableOpacity, ScrollV
 import Header from '../../shared/header';
 import { theme } from '../../shared/theme';
 import { WidthAndHeight } from '../../shared/Dimension';
-import {useState} from 'react';
+import {useState, useEffect} from 'react';
+import axios from 'axios';
+import AsyncStorage from '@react-native-async-storage/async-storage'
 const windowHeight = WidthAndHeight.windowHeight;
 const windowWidth = WidthAndHeight.windowWidth;
 
 export default function PolicyList({navigation}) {
     const [contents, setContents] = useState([]);
     const [titles, setTitles] = useState([]);
+    const [idx, setidx] = useState(null);
+    const [uid, setUid] = useState('');
+    const [jwt, setJWT] = useState(null);
+
+    useEffect(() => {
+        (async () => {
+            AsyncStorage.getItem('user_id', (err, result) => { 
+              setUid(result);
+              console.log("uid: "+uid);
+            });
+            AsyncStorage.getItem('user_jwt', (err, result) => { 
+              setJWT(result);
+              console.log("jwt: "+jwt);
+            });
+            AsyncStorage.getItem('u_idx', (err, result) => { 
+              setidx(result);
+              console.log("idx: "+idx);
+            });
+          })();
+    }, [])
+
+    useEffect(() => {
+        (async() => {
+          if(uid != '' && jwt != null && idx != null)
+          {
+            const config = {
+              headers: { 'X-ACCESS-TOKEN': jwt }
+            };
+            axios.get('https://prod.asherchiv.shop/app/policies?user-idx=' + idx, config)
+            .then(function (response){
+              console.log(response.data.contents)
+              setContents(response.data.contents);
+            })
+            .catch(function (error){
+              console.log(error)
+            })
+          }
+          
+        })();
+        
+      }, [idx]);
+
   return (
     <View style={styles.container}>
     <View style = {{left : '10%'}}>
@@ -25,48 +69,27 @@ export default function PolicyList({navigation}) {
     <Text style = {{left : '10%', fontFamily : 'IBMMe', fontSize : 18}}>나에게 적합한 경제 지원 정책</Text>
         <SafeAreaView>
             <ScrollView style = {styles.gathering}> 
-                <TouchableOpacity style = {{marginTop : 10}} onPress = {() => navigation.navigate('정책정보', {'title' : '노인장기요양 보험제도 1'})}>  
+            {contents? contents.map((info) =>   <TouchableOpacity key  = {info.policy_idx} style = {{marginTop : 10}} onPress = {() => 
+            {   
+                navigation.navigate('정책정보', 
+                    {
+                    'title' : info.policy_name, 'idx' : info.policy_idx, 'jwt' : jwt,
+                    })
+            }
+                }>  
                     <View>
                         <View style = {{ width : windowWidth*0.75, borderWidth : 2, borderColor : 'white', borderBottomColor : theme.mColor,}}>
-                            <Text style = {{fontSize : 17, fontFamily : 'IBMMe'}}>노인장기요양 보험제도 1</Text>
-                            <Text style = {{fontSize : 13, fontFamily : 'IBMMe'}}>- 신체 활동 및 일상생활 지원</Text>
-                            <Text style = {{fontSize : 13, fontFamily : 'IBMMe'}}>- 노인장기요양보험 가입자</Text>
-                            <Text style = {{fontSize : 13, fontFamily : 'IBMMe'}}>- 의료급여수급권자로서 65세 이상 노인과 65세 미만의 노인성 질병이 있는 자</Text>  
+                            <Text style = {{fontFamily : 'IBMMe',fontSize : 17, fontFamily : 'IBMMe'}}>{info.policy_name}</Text>
+                            <Text style = {{fontFamily : 'IBMMe',fontSize : 13, fontFamily : 'IBMMe'}}>- 지원대상 : {info.applicant_subject}</Text>
+                            <Text style = {{fontFamily : 'IBMMe',fontSize : 13, fontFamily : 'IBMMe'}}>- 지원주관 : {info.policy_operation}</Text>
+                            <Text style = {{fontFamily : 'IBMMe',fontSize : 13, fontFamily : 'IBMMe'}}>- 문의번호 : {info.poilcy_phone}</Text>  
                         </View>
                     </View>                                           
-                </TouchableOpacity>
-                <TouchableOpacity style = {{marginTop : 10}}>  
-                    <View>
-                        <View style = {{ width : windowWidth*0.75, borderWidth : 2, borderColor : 'white', borderBottomColor : theme.mColor,}}>
-                            <Text style = {{fontSize : 17, fontFamily : 'IBMMe'}}>노인장기요양 보험제도 2</Text>
-                            <Text style = {{fontSize : 13, fontFamily : 'IBMMe'}}>- 신체 활동 및 일상생활 지원</Text>
-                            <Text style = {{fontSize : 13, fontFamily : 'IBMMe'}}>- 노인장기요양보험 가입자</Text>
-                            <Text style = {{fontSize : 13, fontFamily : 'IBMMe'}}>- 의료급여수급권자로서 65세 이상 노인과 65세 미만의 노인성 질병이 있는 자</Text>  
-                        </View>
-                        
-                    </View>                                           
-                </TouchableOpacity>
-                <TouchableOpacity style = {{marginTop : 10}}>  
-                    <View>
-                        <View style = {{ width : windowWidth*0.75, borderWidth : 2, borderColor : 'white', borderBottomColor : theme.mColor,}}>
-                            <Text style = {{fontSize : 17, fontFamily : 'IBMMe'}}>노인장기요양 보험제도 3</Text>
-                            <Text style = {{fontSize : 13, fontFamily : 'IBMMe'}}>- 신체 활동 및 일상생활 지원</Text>
-                            <Text style = {{fontSize : 13, fontFamily : 'IBMMe'}}>- 노인장기요양보험 가입자</Text>
-                            <Text style = {{fontSize : 13, fontFamily : 'IBMMe'}}>- 의료급여수급권자로서 65세 이상 노인과 65세 미만의 노인성 질병이 있는 자</Text>  
-                        </View>
-                        
-                    </View>                                           
-                </TouchableOpacity>
-                <TouchableOpacity style = {{marginTop : 10}}>  
-                    <View>
-                        <View style = {{ width : windowWidth*0.75, borderWidth : 2, borderColor : 'white', borderBottomColor : theme.mColor,}}>
-                            <Text style = {{fontSize : 17, fontFamily : 'IBMMe'}}>노인장기요양 보험제도 4</Text>
-                            <Text style = {{fontSize : 13, fontFamily : 'IBMMe'}}>- 신체 활동 및 일상생활 지원</Text>
-                            <Text style = {{fontSize : 13, fontFamily : 'IBMMe'}}>- 노인장기요양보험 가입자</Text>
-                            <Text style = {{fontSize : 13, fontFamily : 'IBMMe'}}>- 의료급여수급권자로서 65세 이상 노인과 65세 미만의 노인성 질병이 있는 자</Text>  
-                        </View>
-                    </View>                                           
-                </TouchableOpacity>
+                </TouchableOpacity>)
+            :
+            contents
+            }
+               
             </ScrollView>
         </SafeAreaView>
     </View>

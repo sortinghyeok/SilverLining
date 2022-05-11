@@ -20,7 +20,7 @@ export default function JobMap({navigation}) {
   const [lati, setLatitude] = useState(0);
   const [longi, setLongitude] = useState(0);
   
-  const [idx, setidx] = useState(0);
+  const [idx, setidx] = useState(null);
   const [uid, setUid] = useState('');
   const [title, setTitle] = useState('');
   const [jwt, setJWT] = useState(null);
@@ -40,52 +40,58 @@ export default function JobMap({navigation}) {
   useEffect(() => {
 
     (async () => {
-      await AsyncStorage.getItem('user_id', (err, result) => { 
+      AsyncStorage.getItem('user_id', (err, result) => { 
         setUid(result);
         console.log(uid);
       });
-      await AsyncStorage.getItem('user_jwt', (err, result) => { 
+      AsyncStorage.getItem('user_jwt', (err, result) => { 
         setJWT(result);
         console.log(jwt);
       });
-      await AsyncStorage.getItem('u_idx', (err, result) => { 
+      AsyncStorage.getItem('u_idx', (err, result) => { 
         setidx(result);
         console.log(idx);
       });
-
-      axios.get('https://prod.asherchiv.shop/app/users?user-id=' + uid)
-      .then(function (response)
-      {
-        //console.log(response.data.contents[0])
-        setStatus(response.data.contents[0].user_company_status)
-        setLat(response.data.contents[0].user_lat)
-        setLon(response.data.contents[0].user_lng);
-      })
-      .catch(function (error)
-      {
-        console.log(error);
-      })
-
-      console.log('status, lat, lng, idx : ' + status + " " + lat + " " + lon + " " + idx)
-      const config = {
-        headers: { 'X-ACCESS-TOKEN': jwt }
-      };
-      axios.get('https://prod.asherchiv.shop/app/jobs?user=' +  idx, config)
-      .then(function (response){
-        console.log(response.data.contents)
-        setJoblist(response.data.contents);
-      })
-      .catch(function (error){
-        console.log(error)
-      })
     })();
 
-  }, [status, lat, lon, jwt, idx]);
+  }, []);
 
 
   useEffect(() => {
-    console.log('job_list' + job_list);
-  }, [job_list]);
+    (async() => {
+      if(uid != '' && jwt != null && idx != null)
+      {
+        console.log('job_list' + job_list);
+        axios.get('https://prod.asherchiv.shop/app/users?user-id=' + uid)
+        .then(function (response)
+        {
+          //console.log(response.data.contents[0])
+          setStatus(response.data.contents[0].user_company_status)
+          setLat(response.data.contents[0].user_lat)
+          setLon(response.data.contents[0].user_lng);
+        })
+        .catch(function (error)
+        {
+          console.log(error);
+        })
+
+        console.log('status, lat, lng, idx : ' + status + " " + lat + " " + lon + " " + idx)
+        const config = {
+          headers: { 'X-ACCESS-TOKEN': jwt }
+        };
+        axios.get('https://prod.asherchiv.shop/app/jobs?user=' +  idx, config)
+        .then(function (response){
+          console.log(response.data.contents)
+          setJoblist(response.data.contents);
+        })
+        .catch(function (error){
+          console.log(error)
+        })
+      }
+      
+    })();
+    
+  }, [idx]);
  
 
   const getLocation = async() => {
@@ -130,13 +136,15 @@ export default function JobMap({navigation}) {
     )
   }
 
-  const markerSetter = (title, addr, wage, detail, work, idx) => {
+  const markerSetter = (title, addr, wage, detail, work, idx, lat, lon) => {
     setStitle(title);
     setSaddr(addr)
     setSwage(wage)
     setSdetail(detail)
     setSwork(work)
     setSIdx(idx)
+    setLat(lat)
+    setLon(lon)
   }
 
   return (
@@ -154,28 +162,28 @@ export default function JobMap({navigation}) {
         height : WidthAndHeight.windowHeight*0.50,
         top : '3%' }}>
       <MapView
+        
         initialRegion={{
           latitude : lat,
-          longitude : 	lon,
-          latitudeDelta : 0.7,
-          longitudeDelta : 0.7,
+          longitude : lon,
+          latitudeDelta : 0.3,
+          longitudeDelta : 0.3,
         }}
         region = {{
           latitude : lat,
           longitude : lon, 
-          latitudeDelta : 0.01, 
-          longitudeDelta :0.01}}
+          latitudeDelta : 0.3, 
+          longitudeDelta :0.3}}
         style={[styles.map]}
         loadingEnabled={true}
         provider={PROVIDER_GOOGLE}
-        showsUserLocation={true}
-        showsMyLocationButton={true}
+
       >
       {job_list ? job_list.map((info) =>  <Marker key = {info.job_idx}
           coordinate={{latitude : info.job_lat, longitude : info.job_lng}}
           title= {info.job_title}
           description={info.job_detail}
-          onPress={() => markerSetter(info.job_title, info.job_sinm, info.job_wage, info.job_detail, info.job_working_time, info.job_idx )}
+          onPress={() => markerSetter(info.job_title, info.job_sinm, info.job_wage, info.job_detail, info.job_working_time, info.job_idx, info.job_lat, info.job_lon )}
           //(title, addr, wage, detail, work)
         />)
       :

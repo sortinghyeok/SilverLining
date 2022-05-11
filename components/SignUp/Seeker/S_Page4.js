@@ -26,7 +26,7 @@ export default function S_Page4({navigation}) {
     setCar(val);
     AsyncStorage.setItem('su_car', car.toString(), () => {
     
-      console.log('운전면허 여부 : ' + car);
+      console.log('운전면허 여부 : ' + val);
     });   // 저장하는 법
   }
   return (

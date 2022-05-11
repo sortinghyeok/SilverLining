@@ -1,13 +1,12 @@
 import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View, TouchableOpacity, } from 'react-native';
-import { MaterialIcons,  MaterialCommunityIcons,  FontAwesome, Ionicons } from '@expo/vector-icons'; 
+import { StyleSheet, Text, View, TouchableOpacity, Linking} from 'react-native';
+import { FontAwesome } from '@expo/vector-icons'; 
 import MapView, {PROVIDER_GOOGLE, Marker} from 'react-native-maps';
 import * as Location from 'expo-location';
 import MyPageIconHeader from '../../../shared/MyPageIconHeader';
 import { theme } from '../../../shared/theme';
 import { WidthAndHeight } from '../../../shared/Dimension';
 import { useState, useEffect } from 'react';
-import * as Linking from 'expo-linking';
 import axios from 'axios';
 import AsyncStorage from '@react-native-async-storage/async-storage'
 const windowHeight = WidthAndHeight.windowHeight;
@@ -36,7 +35,7 @@ export default function HospDetail({route, navigation}) {
     setPlace(route.params.place)
     setLat(route.params.lat)
     setLon(route.params.lon)
-  }, [name, kind, phone, addr, place])
+  }, [name, phone, place])
 
 
   useEffect(() => {
@@ -114,7 +113,7 @@ export default function HospDetail({route, navigation}) {
                 marginTop : 10,
                 width : 70
                 }}
-                onPress = {() => navigation.navigate('이력서', {'name' : '숭의도서관 관리직 모집'})}
+                onPress = {() => { Linking.openURL(`tel:${phone}`)}}
                 >
 
                 <Text style = {{fontSize : 15, color : 'white', fontSize : 16, fontFamily : 'IBMMe'}}>
@@ -136,7 +135,7 @@ export default function HospDetail({route, navigation}) {
                 </Text>
             </View>
             <View style ={styles.infoBox}>
-            <FontAwesome name="bus" size={45} color="black" />
+            <FontAwesome name="info-circle" size={45} color="black" />
                 <Text style = {{alignSelf : 'center',
                  position: 'absolute',
                  left : '20%',
@@ -147,18 +146,19 @@ export default function HospDetail({route, navigation}) {
                 </Text>
             </View>
             <View style ={styles.infoBox}>
-            <FontAwesome name="bus" size={45} color="black" />
+            <FontAwesome name="link" size={45} color="black" />
                 <Text style = {{alignSelf : 'center',
                  position: 'absolute',
                  left : '20%',
                  fontFamily : 'IBMMe',
-                 fontSize : 14
+                 fontSize : 20
                  }}
                  onPress={() => {
+                  console.log(place)
                   Linking.openURL(`${place}`);
                 }}
                 >
-                    {place}
+                    웹 브라우저에서 정보 보기
                 </Text>
             </View>
             

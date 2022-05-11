@@ -1,19 +1,49 @@
 import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View, Button, ScrollView, SafeAreaView,TouchableOpacity } from 'react-native';
+import { StyleSheet, Text, View, Button, ScrollView, SafeAreaView,TouchableOpacity, Linking } from 'react-native';
 import { MaterialIcons,  MaterialCommunityIcons, Ionicons } from '@expo/vector-icons'; 
 import MyPageIconHeader from '../../shared/MyPageIconHeader';
 import { theme } from '../../shared/theme';
 import { WidthAndHeight } from '../../shared/Dimension';
 import { useState, useEffect } from 'react';
 import { Entypo } from '@expo/vector-icons';
-
+import AsyncStorage from '@react-native-async-storage/async-storage'
+import axios from 'axios';
 
 export default function PolicyInfo({route, navigation}) {
-  const [title, setTitle] = useState();
+  const [title, setTitle] = useState('');
+  const [idx, setIdx] = useState(null);
+  const [content, setContents] = useState(null);
+  const [jwt, setJWT] = useState(null);
   useEffect(() => {
-    setTitle(route.params.title);
-    console.log(title);
+    (async () => {
+      setTitle(route.params.title);
+      setIdx(route.params.idx)
+      setJWT(route.params.jwt)
+      console.log(title);
+      console.log(idx);
+      console.log(jwt);
+    })();
   }, [])
+
+  useEffect(() => {
+    (async () => {
+      if(jwt != null && idx != null)
+      {
+        const config = {
+          headers: { 'X-ACCESS-TOKEN': jwt }
+        };
+        axios.get('https://prod.asherchiv.shop/app/policies/' + idx, config)
+        .then(function (response){
+          console.log("content : " + response.data.contents[0])
+          setContents(response.data.contents);
+        })
+        .catch(function (error){
+          console.log(error);
+        })
+      }
+    })();
+    
+  }, [idx, jwt])
 
   const leftArrow = () => {
     navigation.pop();
@@ -26,47 +56,55 @@ export default function PolicyInfo({route, navigation}) {
             <Text style = {{fontFamily : 'IBMMe', fontSize : 20, marginTop : '3%', paddingLeft : '5%'}}>상세 페이지</Text>
         </View>
         
-        <View style = {{marginVertical : '3%', marginLeft : '7%'}}>
+        <View style = {{marginTop : '3%', marginLeft : '7%'}}>
             <Text style = {{fontSize : 23, fontFamily : 'IBMMe'}}>{title}</Text>
-            <Text style ={{marginTop : 5, }}>등록 일자 : 2022-03-14    모집 기한 : 2022-03-25</Text>
         </View>
         <View style ={{borderWidth : 3,  borderColor : theme.mColor}}></View>
       
         <SafeAreaView>
-          <ScrollView style = {{height : WidthAndHeight.windowHeight*0.4,}}>
+          <ScrollView style = {{height : WidthAndHeight.windowHeight*0.45,}}>
           <View style  = {{marginVertical : '3%', marginLeft : '7%'}}>
           <Text style = {{fontSize : 18, fontFamily : 'IBMMe'}}>신청 대상</Text>
             <View style= {{flexDirection : 'row'}}>
               <Entypo name="dot-single" size={24} color="black" />
-              <Text style = {{width : WidthAndHeight.windowWidth*0.8}}> 
-              소득수준과 상관없이 노인장기요양보험 가입자(국민건강보험 가입자와 동일)와 그 피부양자
+              <Text style = {{width : WidthAndHeight.windowWidth*0.8, fontFamily : 'IBMMe'}}> 
+              {content != null ? content.applicant_subject : "불러오는 중..."}
               </Text>
-            </View>
-            <View style= {{flexDirection : 'row'}}>
-              <Entypo name="dot-single" size={24} color="black" />
-              <Text style = {{width : WidthAndHeight.windowWidth*0.8}}> 
-              의료급여수급권자로서 65세 이상 노인과 65세 미만의 노인성 질병이 있는 자
-              </Text>
-            </View>
-       
+            </View>       
         </View>
 
         <View style  = {{marginVertical : '3%', marginLeft : '7%'}}>
-          <Text style = {{fontSize : 18, fontFamily : 'IBMMe'}}>급여 대상</Text>
+          <Text style = {{fontSize : 18, fontFamily : 'IBMMe'}}>주관 기관</Text>
+            <View style= {{flexDirection : 'row'}}>
+              <Entypo name="dot-single" size={24} color="black" />
+              <Text style = {{width : WidthAndHeight.windowWidth*0.8, fontFamily : 'IBMMe'}}> 
+              {content != null ? content.policy_operation : "불러오는 중..."}
+              </Text>
+            </View>       
+        </View>
+
+        <View style  = {{marginVertical : '3%', marginLeft : '7%'}}>
+          <Text style = {{fontSize : 18, fontFamily : 'IBMMe'}}>지원 방법</Text>
           <View style= {{flexDirection : 'row'}}>
               <Entypo name="dot-single" size={24} color="black" />
-              <Text style = {{width : WidthAndHeight.windowWidth*0.8}}> 
-              65세 이상 노인 또는 치매, 중풍, 파킨스병 등 노인성 질병을 앓고 있는 65세 미만인 자 중 6개월 이상의 기간 동안 일상생활을 수행하기 어려워 장기요양서비스가 필요하다고 인정되는 자
+              <Text style = {{width : WidthAndHeight.windowWidth*0.8, fontFamily : 'IBMMe'}}> 
+              {content != null ? '현장 지원 : ' + content.policy_apply_method : "불러오는 중..."}
               </Text>
-            </View>           
+            </View>   
+            <View style= {{flexDirection : 'row'}}>
+              <Entypo name="dot-single" size={24} color="black" />
+              <Text style = {{width : WidthAndHeight.windowWidth*0.8, fontFamily : 'IBMMe'}}> 
+              {content != null ? '해당 번호로 전화 : ' + content.poilcy_phone : "불러오는 중..."}
+              </Text>
+            </View>         
         </View>
         
         <View style  = {{marginVertical : '3%', marginLeft : '7%'}}>
-          <Text style = {{fontSize : 18, fontFamily : 'IBMMe'}}>장기요양인정 및 서비스 이용절차</Text>
+          <Text style = {{fontSize : 18, fontFamily : 'IBMMe'}}>지원 정책/사업 상세</Text>
           <View style= {{flexDirection : 'row'}}>
               <Entypo name="dot-single" size={24} color="black" />
-              <Text style = {{width : WidthAndHeight.windowWidth*0.8}}> 
-              ① (공단 각 지사별 장기요양센터) 신청 → ② (공단직원) 방문조사 → ③ (등급판정위원회) 장기요양 인정 및 등급판정 → ④ (장기요양센터) 장기요양인정서 및 표준장기요양이용계획서 통보 → ⑤ (장기요양기관) 서비스 이용
+              <Text style = {{width : WidthAndHeight.windowWidth*0.8, fontFamily : 'IBMMe'}}> 
+              {content != null ? '현장 지원 : ' + content.policy_support_detail : "불러오는 중..."}
               </Text>
             </View>           
         </View>
@@ -79,7 +117,7 @@ export default function PolicyInfo({route, navigation}) {
             <ScrollView style = {{borderWidth : 3, 
                 alignSelf :'center',
                 width : WidthAndHeight.windowWidth*0.9,
-                height : WidthAndHeight.windowHeight*0.17, 
+                height : WidthAndHeight.windowHeight*0.135, 
                 marginBottom : 5,
                 borderColor : theme.mColor
                 }}>
@@ -88,20 +126,15 @@ export default function PolicyInfo({route, navigation}) {
                     <Text style = {{fontSize : 16, fontFamily : 'IBMMe', marginLeft : 20}}>선생님의 해당 사항은 다음과 같아요!</Text>
                     <View style= {{flexDirection : 'row'}}>
                         <Entypo name="dot-single" size={24} color="black" />
-                        <Text style = {{width : WidthAndHeight.windowWidth*0.8}}> 
-                        65세 이상
+                        <Text style = {{width : WidthAndHeight.windowWidth*0.8, fontFamily : 'IBMMe'}}> 
+                        {content != null ? content.applicant_subject : "불러오는 중..."}                     
                         </Text>
-                    </View>   
+                    </View>  
                     <View style= {{flexDirection : 'row'}}>
+    
                         <Entypo name="dot-single" size={24} color="black" />
-                        <Text style = {{width : WidthAndHeight.windowWidth*0.8}}> 
-                        노인성 질병을 앓고 있는 자
-                        </Text>
-                    </View>
-                    <View style= {{flexDirection : 'row'}}>
-                        <Entypo name="dot-single" size={24} color="black" />
-                        <Text style = {{width : WidthAndHeight.windowWidth*0.8}}> 
-                        노인장기요양보험에 가입된 자
+                        <Text style = {{width : WidthAndHeight.windowWidth*0.8, fontFamily : 'IBMMe'}}> 
+                        {content != null ? content.applicant_age + "대 이상" : "불러오는 중..."}                    
                         </Text>
                     </View>
                 </View>
@@ -128,7 +161,7 @@ export default function PolicyInfo({route, navigation}) {
               justifyContent : 'center',
               marginTop : 5
               }}
-             onPress = {() => navigation.navigate('이력서', {'name' : '숭의도서관 관리직 모집'})}
+             onPress = {() => { Linking.openURL('tel:' + content.poilcy_phone)}}
               >
                 <Text style = {{fontSize : 15, color : 'white', fontSize : 16}}>
                   신청 전화하기

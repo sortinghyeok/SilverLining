@@ -15,7 +15,7 @@ export default function JobMain({navigation}) {
   const [name, setName] = useState('');
   const [userStatus, setStatus] = useState(null);
   const [id, setId] = useState('');
-  useEffect(async () => {
+  useEffect(() => {
     (async () => {
       AsyncStorage.getItem('user_jwt', (err, result) => { 
         setJWT(result);
@@ -29,23 +29,28 @@ export default function JobMain({navigation}) {
         setName(result);
         console.log('username : ' + result);
       });
-  
-      axios.get('https://prod.asherchiv.shop/app/users?user-id=' + id, {
-      })
-      .then(function (response){
-        console.log(response.data.contents[0]);
-        setStatus(response.data.contents[0].user_company_status)
-        /*AsyncStorage.setItem('user_name', response.data.contents[0].user_name, () => {
-          console.log('로그인 성공, name : ' + response.data.contents[0].user_name);
-        });*/
-      })
     })();
    
-  }, [id])
+  }, [])
 
   useEffect(() => {
-    console.log('user status : ' + userStatus);
-  }, [userStatus]);
+    (async() => {
+      if(id != "")
+      {
+        axios.get('https://prod.asherchiv.shop/app/users?user-id=' + id, {
+        })
+        .then(function (response){
+          console.log(response.data.contents[0]);
+          setStatus(response.data.contents[0].user_company_status)
+          /*AsyncStorage.setItem('user_name', response.data.contents[0].user_name, () => {
+            console.log('로그인 성공, name : ' + response.data.contents[0].user_name);
+          });*/
+        })
+        console.log('로그인 성공. user status : ' + userStatus);
+      }
+    })();
+   
+  }, [name]);
 
 
   const moveForward = (val) => {

@@ -11,15 +11,6 @@ import axios from 'axios';
 import AsyncStorage from '@react-native-async-storage/async-storage'
 
 export default function InstSearch({navigation}) {
-  const [location, setLocation] = useState(null);
-  const [errorMsg, setErrorMsg] = useState(null);
-  const [ok, setOK] = useState(true);
-  const [markerData, setMarkerData] = useState("");
-  const [initialRegion, setInitialRegion] = useState(null);
-  const [lati, setLatitude] = useState(0);
-  const [longi, setLongitude] = useState(0); //유저 핸드폰 기준 위, 경도
-
-  const [title, setTitle] = useState('');
   let tempKey = 0;
 
   const [idx, setidx] = useState(0);
@@ -27,13 +18,13 @@ export default function InstSearch({navigation}) {
   const [jwt, setJWT] = useState(null);
   const [lat, setLat] = useState(0.1);
   const [lon, setLon] = useState(0.1);
-  const [hostData, setHost] = useState(null);
+  const [InstData, setInst] = useState(null);
 
-  const [hosp_kind, setHKind] = useState('')
-  const [hosp_name, setHtitle] = useState('');
-  const [hosp_phone, setHphone] = useState('');
-  const [hosp_addr, setHaddr] = useState('');
-  const [hosp_placeurl, setHplace] = useState('');
+  const [inst_kind, setIKind] = useState('')
+  const [inst_name, setItitle] = useState('');
+  const [inst_phone, setIphone] = useState('');
+  const [inst_addr, setIaddr] = useState('');
+  const [inst_placeurl, setIplace] = useState('');
 
 
   useEffect(() => {
@@ -51,56 +42,72 @@ export default function InstSearch({navigation}) {
         setidx(result);
         console.log('idx : ' + idx);
       });
-  
-    
-      await axios.get('https://prod.asherchiv.shop/app/facilities?user-idx=' + idx + '&welfare=1', 
-      {
-        headers: { 'X-ACCESS-TOKEN': jwt }
-      })
-        .then(function (response){
-          console.log(response.data.contents)
-          setHost(response.data.contents)
-         
-        })
-        .catch(function (error){
-          console.log(error)
-        })
-      await axios.get('https://prod.asherchiv.shop/app/users?user-id=' + uid)
-        .then(function (response)
-        {
-          //console.log(response.data.contents[0])
-          setLat(response.data.contents[0].user_lat)
-          setLon(response.data.contents[0].user_lng);
-        })
-        .catch(function (error)
-        {
-          console.log(error);
-        })
-  
     })();
   
-  }, [uid, jwt, idx])
+  }, [])
+
+  const setUserInst = async(res) => {
+    setInst(res.data.contents)
+    console.log(res)
+  }
+
+  const setUserLat = async(res) => {
+    setLat(res.data.contents[0].user_lat)
+    console.log(res)
+  }
+
+  const setUserLon = async(res) => {
+    setLon(res.data.contents[0].user_lng);
+    console.log(res)
+  }
+
+  const getInst = async() => {
+    axios.get('https://prod.asherchiv.shop/app/facilities?user-idx=' + idx + '&welfare=1', 
+    {
+      headers: { 'X-ACCESS-TOKEN': jwt }
+    })
+    .then(function (response){
+      setUserInst(response)
+    })
+    .catch(function (error){
+      console.log(error)
+    })
+  }
+  const getUinfo = async() => {
+    axios.get('https://prod.asherchiv.shop/app/users?user-id=' + uid)
+    .then(function (response)
+    {
+      setUserLat(response);
+      setUserLon(response);
+    })
+    .catch(function (error)
+    {
+      console.log(error);
+    })
+  }
 
   useEffect(() => {
-    console.log(lat, lon)
-  },[lat, lon])
-
-
+    if(uid != '' && jwt != null && idx != null)
+    {
+      getInst();
+      getUinfo();
+    }
+  },[idx])
 
 
   const titleJumper = ()=>{
-    navigation.navigate('복지상세', {'name' : hosp_name, 'kind' : hosp_kind, 'phone' : hosp_phone, 'addr' : hosp_addr, 'place' : hosp_placeurl, 'lat' : lat, 'lon' : lon})
+    navigation.navigate('복지상세', {'name' : inst_name, 'kind' : inst_kind, 'phone' : inst_phone, 'addr' : inst_addr, 'place' : inst_placeurl, 'lat' : lat, 'lon' : lon})
   }
 
  
   const markerSetter = (kind, title, phone, addr, detail, lat, lng) => {
-    setHaddr(addr)
-    setHphone(phone)
-    setHplace(detail)
+    setIaddr(addr)
+    setIphone(phone)
+    setIplace(detail)
     setLat(lat)
     setLon(lng)
-    setHKind(kind)
-    setHtitle(title)
+    setIKind(kind)
+    setItitle(title)
     console.log('lat : ' + lat + " " + 'lon : ' + lng)
   }
   return (
@@ -138,7 +145,7 @@ export default function InstSearch({navigation}) {
  
        
       >
-        {hostData ? hostData.map((info) =>  <Marker key = {tempKey++}
+        {InstData ? InstData.map((info) =>  <Marker key = {tempKey++}
           coordinate={{latitude : info.lat, longitude : info.lng}}
           title= {info.place_name}
           description={'장소 정보 : ' + info.place_url}
@@ -147,7 +154,7 @@ export default function InstSearch({navigation}) {
           //(title, addr, wage, detail, work)
         />)
       :
-      hostData
+      InstData
       }
         
         
@@ -165,34 +172,34 @@ export default function InstSearch({navigation}) {
     <View style = {styles.grid} >
 
         <Text style = {{fontSize : 15, fontFamily : 'IBMMe' }}>
-          {hosp_addr ? hosp_addr : '입력하신 병과 관련된 병원들이 표시됩니다.'}
+          {inst_addr ? inst_addr : '입력하신 병과 관련된 병원들이 표시됩니다.'}
         </Text>
         <Text style = {{fontSize : 20, fontFamily : 'IBMMe' }}>
-        {hosp_name ? hosp_name :'마커를 누르시면 병원이름이 표시됩니다.'}
+        {inst_name ? inst_name :'마커를 누르시면 병원이름이 표시됩니다.'}
         </Text>
         
         <View style= {styles.flexRow}>
         <Entypo name="dot-single" size={24} color="black" />
-        <Text>  
-          {hosp_kind ? hosp_kind :'마커를 누르시면 병원 종류가 표시됩니다.'}
+        <Text style = {{ fontFamily : 'IBMMe'}}>  
+          {inst_kind ? inst_kind :'마커를 누르시면 병원 종류가 표시됩니다.'}
         </Text>
         </View>
         <View style= {styles.flexRow}>
         <Entypo name="dot-single" size={24} color="black" />
-        <Text> 
-         {hosp_phone ? hosp_phone : '마커를 누르시면 전화번호가 표시됩니다.'}
+        <Text style = {{ fontFamily : 'IBMMe'}}> 
+         {inst_phone ? inst_phone : '마커를 누르시면 전화번호가 표시됩니다.'}
         </Text>
         </View>
         <View style= {styles.flexRow}>
         <Entypo name="dot-single" size={24} color="black" />
-        <Text> 
-        {hosp_addr ? hosp_addr :'마커를 누르시면 병원 주소가 표시됩니다.'}
+        <Text style = {{ fontFamily : 'IBMMe'}}> 
+        {inst_addr ? inst_addr :'마커를 누르시면 병원 주소가 표시됩니다.'}
         </Text>
         </View>
         <View style= {styles.flexRow}>
         <Entypo name="dot-single" size={24} color="black" />
-        <Text> 
-        {hosp_placeurl ? hosp_placeurl :'마커를 누르시면 병원이름이 표시됩니다.'}
+        <Text style = {{ fontFamily : 'IBMMe'}}> 
+        {inst_placeurl ? inst_placeurl :'마커를 누르시면 병원이름이 표시됩니다.'}
         </Text>
         </View>
         
@@ -224,6 +231,7 @@ const styles = StyleSheet.create({
   },
   flexRow : {
     flexDirection : 'row',
-    alignContent : 'center'
+    alignContent : 'center',
+ 
   }
 });
