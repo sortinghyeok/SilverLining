@@ -4,7 +4,10 @@ import Header from '../../shared/header'
 import Arrow from '../../shared/Arrow'
 import { theme } from '../../shared/theme';
 import { Entypo, FontAwesome5, MaterialIcons, MaterialCommunityIcons } from '@expo/vector-icons';
-
+import { useEffect, useState } from 'react';
+import MyPageIconHeader from '../../shared/MyPageIconHeader';
+import { Ionicons } from '@expo/vector-icons'; 
+import AsyncStorage from '@react-native-async-storage/async-storage'
 const chartHeight = Dimensions.get('window').height;
 const chartWidth = Dimensions.get('window').width;
 
@@ -18,7 +21,16 @@ export default function Home({navigation}) {
   return (
     <View style={styles.container}>
       <StatusBar style="auto" />
+
       <Header str = "서비스를 선택해주세요" width = "316" style = {{fontSize : 30}}></Header>
+      
+      <View style = {{position : 'absolute', top : '8%', right : '10%', flexDirection : 'row'}}>
+      <TouchableOpacity onPress = {() => navigation.navigate('마이페이지')}>
+        <Ionicons name="person-circle-outline" size={80} color={theme.mColor}/>
+        <Text style = {{fontFamily : "IBMMe", marginLeft :5}}>마이페이지</Text>
+      </TouchableOpacity>
+      </View>
+      
       <Text style = {{marginLeft : '10%', fontFamily : 'IBMMe'}}>당신의 자립을 돕습니다.</Text>
 
       <View style = {{marginTop : 15, alignItems : 'center'}}>

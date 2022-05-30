@@ -1,15 +1,15 @@
-import { StatusBar } from 'expo-status-bar';
+
 import { StyleSheet, Text, View, Button, SafeAreaView, TouchableOpacity, ScrollView} from 'react-native';
-import Header from '../../shared/header';
-import { theme } from '../../shared/theme';
-import { WidthAndHeight } from '../../shared/Dimension';
+
+import { theme } from '../../../shared/theme';
+import { WidthAndHeight } from '../../../shared/Dimension';
 import {useState, useEffect} from 'react';
 import axios from 'axios';
 import AsyncStorage from '@react-native-async-storage/async-storage'
 const windowHeight = WidthAndHeight.windowHeight;
 const windowWidth = WidthAndHeight.windowWidth;
 import { Ionicons } from '@expo/vector-icons';
-export default function PolicyList({navigation}) {
+export default function Applied({navigation}) {
     const [contents, setContents] = useState([]);
     const [titles, setTitles] = useState([]);
     const [idx, setidx] = useState(null);
@@ -40,7 +40,7 @@ export default function PolicyList({navigation}) {
             const config = {
               headers: { 'X-ACCESS-TOKEN': jwt }
             };
-            axios.get('https://prod.asherchiv.shop/app/policies?user-idx=' + idx, config)
+            axios.get('https://prod.asherchiv.shop/app/users/' + idx + '/applications', config)
             .then(function (response){
               console.log(response.data.contents)
               setContents(response.data.contents);
@@ -74,23 +74,23 @@ export default function PolicyList({navigation}) {
     <Text style = {{left : '10%', fontFamily : 'IBMMe'}}>당신의 홀로 서기를 돕습니다.</Text>
     
     <View style = {{borderWidth : 1, width : windowWidth*0.8, left :'10%', marginBottom : 10, borderColor : theme.mColor}}></View>
-    <Text style = {{left : '10%', fontFamily : 'IBMMe', fontSize : 18}}>나에게 적합한 경제 지원 정책</Text>
+    <Text style = {{left : '10%', fontFamily : 'IBMMe', fontSize : 18}}>내가 지원한 공고</Text>
         <SafeAreaView>
             <ScrollView style = {styles.gathering}> 
-            {contents? contents.map((info) =>   <TouchableOpacity key  = {info.policy_idx} style = {{marginTop : 10}} onPress = {() => 
+            {contents? contents.map((info) =>   <TouchableOpacity key  = {info.job_idx} style = {{marginTop : 10}} 
+            onPress = {() => 
             {   
-                navigation.navigate('정책정보', 
+                navigation.navigate('구인상세', 
                     {
-                    'title' : info.policy_name, 'idx' : info.policy_idx, 'jwt' : jwt,
+                    'name' : info.job_title, 'idx' : info.job_idx, 'status' : 0
                     })
             }
                 }>  
                     <View>
                         <View style = {{ width : windowWidth*0.75, borderWidth : 2, borderColor : 'white', borderBottomColor : theme.mColor,}}>
-                            <Text style = {{fontFamily : 'IBMMe',fontSize : 17, fontFamily : 'IBMMe'}}>{info.policy_name}</Text>
-                            <Text style = {{fontFamily : 'IBMMe',fontSize : 13, fontFamily : 'IBMMe'}}>- 지원대상 : {info.applicant_subject}</Text>
-                            <Text style = {{fontFamily : 'IBMMe',fontSize : 13, fontFamily : 'IBMMe'}}>- 지원주관 : {info.policy_operation}</Text>
-                            <Text style = {{fontFamily : 'IBMMe',fontSize : 13, fontFamily : 'IBMMe'}}>- 문의번호 : {info.poilcy_phone}</Text>  
+                            <Text style = {{fontFamily : 'IBMMe',fontSize : 17, fontFamily : 'IBMMe'}}>{info.job_title}</Text>
+                          
+                            <Text style = {{fontFamily : 'IBMMe',fontSize : 13, fontFamily : 'IBMMe'}}>- 업체명 : {info.company_name}</Text>
                         </View>
                     </View>                                           
                 </TouchableOpacity>)

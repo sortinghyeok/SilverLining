@@ -17,6 +17,8 @@ export default function JobInfo({route, navigation}) {
   const [name, setName] = useState('');
   const [phone, setPhone] = useState('');
 
+  const [pname, setPname] = useState('');
+  const [pphone, setPphone] = useState('');
   const [content, setContent] = useState(null);
 
   const contentSetter = (val) => {
@@ -32,6 +34,21 @@ export default function JobInfo({route, navigation}) {
     console.log('스테이터스 : ' + userStatus);
    
   }, [title, idx, userStatus])
+
+  useEffect(() => {
+    (async() => {
+      if(content!=null)
+      {
+        axios.get('https://prod.asherchiv.shop/app/users/' + content.job_publisher_idx)
+        .then(function(response){
+          console.log(response.data.contents.user_name);
+          setPname(response.data.contents.user_name)
+          setPphone(response.data.contents.user_phone)
+        })
+
+      }
+    })();
+  }, [content])
 
   useEffect(async() => {
     await AsyncStorage.getItem('user_id', (err, result) => { 
@@ -106,11 +123,13 @@ export default function JobInfo({route, navigation}) {
     })
   }
 
-  //props의 id와 title을 이용, 데이터를 불러옴, id부분은 데이터 베이스 연동이 안되어 아직 실행 못함
+
   return (
     <View style={styles.container}>
-        <View style = {{top : '5%', marginBottom : 30, borderWidth : 1, borderColor :'white', borderBottomColor : theme.mColor, height : WidthAndHeight.windowHeight*0.08}}>
-            <View style = {{position : 'absolute', right : '5%',}}><MyPageIconHeader /></View>
+        <View style = {{
+          flexDirection : 'row',
+          top : '10%', marginBottom : 30, borderWidth : 1, borderColor :'white', borderBottomColor : theme.mColor, height : WidthAndHeight.windowHeight*0.08}}>
+    
             <Text style = {{fontFamily : 'IBMMe', fontSize : 20, marginTop : '3%', paddingLeft : '5%'}}>상세 페이지</Text>
         </View>
         
@@ -121,49 +140,48 @@ export default function JobInfo({route, navigation}) {
         <View style ={{borderWidth : 3,  borderColor : theme.mColor}}></View>
       
         <SafeAreaView>
-          <ScrollView style = {{height : WidthAndHeight.windowHeight*0.6,}}>
+          <ScrollView style = {{height : WidthAndHeight.windowHeight*0.6}}>
           <View style  = {{marginVertical : '3%', marginLeft : '7%'}}>
           <Text style = {{fontSize : 23, fontFamily : 'IBMMe'}}>근무 조건</Text>
-            <View style= {{flexDirection : 'row'}}>
-              <Entypo name="dot-single" size={30} color="black" />
-              <Text style = {{fontSize : 18}}> 
+            <View style= {{flexDirection : 'row', width : WidthAndHeight.windowWidth*0.9}}>
+              <Entypo name="dot-single" size={30} color="black" style = {{paddingTop : 6}}/>
+              <Text style = {{fontSize : 18, fontFamily : 'IBMMe'}}> 
                 근무 시간 : {content != null ? content.job_working_time : ''}
               </Text>
-            </View>
-            <View style= {{flexDirection : 'row'}}>
-              <Entypo name="dot-single" size={30} color="black" />
-              <Text style = {{fontSize : 18}}> 
-                근무 요일 : {content != null ? content.job_detail: ''}
-              </Text>
-            </View>
-            <View style= {{flexDirection : 'row'}}>
-              <Entypo name="dot-single" size={30} color="black" />
-              <Text style = {{fontSize : 18}}> 
+            </View>        
+            <View style= {{flexDirection : 'row', width : WidthAndHeight.windowWidth*0.9}}>
+              <Entypo name="dot-single" size={30} color="black" style = {{paddingTop : 6}}/>
+              <Text style = {{fontSize : 18, fontFamily : 'IBMMe'}}> 
                 급여 : {content != null ? content.job_wage: ''}
               </Text>
             </View>
-            <View style= {{flexDirection : 'row'}}>
-              <Entypo name="dot-single" size={30} color="black" />
-              <Text style = {{fontSize : 18}}> 
-                근무 지역 : {content != null ? content.job_sinm: ''}
+            <View style= {{flexDirection : 'row', width : WidthAndHeight.windowWidth*0.9}}>
+              <Entypo name="dot-single" size={30} color="black" style = {{paddingTop : 6}}/>
+              <Text style = {{fontSize : 18, fontFamily : 'IBMMe'}}> 
+                근무지 : {content != null ? content.job_sinm: ''}
               </Text>
             </View>
-            
+            <View style= {{flexDirection : 'row', width : WidthAndHeight.windowWidth*0.9}}>
+              <Entypo name="dot-single" size={30} color="black" style = {{paddingTop : 6}} />
+              <Text style = {{fontSize : 18, fontFamily : 'IBMMe'}}> 
+                근무 상세 : {content != null ? content.job_detail: ''}
+              </Text>
+            </View>
   
        
         </View>
 
         <View style  = {{marginVertical : '3%', marginLeft : '7%'}}>
           <Text style = {{fontSize : 23, fontFamily : 'IBMMe'}}>지원 조건</Text>
-          <View style= {{flexDirection : 'row'}}>
-              <Entypo name="dot-single" size={30} color="black" />
-              <Text style = {{fontSize : 18}}> 
+          <View style= {{flexDirection : 'row', width : WidthAndHeight.windowWidth*0.9}}>
+              <Entypo name="dot-single" size={30} color="black"  style = {{paddingTop : 6}}/>
+              <Text style = {{fontSize : 18, fontFamily : 'IBMMe'}}> 
                 연령 : {content != null ? content.job_min_age + '세부터 ' + content.job_max_age + '세까지': ''}
               </Text>
             </View>
-            <View style= {{flexDirection : 'row'}}>
-              <Entypo name="dot-single" size={30} color="black" />
-              <Text style = {{fontSize : 18}}> 
+            <View style= {{flexDirection : 'row', width : WidthAndHeight.windowWidth*0.9}}>
+              <Entypo name="dot-single" size={30} color="black"  style = {{paddingTop : 6}}/>
+              <Text style = {{fontSize : 18, fontFamily : 'IBMMe'}}> 
                 성별 : {content != null ? (content.job_gender == 0 ? '남자' : '여자' ): ''}
               </Text>
             </View>
@@ -172,15 +190,15 @@ export default function JobInfo({route, navigation}) {
 
         <View style  = {{marginVertical : '3%', marginLeft : '7%'}}>
           <Text style = {{fontSize : 23, fontFamily : 'IBMMe'}}>부가 정보</Text>
-          <View style= {{flexDirection : 'row'}}>
-              <Entypo name="dot-single" size={30} color="black" />
-              <Text style = {{fontSize : 18}}> 
-                담당자 : {name != '' ? name : ''}
+          <View style= {{flexDirection : 'row', width : WidthAndHeight.windowWidth*0.9}}>
+              <Entypo name="dot-single" size={30} color="black"  style = {{paddingTop : 6}}/>
+              <Text style = {{fontSize : 18, fontFamily : 'IBMMe'}}> 
+                담당자 : {pname != '' ? pname : ''} ( {phone != '' ? pphone : ''} )
               </Text>
             </View>
-            <View style= {{flexDirection : 'row'}}>
-              <Entypo name="dot-single" size={30} color="black" />
-              <Text style = {{fontSize : 18}}> 
+            <View style= {{flexDirection : 'row', width : WidthAndHeight.windowWidth*0.9}}>
+              <Entypo name="dot-single" size={30} color="black"  style = {{paddingTop : 6}}/>
+              <Text style = {{fontSize : 18, fontFamily : 'IBMMe'}}> 
                 문의 방법 : 문자/전화
               </Text>
             </View>
@@ -242,11 +260,11 @@ export default function JobInfo({route, navigation}) {
               justifyContent : 'center',
               marginTop : 5
               }}
-             onPress = {() => navigation.navigate('이력서', {'name' : '숭의도서관 관리직 모집'})}
+             onPress = {() => navigation.navigate('구인글수정', {'content' : content})}
               >
                 
                 <Text style = {{fontSize : 15, color : 'white', fontSize : 16}}>
-                  모집 완료
+                  글 수정/마감
                 </Text>
             </TouchableOpacity>
             </View>

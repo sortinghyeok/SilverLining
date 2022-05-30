@@ -57,7 +57,15 @@ export default function JobMain({navigation}) {
     console.log(val);
     if(userStatus == 0 && val == 0)
     {
-      navigation.navigate('구인지도')
+      Alert.alert('지금 댁에 계신가요?', '댁에 계시다면, \n거주지 주소 기반으로 검색합니다.', [
+        {
+          text: '네',
+          onPress: () => navigation.navigate('구인지도', {'mode' : 0}),
+        },
+        { text: '아니오.', 
+        onPress: () => navigation.navigate('구인지도', {'mode' : 1}) },//실외 모드
+      ])
+
     }
     else if(userStatus == 1 && val == 1)
     {
@@ -78,10 +86,11 @@ export default function JobMain({navigation}) {
   return (
     <View style={styles.container}>
     <View style = {{position : 'absolute', top : '8%', right : '10%'}}>
-      <View style = {{flexDirection : 'row'}}>
-      <Text style = {{fontFamily : 'IBMMe', fontSize : 16, paddingTop : 8}}>어서오세요. {name}님</Text><MyPageIconHeader></MyPageIconHeader>
-      </View>
-    
+      <TouchableOpacity onPress = {() => navigation.navigate('마이페이지')}>
+        <View style = {{flexDirection : 'row'}}>
+        <Text style = {{fontFamily : 'IBMMe', fontSize : 16, paddingTop : 8}}>어서오세요. {name}님</Text><MyPageIconHeader></MyPageIconHeader>
+        </View>
+      </TouchableOpacity>
     </View>
         
       <Header str = "구인구직 플랫폼" width = "240"></Header>

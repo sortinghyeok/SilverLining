@@ -24,9 +24,11 @@ export default function FindEmp({navigation}) {
   return (
     <View style={styles.container}>
       <View style = {{position : 'absolute', top : '8%', right : '10%'}}>
-      <View style = {{flexDirection : 'row'}}>
-      <Text style = {{fontFamily : 'IBMMe', fontSize : 16, paddingTop : 8}}>어서오세요. {name}님</Text><MyPageIconHeader></MyPageIconHeader>
-      </View>
+      <TouchableOpacity onPress = {() => navigation.navigate('마이페이지')}>
+        <View style = {{flexDirection : 'row'}}>
+        <Text style = {{fontFamily : 'IBMMe', fontSize : 16, paddingTop : 8}}>어서오세요. {name}님</Text><MyPageIconHeader></MyPageIconHeader>
+        </View>
+      </TouchableOpacity>
     </View>
 
       <Header str = '구인 정보 등록'  width = '240'>

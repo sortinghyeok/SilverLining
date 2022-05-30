@@ -48,6 +48,7 @@ export default function Page4({navigation}) {
       navigation.navigate('회원가입4');
       break;
       case 5 :
+        console.log(validNum.data.contents)
         if(confirm)
         {
           navigation.navigate('회원가입5');
@@ -127,8 +128,9 @@ export default function Page4({navigation}) {
         >
         </TextInput> 
     <TouchableOpacity onPress={() => {
-      //console.log(validNum.data.contents.valid_str)
-      if(validInput == '7053')
+
+      console.log(validNum.data.contents.valid_str)
+      if(validInput == validNum.data.contents.valid_str)
       {
         console.log('인증번호 일치')
         setConfirm(true);

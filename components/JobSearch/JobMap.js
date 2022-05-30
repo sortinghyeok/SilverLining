@@ -10,7 +10,7 @@ import { Entypo } from '@expo/vector-icons';
 import JobInfo from './JobInfo';
 import axios from 'axios';
 import AsyncStorage from '@react-native-async-storage/async-storage'
-export default function JobMap({navigation}) {
+export default function JobMap({route, navigation}) {
   const [location, setLocation] = useState(null);
   const [errorMsg, setErrorMsg] = useState(null);
   const [ok, setOK] = useState(true);
@@ -61,7 +61,6 @@ export default function JobMap({navigation}) {
     (async() => {
       if(uid != '' && jwt != null && idx != null)
       {
-        console.log('job_list' + job_list);
         axios.get('https://prod.asherchiv.shop/app/users?user-id=' + uid)
         .then(function (response)
         {
@@ -93,6 +92,15 @@ export default function JobMap({navigation}) {
     
   }, [idx]);
  
+
+
+  useEffect(() => {
+    console.log(job_list)
+  }, [job_list])
+
+  useEffect(()=>{
+    console.log("jwt: " + jwt + " uid: " + uid + " idx : " + idx)
+  }, [uid, jwt, idx])
 
   const getLocation = async() => {
     const {coords : {latitude, longitude},} = await Location.getCurrentPositionAsync({accuracy:5});
@@ -164,14 +172,14 @@ export default function JobMap({navigation}) {
       <MapView
         
         initialRegion={{
-          latitude : lat,
-          longitude : lon,
+          latitude : route.params.mode == 0 ? lat : lati,
+          longitude : route.params.mode == 0 ? lon : longi,
           latitudeDelta : 0.3,
           longitudeDelta : 0.3,
         }}
         region = {{
-          latitude : lat,
-          longitude : lon, 
+          latitude : route.params.mode == 0 ? lat : lati,
+          longitude : route.params.mode == 0 ? lon : longi,
           latitudeDelta : 0.3, 
           longitudeDelta :0.3}}
         style={[styles.map]}

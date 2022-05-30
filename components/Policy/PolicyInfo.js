@@ -1,5 +1,6 @@
 import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View, Button, ScrollView, SafeAreaView,TouchableOpacity, Linking } from 'react-native';
+import { StyleSheet, Text, View, Button, ScrollView, Alert,
+  SafeAreaView,TouchableOpacity, Linking } from 'react-native';
 import { MaterialIcons,  MaterialCommunityIcons, Ionicons } from '@expo/vector-icons'; 
 import MyPageIconHeader from '../../shared/MyPageIconHeader';
 import { theme } from '../../shared/theme';
@@ -12,8 +13,12 @@ import axios from 'axios';
 export default function PolicyInfo({route, navigation}) {
   const [title, setTitle] = useState('');
   const [idx, setIdx] = useState(null);
+  const [uidx, setUidx] = useState(null);
   const [content, setContents] = useState(null);
   const [jwt, setJWT] = useState(null);
+  const [curLidx,setCurLidx] = useState(null);//cur liked idx
+  const [policy_liked_idx, setPliked] = useState(null);
+  const [likedList, setLikedList] = useState([]);
   useEffect(() => {
     (async () => {
       setTitle(route.params.title);
@@ -24,6 +29,54 @@ export default function PolicyInfo({route, navigation}) {
       console.log(jwt);
     })();
   }, [])
+
+  useEffect(() => {
+    (async () => {
+      await AsyncStorage.getItem('u_idx', (err, result) => { 
+        setUidx(result);
+        console.log('uidx : ' + uidx);
+      });
+    })();
+  }, [])
+
+  useEffect(() => {
+    console.log(content);
+    console.log(jwt);
+    console.log(uidx);
+    (async() => {
+      if(uidx != null && jwt != null && content != null)
+      {
+        axios.get('https://prod.asherchiv.shop/app/policies/liked-list?user-idx=' + uidx,
+        {
+          headers: { 'X-ACCESS-TOKEN': jwt }         
+        },
+        {
+          'user-idx' : uidx
+        }
+        )
+        .then(function (response){
+          console.log(response.data.contents);
+          let res = response.data.contents;
+          for(let i = 0; i<res.length; i++)
+          {
+            if(res[i].policy_idx == content.policy_idx)
+            {
+              setPliked(res[i].policy_liked_idx);
+              console.log('plikedidx: ' +policy_liked_idx);
+              break;
+            }
+          }
+        
+        })
+        .catch(function (error){
+          console.log(error);
+          
+        })
+      
+      }
+    })();
+   
+  }, [content, uidx, jwt])
 
   useEffect(() => {
     (async () => {
@@ -40,6 +93,7 @@ export default function PolicyInfo({route, navigation}) {
         .catch(function (error){
           console.log(error);
         })
+
       }
     })();
     
@@ -51,18 +105,26 @@ export default function PolicyInfo({route, navigation}) {
   //props의 id와 title을 이용, 데이터를 불러옴, id부분은 데이터 베이스 연동이 안되어 아직 실행 못함
   return (
     <View style={styles.container}>
-        <View style = {{top : '5%', marginBottom : 30, borderWidth : 1, borderColor :'white', borderBottomColor : theme.mColor, height : WidthAndHeight.windowHeight*0.08}}>
-            <View style = {{position : 'absolute', right : '5%',}}><MyPageIconHeader /></View>
-            <Text style = {{fontFamily : 'IBMMe', fontSize : 20, marginTop : '3%', paddingLeft : '5%'}}>상세 페이지</Text>
-        </View>
+   
+        <View  style = {{top : '5%', marginBottom : 30, borderWidth : 1, borderColor :'white', borderBottomColor : theme.mColor, height : WidthAndHeight.windowHeight*0.08}}>
+         
+        <Text style = {{fontFamily : 'IBMMe', fontSize : 20, marginTop : '3%', paddingLeft : '5%'}}>상세 페이지</Text>
         
-        <View style = {{marginTop : '3%', marginLeft : '7%'}}>
-            <Text style = {{fontSize : 23, fontFamily : 'IBMMe'}}>{title}</Text>
+        <TouchableOpacity style = {{position : 'absolute', right : '5%', flexDirection : 'row'}} onPress={() => navigation.navigate('마이페이지')}>
+            <Text style = {{paddingTop : 12, fontFamily : 'IBMMe'}}>마이페이지
+            </Text>
+            <MyPageIconHeader />
+          </TouchableOpacity>
+        </View>
+     
+        
+        <View style = {{marginTop : '3%', marginLeft : '7%', flexDirection : 'row'}}>
+            <Text style = {{fontSize : 23, fontFamily : 'IBMMe'}}>{title}</Text>            
         </View>
         <View style ={{borderWidth : 3,  borderColor : theme.mColor}}></View>
       
         <SafeAreaView>
-          <ScrollView style = {{height : WidthAndHeight.windowHeight*0.45,}}>
+          <ScrollView style = {{height : WidthAndHeight.windowHeight*0.4,}}>
           <View style  = {{marginVertical : '3%', marginLeft : '7%'}}>
           <Text style = {{fontSize : 18, fontFamily : 'IBMMe'}}>신청 대상</Text>
             <View style= {{flexDirection : 'row'}}>
@@ -151,7 +213,7 @@ export default function PolicyInfo({route, navigation}) {
         <View style = {{
           width : WidthAndHeight.windowWidth*0.3,
           justifyContent :'center',
-          marginLeft : '10%'
+          marginLeft : '10%',
           }}>
             <TouchableOpacity style = {{
               backgroundColor : theme.mColor,
@@ -159,14 +221,96 @@ export default function PolicyInfo({route, navigation}) {
               alignItems : 'center',
               height : 40,
               justifyContent : 'center',
-              marginTop : 5
+              marginTop : 15
               }}
              onPress = {() => { Linking.openURL('tel:' + content.poilcy_phone)}}
               >
-                <Text style = {{fontSize : 15, color : 'white', fontSize : 16}}>
+                <Text style = {{fontFamily : 'IBMMe',fontSize : 15, color : 'white', fontSize : 16}}>
                   신청 전화하기
                 </Text>
+  
             </TouchableOpacity>
+            <TouchableOpacity style = 
+            {{width : WidthAndHeight.windowWidth*0.3, paddingTop : 5, 
+              paddingBottom : 10}}
+            onPress = {() => {
+              Alert.alert('즐겨찾기', '관심공고에 추가하시겠어요?', [{
+                text : '네!',
+                onPress : () => {
+                  axios.post('https://prod.asherchiv.shop/app/policies/' + idx + '?user-idx=' + uidx, {
+                    'user-idx' : uidx
+                  },
+                  {
+                    headers : { 'X-ACCESS-TOKEN': jwt },   
+                  }
+                  )
+                  .then(function (response){
+                    console.log(response.data)
+                    if(response.data.code == 1000)
+                    {
+                      Alert.alert('즐겨찾기 완료!', '마이페이지에서 확인하실 수 있습니다.', [
+                        {
+                          text : '확인'
+                        }
+                      ]);
+                    }
+                    else if(response.data.code = 2032)
+                    {
+                      Alert.alert('알림', '이미 즐겨찾기 하신 정책입니다. 취소하시겠어요?', [
+                        {
+                          text : '즐겨찾기 취소',
+                          onPress : () => {
+                            console.log('policy_idx : ' + content.policy_idx);
+                            axios.delete('https://prod.asherchiv.shop/app/policies/liked-list?liked-idx='+ policy_liked_idx,
+                            {
+                              headers : { 'X-ACCESS-TOKEN': jwt },   
+                            },
+                            {
+                              'liked-idx' : policy_liked_idx
+                            }
+                            )
+                            .then(function(response){
+                              console.log(response.data)
+                              if(response.data.code == 1000)
+                              {
+                                Alert.alert('취소 성공!' ,'즐겨찾기를 취소하셨어요.')
+                              }
+                              else{
+                                Alert.alert('취소 실패...' ,'즐겨찾기 취소 실패.')
+                              }
+                           
+                            })
+                            .catch(function (error)
+                            {
+                              console.log(error);
+                            })
+                          }
+                          
+                        }
+                        ,
+                        {
+                          text : '즐겨찾기 유지',                  
+                        }
+                      ])
+                    }
+                   
+                  })
+                  .catch(function (error)
+                  {
+                    console.log(error);
+                  })
+                }
+              },
+              {
+                text : '아니오.'
+              }])
+            }}
+            >
+              <View style = {{ backgroundColor : theme.mColor, alignItems : 'center', 
+            borderRadius : 4, 
+            }}
+            ><Text style = {{fontFamily : 'IBMMe', color : 'white', height :40, fontSize : 16}}>관심 등록</Text></View>
+            </TouchableOpacity> 
         </View>
       
       </View>

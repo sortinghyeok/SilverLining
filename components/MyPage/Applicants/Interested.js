@@ -1,20 +1,20 @@
-import { StatusBar } from 'expo-status-bar';
+
 import { StyleSheet, Text, View, Button, SafeAreaView, TouchableOpacity, ScrollView} from 'react-native';
-import Header from '../../shared/header';
-import { theme } from '../../shared/theme';
-import { WidthAndHeight } from '../../shared/Dimension';
+import { theme } from '../../../shared/theme';
+import { WidthAndHeight } from '../../../shared/Dimension';
 import {useState, useEffect} from 'react';
 import axios from 'axios';
 import AsyncStorage from '@react-native-async-storage/async-storage'
 const windowHeight = WidthAndHeight.windowHeight;
 const windowWidth = WidthAndHeight.windowWidth;
 import { Ionicons } from '@expo/vector-icons';
-export default function PolicyList({navigation}) {
+export default function Interested({navigation}) {
     const [contents, setContents] = useState([]);
     const [titles, setTitles] = useState([]);
     const [idx, setidx] = useState(null);
     const [uid, setUid] = useState('');
     const [jwt, setJWT] = useState(null);
+    const [uidx, setUidx] = useState(null);
 
     useEffect(() => {
         (async () => {
@@ -30,30 +30,47 @@ export default function PolicyList({navigation}) {
               setidx(result);
               console.log("idx: "+idx);
             });
+            AsyncStorage.getItem('u_idx', (err, result) => { 
+              setUidx(result);
+              console.log('uidx : ' + uidx);
+            });
           })();
     }, [])
 
     useEffect(() => {
-        (async() => {
-          if(uid != '' && jwt != null && idx != null)
-          {
-            const config = {
-              headers: { 'X-ACCESS-TOKEN': jwt }
-            };
-            axios.get('https://prod.asherchiv.shop/app/policies?user-idx=' + idx, config)
-            .then(function (response){
-              console.log(response.data.contents)
-              setContents(response.data.contents);
-            })
-            .catch(function (error){
-              console.log(error)
-            })
-          }
+    console.log(jwt);
+    console.log(uidx);
+    if(uidx != null && jwt != null)
+    {
+    (async() => {
+     
+        axios.get('https://prod.asherchiv.shop/app/policies/liked-list?user-idx=' + uidx,
+        {
+          headers: { 'X-ACCESS-TOKEN': jwt }         
+        },
+        {
+          'user-idx' : uidx
+        }
+       
+        )
+        .then(function (response){
+          console.log(response.data.contents);
+          setContents(response.data.contents);
+        })
+        .catch(function (error){
+          console.log(error);
           
-        })();
-        
-      }, [idx]);
+        }
+        )
+      
+      
+    })();
+  }
+  }, [uidx, jwt])
 
+  useEffect(() =>{
+    console.log(contents)
+  }, [contents])
   return (
     <View style={styles.container}>
        <View style = {{position : 'absolute', top : '6%', right : '10%', flexDirection : 'row'}}>
@@ -74,7 +91,7 @@ export default function PolicyList({navigation}) {
     <Text style = {{left : '10%', fontFamily : 'IBMMe'}}>당신의 홀로 서기를 돕습니다.</Text>
     
     <View style = {{borderWidth : 1, width : windowWidth*0.8, left :'10%', marginBottom : 10, borderColor : theme.mColor}}></View>
-    <Text style = {{left : '10%', fontFamily : 'IBMMe', fontSize : 18}}>나에게 적합한 경제 지원 정책</Text>
+    <Text style = {{left : '10%', fontFamily : 'IBMMe', fontSize : 18}}>내가 관심있는 지원정책</Text>
         <SafeAreaView>
             <ScrollView style = {styles.gathering}> 
             {contents? contents.map((info) =>   <TouchableOpacity key  = {info.policy_idx} style = {{marginTop : 10}} onPress = {() => 
@@ -88,9 +105,7 @@ export default function PolicyList({navigation}) {
                     <View>
                         <View style = {{ width : windowWidth*0.75, borderWidth : 2, borderColor : 'white', borderBottomColor : theme.mColor,}}>
                             <Text style = {{fontFamily : 'IBMMe',fontSize : 17, fontFamily : 'IBMMe'}}>{info.policy_name}</Text>
-                            <Text style = {{fontFamily : 'IBMMe',fontSize : 13, fontFamily : 'IBMMe'}}>- 지원대상 : {info.applicant_subject}</Text>
-                            <Text style = {{fontFamily : 'IBMMe',fontSize : 13, fontFamily : 'IBMMe'}}>- 지원주관 : {info.policy_operation}</Text>
-                            <Text style = {{fontFamily : 'IBMMe',fontSize : 13, fontFamily : 'IBMMe'}}>- 문의번호 : {info.poilcy_phone}</Text>  
+                            <Text style = {{fontFamily : 'IBMMe',fontSize : 13, fontFamily : 'IBMMe'}}>- 문의 번호 : {info.policy_phone}</Text>
                         </View>
                     </View>                                           
                 </TouchableOpacity>)

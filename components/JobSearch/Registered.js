@@ -49,7 +49,7 @@ export default function Registered({navigation}) {
     {
         for(let i = 0; i<clist.length; i++)
         {
-            if(clist[0].job_offer_status == 1)
+            if(clist[i].job_offer_status == 1)
             {
                 arr.push(clist[i]);
                 console.log('clist: ' + clist[i].job_title);

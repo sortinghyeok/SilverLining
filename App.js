@@ -32,6 +32,13 @@ import FindEmp from './components/JobSearch/FindEmp';
 import JobInfo from './components/JobSearch/JobInfo';
 import Resume from './components/JobSearch/Resume';
 import Applicants from './components/JobSearch/Applicants';
+import AlterInfo from './components/JobSearch/AlterInfo';
+
+import MyPageMain from './components/MyPage/MyPageMain';
+import MyInfoEdit from './components/MyPage/MyInfoEdit';
+import Applied from './components/MyPage/Applicants/Applied';
+import Interested from './components/MyPage/Applicants/Interested';
+
 
 import FindAddress from './components/Address/FindAddress';
 import FindEmpDetail from './components/JobSearch/FindEmpDetail';
@@ -109,6 +116,7 @@ export default function App() {
         <Stack.Screen name  = '구인글등록' component={FindEmpDetail} options = {{title : '구인글등록', headerShown : false}}></Stack.Screen>
         <Stack.Screen name  = '작성한구인글' component={Registered} options = {{title : '작성글목록', headerShown : false}}></Stack.Screen>
         <Stack.Screen name  = '지원자목록' component={Applicants} options = {{title : '지원자목록', headerShown : false}}></Stack.Screen>
+        <Stack.Screen name  = '구인글수정' component={AlterInfo} options = {{title : '구인글수정', headerShown : false}}></Stack.Screen>
 
         <Stack.Screen name  = '복지메인' component={WelfareMain} options = {{title : '복지메인', headerShown : false}}></Stack.Screen>
         <Stack.Screen name  = '병원찾기' component={HospSearch} options = {{title : '병원찾기', headerShown : false}}></Stack.Screen>
@@ -117,6 +125,12 @@ export default function App() {
         <Stack.Screen name  = '복지상세' component={InstDetail} options = {{title : '복지상세', headerShown : false}}></Stack.Screen>
         <Stack.Screen name  = '정책메인' component={PolicyList} options = {{title : '정책메인', headerShown : false}}></Stack.Screen>
         <Stack.Screen name  = '정책정보' component={PolicyInfo} options = {{title : '정책정보', headerShown : false}}></Stack.Screen>
+
+        <Stack.Screen name = '마이페이지' component={MyPageMain} options = {{title : '마이페이지', headerShown : false}}></Stack.Screen>
+        <Stack.Screen name = '내정보수정' component={MyInfoEdit} options = {{title : '내정보수정', headerShown : false}}></Stack.Screen>
+        <Stack.Screen name = '지원한공고' component={Applied} options = {{title : '지원한공고', headerShown : false}}></Stack.Screen>
+        <Stack.Screen name = '관심있는공고' component={Interested} options = {{title : '관심있는 공고', headerShown : false}}></Stack.Screen>
+
       </Stack.Navigator>
     </NavigationContainer>
   );

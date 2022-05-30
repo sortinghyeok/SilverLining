@@ -53,12 +53,12 @@ export default function Resume({route, navigation}) {
             text : '지원 취소',
             onPress : () => {
               console.log('still in development')
-              navigation.navigate('구인지도')
+              navigation.navigate('구인메인')
             } 
           },
           {
             text : '지원 유지',
-            onPress : () => navigation.navigate('구인지도')
+            onPress : () => navigation.navigate('구인메인')
           }
         ])
       }
@@ -66,7 +66,7 @@ export default function Resume({route, navigation}) {
         Alert.alert('알림', '제출 완료!', [
           {
             text : '확인',
-            onPress : () => navigation.navigate('구인지도')
+            onPress : () => navigation.navigate('구인메인')
           }
         ])
       }
