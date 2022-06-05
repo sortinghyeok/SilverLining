@@ -1,5 +1,5 @@
 import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View, TextInput, TouchableOpacity, Button } from 'react-native';
+import { StyleSheet, Text, View, TextInput, TouchableOpacity, Button, Alert } from 'react-native';
 import { theme } from '../../../shared/theme';
 import Header from '../../../shared/header';
 import React, {useState, useEffect} from 'react';
@@ -111,8 +111,19 @@ export default function Page6({navigation}) {
         <Text style = {{fontSize : 28,fontFamily : 'IBMMe'}}>어떤 목적으로 오셨어요?</Text>
         </View>
   
-    <View style = {{  }}>   
-        <TouchableOpacity style = {{marginVertical : 5}} onPress = {() => setJumper(0)}>
+    <View>   
+        <TouchableOpacity style = {{marginVertical : 5}} onPress = {() => 
+            { 
+              Alert.alert('알림', '일반 회원으로 가입을 진행합니다.', [{
+                text : '확인',
+                onPress : () =>  setJumper(0)
+              },
+              {
+                text : '취소'
+              }]
+              )
+            }
+           }>
           <View style = {{borderWidth : 4, borderColor : theme.mColor, borderRadius : 5,  width :  WidthAndHeight.windowWidth*0.8}}>
           <Text style = {{fontSize : 20, padding : 5, fontFamily : 'IBMMe'}}>
             저는 서비스를 이용하려고 해요.
@@ -120,7 +131,18 @@ export default function Page6({navigation}) {
           </View>
         </TouchableOpacity>
         
-        <TouchableOpacity style = {{marginVertical : 5}} onPress = {() => setJumper(1)}>
+        <TouchableOpacity style = {{marginVertical : 5}} onPress = {() => 
+            { 
+              Alert.alert('알림', '기업 회원으로 가입을 진행합니다.', [{
+                text : '확인',
+                onPress : () =>  setJumper(1)
+              },
+              {
+                text : '취소'
+              }]
+              )
+            }
+           }>
         <View style = {{borderWidth : 4, borderColor : theme.mColor, borderRadius : 5,  width :  WidthAndHeight.windowWidth*0.8}}>
         <Text style = {{fontSize : 20, padding : 5, fontFamily : 'IBMMe'}}>
             저는 직원을 뽑고 싶어요.

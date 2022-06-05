@@ -81,21 +81,29 @@ export default function S_Page1({navigation}) {
 
     <View style = {{alignSelf : 'center', height : WidthAndHeight.windowHeight*0.28, marginTop : 15}}>
     <SafeAreaView>
-        <ScrollView style = {{height : WidthAndHeight.windowHeight*0.43, padding : 10, borderWidth : 1, borderColor : theme.mColor, width : WidthAndHeight.windowWidth*0.8}}>
+        <ScrollView style = {{height : WidthAndHeight.windowHeight*0.43, paddingBottom : 15, paddingLeft :5, borderWidth : 1, borderColor : theme.mColor, width : WidthAndHeight.windowWidth*0.8}}>
           <View style = {styles.gridMargin}>
           <Button title = "고혈압" color = {clicked[1] ? 'gray' : theme.mColor} onPress = {() => setDisease(1)}></Button><Text>{"\t"}</Text>
           <Button title = "류마티스/관절염"  color = {clicked[2] ? 'gray' : theme.mColor} onPress = {() => setDisease(2) } > </Button><Text>{"\t"}</Text>
           <Button title = "폐질환"  color = {clicked[3] ? 'gray' : theme.mColor} onPress = {() =>setDisease(3)} ></Button><Text>{"\t"}</Text>
-          <Button title = "신장질환" color = {clicked[4] ? 'gray' : theme.mColor} onPress = {() => setDisease(4)} ></Button>
+          
           </View>
           <View style = {styles.gridMargin}>
+          <Button title = "신장질환" color = {clicked[4] ? 'gray' : theme.mColor} onPress = {() => setDisease(4)} ></Button><Text>{"\t"}</Text>
           <Button title = "간질환"  color = {clicked[5] ? 'gray' : theme.mColor} onPress = {() => setDisease(5)} ></Button><Text>{"\t"}</Text>
           <Button title = "당뇨병"  color = {clicked[6] ? 'gray' : theme.mColor} onPress = {() => setDisease(6)} > </Button><Text>{"\t"}</Text>
-          <Button title = "노안/백내장"  color = {clicked[7] ? 'gray' : theme.mColor} onPress = {() => setDisease(7)} ></Button><Text>{"\t"}</Text>
-          <Button title = "소화기 질환"  color = {clicked[8] ? 'gray' : theme.mColor} onPress = {() => setDisease(8)}></Button>
           </View>
+
+         
           <View style = {styles.gridMargin}>
+          <Button title = "노안/백내장"  color = {clicked[7] ? 'gray' : theme.mColor} onPress = {() => setDisease(7)} ></Button><Text>{"\t"}</Text>
+          <Button title = "소화기 질환"  color = {clicked[8] ? 'gray' : theme.mColor} onPress = {() => setDisease(8)}></Button><Text>{"\t"}</Text>
           <Button title = "난청" color = {clicked[9] ? 'gray' : theme.mColor} onPress = {() => setDisease(9)} ></Button><Text>{"\t"}</Text>
+          </View>
+       
+
+          <View style = {styles.gridMargin}>
+        
           <Button title = "보행장애"  color = {clicked[10] ? 'gray' : theme.mColor} onPress = {() => setDisease(10)} > </Button><Text>{"\t"}</Text>
           <Button title = "암"  color = {clicked[11] ? 'gray' : theme.mColor}onPress = {() => setDisease(11)} ></Button><Text>{"\t"}</Text>
           <Button title = "치매/알츠하이머"  color = {clicked[12] ? 'gray' : theme.mColor} onPress = {() => setDisease(12)} ></Button>

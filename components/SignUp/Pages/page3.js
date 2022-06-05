@@ -2,7 +2,7 @@ import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, View, TextInput, TouchableOpacity } from 'react-native';
 import { theme } from '../../../shared/theme';
 import Header from '../../../shared/header';
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import { MaterialCommunityIcons, Entypo } from '@expo/vector-icons'; 
 import Arrow from '../../../shared/Arrow';
 import { WidthAndHeight } from '../../../shared/Dimension';
@@ -23,13 +23,18 @@ export default function Page3({navigation}) {
       console.log('생년월일 실시간 변화 저장 : ' + val)
     });
   };
-  const [gender, setGender] = useState(3);
+  const [gender, setGender] = useState(0);
   const su_gender = (val) => {
     setGender(val);
     AsyncStorage.setItem('su_gender', val.toString(), () => {
       console.log('성별 저장 : ' + val)
     });
   };
+
+  useEffect(() => {
+    console.log('name : ' + name + " birthday : " + birthday)
+  }, [name, birthday])
+
   const numberSetter = (val) => {
     switch (val)
     {

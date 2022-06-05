@@ -1,19 +1,29 @@
 import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View, Button, TouchableOpacity, Dimensions } from 'react-native';
+import { StyleSheet, Text, View, Button, TouchableOpacity, Dimensions, Alert } from 'react-native';
 import Header from '../../shared/header'
 import Arrow from '../../shared/Arrow'
 import { theme } from '../../shared/theme';
 import { Entypo, FontAwesome5, MaterialIcons, MaterialCommunityIcons } from '@expo/vector-icons';
 import { useEffect, useState } from 'react';
+import { useIsFocused } from '@react-navigation/native';
 import MyPageIconHeader from '../../shared/MyPageIconHeader';
 import { Ionicons } from '@expo/vector-icons'; 
 import AsyncStorage from '@react-native-async-storage/async-storage'
+import { WidthAndHeight } from '../../shared/Dimension';
 const chartHeight = Dimensions.get('window').height;
 const chartWidth = Dimensions.get('window').width;
 
 export default function Home({navigation}) {
+  const [jwt, setJWT] = useState('');
+  const isFocused = useIsFocused();
+  useEffect(() => {
+    AsyncStorage.getItem('user_jwt', (err, result) => { 
+      setJWT(result);
+      console.log('userjwt : ' + result);
+    });
+  }, [jwt, isFocused])
   const naviLeft = () => {
-    navigation.pop();
+    navigation.navigate('Title', {'user_jwt' : jwt});
   }
   const naviRight = () => {
     
@@ -22,18 +32,29 @@ export default function Home({navigation}) {
     <View style={styles.container}>
       <StatusBar style="auto" />
 
-      <Header str = "서비스를 선택해주세요" width = "316" style = {{fontSize : 30}}></Header>
+      <Header str = "기능 선택" width = "200" style = {{fontSize : 30}}></Header>
       
       <View style = {{position : 'absolute', top : '8%', right : '10%', flexDirection : 'row'}}>
-      <TouchableOpacity onPress = {() => navigation.navigate('마이페이지')}>
+      <TouchableOpacity onPress = {() => 
+        {
+          if(jwt != null)
+          {
+            navigation.navigate('마이페이지')
+          }
+          else
+          {
+            Alert.alert('알림', '로그인이 필요합니다.', [{text : '확인'}])
+          }
+        }
+       }>
         <Ionicons name="person-circle-outline" size={80} color={theme.mColor}/>
-        <Text style = {{fontFamily : "IBMMe", marginLeft :5}}>마이페이지</Text>
+        <Text style = {{fontFamily : "IBMMe", marginLeft :5}}>{jwt == null ? '로그인 필요' : '  나의 정보'}</Text>
       </TouchableOpacity>
       </View>
       
       <Text style = {{marginLeft : '10%', fontFamily : 'IBMMe'}}>당신의 자립을 돕습니다.</Text>
 
-      <View style = {{marginTop : 15, alignItems : 'center'}}>
+      <View style = {{marginTop : 10, alignItems : 'center', }}>
         <View style = {{flexDirection : 'row'}}>
         <TouchableOpacity onPress = {() => navigation.navigate('구인메인')}>
           <View style = {styles.gridBox}>
@@ -69,7 +90,9 @@ export default function Home({navigation}) {
         </TouchableOpacity>
         </View>
       </View>
-
+       <View style = {{borderBottomWidth : 3, marginTop : 7,borderBottomColor : 'silver', width : WidthAndHeight.windowWidth*0.5, alignSelf : 'center'}}>
+         
+       </View>
       <View style = {{alignSelf : 'center', position : 'absolute', bottom : '5%'}}>
       <Arrow leftArrow = {naviLeft} rightArrow = {naviRight}></Arrow>
       </View>

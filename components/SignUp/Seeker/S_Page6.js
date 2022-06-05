@@ -229,17 +229,13 @@ export default function S_Page6({navigation}) {
             .then(function (response) {
                 console.log(response.data.contents);
                 let jwt = response.data.contents.jwt;
-               
-                AsyncStorage.setItem('user_jwt', jwt, () => {
-                console.log('jwt : ' + jwt);
-                });
-                navigation.navigate('Title');
-  
-            }).catch(function (error) {
+                console.log(jwt);
+                navigation.navigate('Title', {state : jwt})
+                                      
+            })
+            .catch(function (error) {
                 // 오류발생시 실행
                 console.log(error);
-            }).then(function() {
-                // 항상 실행
             });                             
 
             } 

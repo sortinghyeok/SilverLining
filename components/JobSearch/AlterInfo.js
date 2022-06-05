@@ -9,8 +9,10 @@ import { Entypo } from '@expo/vector-icons';
 import RNPickerSelect from 'react-native-picker-select';
 import AsyncStorage from '@react-native-async-storage/async-storage'
 import axios from 'axios';
+import { useIsFocused } from '@react-navigation/native';
 
 export default function AlterInfo({route, navigation}) {
+  const isFocused = useIsFocused();
   const [selectedValue, setSelected] = useState('');
 
   const [curData, setCurData] = useState('');
@@ -32,7 +34,7 @@ export default function AlterInfo({route, navigation}) {
     }
     setFlag(true);
     console.log(content);
-  }, [content])
+  }, [content, isFocused])
 
   useEffect(()=> {
     console.log(content);

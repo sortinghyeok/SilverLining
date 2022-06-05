@@ -15,6 +15,10 @@ export default function Page5({navigation}) {
   const [userAddress, setAddress] = useState("");
   const navi = useNavigation();
   var pageNum = 5;
+  useEffect(() => {
+    console.log(userAddress)
+  }, [userAddress])
+
   const numberSetter = (val) => {
     switch (val)
     {
@@ -81,7 +85,9 @@ export default function Page5({navigation}) {
         <Text style = {{fontSize : 15, fontFamily : 'IBMMe'}}>(고용 목적 가입의 경우, 기업 주소를 적어주세요.)</Text>
         </View>
   
-        <TouchableOpacity style= {{justifyContent : 'center'}} onPress = {() => navi.navigate('주소찾기')}>
+        <TouchableOpacity style= {{justifyContent : 'center'}} onPress = {() => navi.navigate('주소찾기', {
+          type : 'signup'
+        })}>
         <Text style = {{
           marginVertical : 10, 
           fontSize : 30, 
@@ -92,21 +98,21 @@ export default function Page5({navigation}) {
           }}>
             주소 등록하기</Text>
         </TouchableOpacity>
-        <TouchableOpacity onPress = {() => Alert.alert('아래 등록한 주소로 바뀌지 않았으면, \n몇 초 뒤 다시 눌러주세요', getAddress(), [
-           {
-            text: '확인',
-            onPress: () => console.log('확인 완료'),
-          },
-        ])}>
+        <TouchableOpacity 
+        onPress = {() => getAddress()
+        }>
           <View>
             <Text style = {{fontSize : 20, fontFamily :'IBMMe',}}>
-              눌러서 주소확인
+              눌러서 설정된 주소 보기
             </Text>
           </View>
         </TouchableOpacity>
-        <Text style = {{fontSize :20, marginLeft : '10%'}}>
-          
+        <View style= {{borderBottomWidth : 3, width : windowWidth*0.8, borderColor : theme.mColor}}>
+        <Text style = {{fontFamily : 'IBMMe', fontSize :17}}>
+          {userAddress == '' ? '' : userAddress}
         </Text>  
+        </View>
+       
         
     </View>
     <View style = {{bottom : -10}}><Arrow leftArrow = {() => numberSetter(4)} rightArrow = {() =>numberSetter(6)}></Arrow></View>

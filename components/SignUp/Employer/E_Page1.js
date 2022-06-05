@@ -70,23 +70,37 @@ export default function E_Page1({navigation}) {
           <View style = {styles.jobs}>
             <Button title = "외식/음료" color = {clicked[1] ? 'gray' : theme.mColor} onPress = {() => setJob(1)}></Button><Text>{"\t"}</Text>
             <Button title = "유통/판매" color = {clicked[2] ? 'gray' : theme.mColor} onPress = {() => setJob(2)}> </Button><Text>{"\t"}</Text>
-            <Button title = "문화/여가/생활" color = {clicked[3] ? 'gray' : theme.mColor} onPress = {() => setJob(3)}></Button><Text>{"\t"}</Text>
+         
           </View>
+
           <View style = {styles.jobs}>
-          <Button title = "서비스" color = {clicked[4] ? 'gray' : theme.mColor} onPress = {() => setJob(4)}></Button><Text>{"\t"}</Text>
+            <Button title = "문화/여가/생활" color = {clicked[3] ? 'gray' : theme.mColor} onPress = {() => setJob(3)}></Button><Text>{"\t"}</Text>
+            <Button title = "서비스" color = {clicked[4] ? 'gray' : theme.mColor} onPress = {() => setJob(4)}></Button><Text>{"\t"}</Text>
+          </View>
+
+          <View style = {styles.jobs}>
             <Button title = "사무/회계" color = {clicked[5] ? 'gray' : theme.mColor} onPress = {() => setJob(5)}></Button><Text>{"\t"}</Text>
             <Button title = "고객상담/영업/리서치" color = {clicked[6] ? 'gray' : theme.mColor} onPress = {() => setJob(6)}></Button>
           </View>
+
           <View style = {styles.jobs}>
             <Button title = "생산/건설/노무" color = {clicked[7] ? 'gray' : theme.mColor} onPress = {() => setJob(7)}> </Button><Text>{"\t"}</Text>
             <Button title = "IT/인터넷" color = {clicked[8] ? 'gray' : theme.mColor} onPress = {() => setJob(8)}></Button><Text>{"\t"}</Text>
-            <Button title = "교육/강사" color = {clicked[9] ? 'gray' : theme.mColor} onPress = {() => setJob(9)}></Button>
+            
           </View>
+
           <View style = {styles.jobs}>
+            <Button title = "교육/강사" color = {clicked[9] ? 'gray' : theme.mColor} onPress = {() => setJob(9)}></Button>
             <Button title = "디자인" color = {clicked[10] ? 'gray' : theme.mColor} onPress = {() => setJob(10)}> </Button><Text>{"\t"}</Text>
-            <Button title = "미디어" color = {clicked[11] ? 'gray' : theme.mColor} onPress = {() => setJob(11)}></Button><Text>{"\t"}</Text>
+          </View>
+
+          <View style = {styles.jobs}>
+          <Button title = "미디어" color = {clicked[11] ? 'gray' : theme.mColor} onPress = {() => setJob(11)}></Button><Text>{"\t"}</Text>
             <Button title = "운전/배달" color = {clicked[12] ? 'gray' : theme.mColor} onPress = {() => setJob(12)}></Button><Text>{"\t"}</Text>
-            <Button title = "병원/간호/연구" color = {clicked[12] ? 'gray' : theme.mColor} onPress = {() => setJob(13)}></Button>
+          </View>
+
+          <View style = {styles.jobs}>
+            <Button title = "병원/간호/연구" color = {clicked[13] ? 'gray' : theme.mColor} onPress = {() => setJob(13)}></Button>
           </View>
 
         </ScrollView>

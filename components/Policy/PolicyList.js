@@ -71,9 +71,9 @@ export default function PolicyList({navigation}) {
         marginVertical : 10
         }}>SilverLining</Text>
     </View>
-    <Text style = {{left : '10%', fontFamily : 'IBMMe'}}>당신의 홀로 서기를 돕습니다.</Text>
+    <Text style = {{fontSize : 16, left : '10%', fontFamily : 'IBMMe'}}>당신의 홀로 서기를 돕습니다.</Text>
     
-    <View style = {{borderWidth : 1, width : windowWidth*0.8, left :'10%', marginBottom : 10, borderColor : theme.mColor}}></View>
+    <View style = {{borderWidth : 1, width : windowWidth*0.5, left :'10%', marginBottom : 10, borderColor : theme.mColor}}></View>
     <Text style = {{left : '10%', fontFamily : 'IBMMe', fontSize : 18}}>나에게 적합한 경제 지원 정책</Text>
         <SafeAreaView>
             <ScrollView style = {styles.gathering}> 

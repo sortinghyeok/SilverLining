@@ -118,7 +118,7 @@ export default function E_Page2({navigation}) {
 
 
   const getFullInfo = () => {
-    let str = "아이디 : " + su_id + '\n성함 : ' + su_name +  '\n성별 : ' + (su_gender == 1 ? '남자' : '여자')
+    let str = "아이디 : " + su_id + '\n성함 : ' + su_name +  '\n성별 : ' + (su_gender == 0 ? '남자' : '여자')
     + '\n생년월일 : ' + su_birthday + '\n전화번호: ' + su_phone + '\n기업이름: ' + su_info;
     console.log(str);
     return str;
@@ -185,10 +185,7 @@ export default function E_Page2({navigation}) {
               console.log(response);
               let jwt = response.data.contents.jwt;
              
-              AsyncStorage.setItem('user_jwt', jwt, () => {
-                console.log('jwt : ' + jwt)
-              });
-              navigation.navigate('메인');
+              navigation.navigate('Title', {state : jwt});
             }).catch(function (error) {
                 // 오류발생시 실행
                 console.log(error);

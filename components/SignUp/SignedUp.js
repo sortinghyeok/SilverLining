@@ -11,7 +11,7 @@ export default function SignedUp({navigation}) {
     <View style = {styles.container}>
         <View  style = {styles.complete}>
             <Text style= {{fontSize : 50}}>회원가입 완료!</Text>
-            <Text style = {{textAlign : 'center'}}>still in development...</Text>
+            <Text style = {{textAlign : 'center'}}>환영합니다.</Text>
         </View>
         <Button title = "메인 페이지" color = {theme.mColor} onPress={() => navigation.navigate('메인')}></Button>
     </View>

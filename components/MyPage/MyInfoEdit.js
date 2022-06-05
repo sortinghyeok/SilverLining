@@ -10,6 +10,7 @@ import RNPickerSelect from 'react-native-picker-select';
 import AsyncStorage from '@react-native-async-storage/async-storage'
 import axios from 'axios';
 import { useNavigation } from '@react-navigation/native';
+import { useIsFocused } from '@react-navigation/native';
 
 export default function MyInfoEdit({route, navigation}) {
   let dList = ['', '고혈압',"류마티스/관절염" ,"폐질환" ,"신장질환" ,
@@ -20,6 +21,8 @@ export default function MyInfoEdit({route, navigation}) {
   const [curData, setCurData] = useState('');
   const [DList, setDlist] = useState('');
   const [conFlag, setFlag] = useState(false);
+
+  const isFocused = useIsFocused();
 
   const [jwt, setJWT] = useState('');
   const [uid, setID] = useState('');
@@ -99,7 +102,7 @@ export default function MyInfoEdit({route, navigation}) {
      })();      
     }
      
-   }, [userobj])
+   }, [userobj, isFocused])
 
    useEffect(() => {
     (async() => {
@@ -155,7 +158,7 @@ export default function MyInfoEdit({route, navigation}) {
         }
     })();
     
- },[uid])
+ },[uid, isFocused])
 
 
  const setDisElem = (idx) => {
@@ -204,7 +207,7 @@ export default function MyInfoEdit({route, navigation}) {
                 성함
               </Text>
             </View>
-            <View style= {{flexDirection : 'row'}}>
+            <View style= {{flexDirection : 'row', marginBottom : 10}}>
             <Entypo name="dot-single" size={30} color="black" style = {{paddingTop : 5}}/>
               {selectedValue == 'user_name' ? <TextInput style = {{
                 paddingLeft : 10, borderWidth : 2, borderColor : theme.mColor, width : WidthAndHeight.windowWidth*0.5, borderRadius : 5,
@@ -224,7 +227,7 @@ export default function MyInfoEdit({route, navigation}) {
                 성별
               </Text>
             </View>
-            <View style= {{flexDirection : 'row'}}>
+            <View style= {{flexDirection : 'row', marginBottom : 10}}>
             <Entypo name="dot-single" size={30} color="black" style = {{paddingTop : 5}}/>     
                <Text style = {styles.info}> 
                 {userobj.user_gender != 0 ? '여성' : '남성'}
@@ -237,8 +240,7 @@ export default function MyInfoEdit({route, navigation}) {
                 생년월일
               </Text>
             </View>
-
-            <View style= {{flexDirection : 'row'}}>
+            <View style= {{flexDirection : 'row', marginBottom : 10}}>
             <Entypo name="dot-single" size={30} color="black" style = {{paddingTop : 5}}/>
              <Text style = {styles.info}> 
             {userobj.user_birth != null ? userobj.user_birth : ''}
@@ -251,8 +253,7 @@ export default function MyInfoEdit({route, navigation}) {
                 주소
               </Text>
             </View>
-
-            <View style= {{flexDirection : 'row'}}>
+            <View style= {{flexDirection : 'row', marginBottom : 10}}>
             <Entypo name="dot-single" size={30} color="black" style = {{paddingTop : 5}}/>
               <Text style = {styles.info}> 
               {userobj.user_siNm != null ? (route.params != undefined ? route.params.addr : userobj.user_siNm) : '정보 없음'}
@@ -267,7 +268,7 @@ export default function MyInfoEdit({route, navigation}) {
               </Text>
             </View>
 
-            <View style= {{flexDirection : 'row'}}>
+            <View style= {{flexDirection : 'row', marginBottom : 10}}>
             <Entypo name="dot-single" size={30} color="black" style = {{paddingTop : 5}}/>
                 <Text style = {styles.info}> 
                     {userobj.user_phone != null ? userobj.user_phone : ''}
@@ -281,7 +282,7 @@ export default function MyInfoEdit({route, navigation}) {
               </Text>
             </View>
 
-            <View style= {{flexDirection : 'row'}}>
+            <View style= {{flexDirection : 'row', marginBottom : 10}}>
             <Entypo name="dot-single" size={30} color="black" style = {{paddingTop : 5}}/>
               {selectedValue == 'user_insurance_status' ? <TextInput style = {{
                 paddingLeft : 10, borderWidth : 2, borderColor : theme.mColor, width : WidthAndHeight.windowWidth*0.60, borderRadius : 5,
@@ -302,7 +303,7 @@ export default function MyInfoEdit({route, navigation}) {
               </Text>
             </View>
 
-            <View style= {{flexDirection : 'row'}}>
+            <View style= {{flexDirection : 'row', marginBottom : 10}}>
             <Entypo name="dot-single" size={30} color="black" style = {{paddingTop : 5}}/>
               {selectedValue == 'user_drive_status' ? <TextInput style = {{
                 paddingLeft : 10, borderWidth : 2, borderColor : theme.mColor, width : WidthAndHeight.windowWidth*0.60, borderRadius : 5,
@@ -323,7 +324,7 @@ export default function MyInfoEdit({route, navigation}) {
               </Text>
             </View>
 
-            <View style= {{flexDirection : 'row'}}>
+            <View style= {{flexDirection : 'row', marginBottom : 10}}>
             <Entypo name="dot-single" size={30} color="black" style = {{paddingTop : 5}}/>
               {selectedValue == 'user_experience' ? <TextInput style = {{
                 paddingLeft : 10, borderWidth : 2, borderColor : theme.mColor, width : WidthAndHeight.windowWidth*0.65, borderRadius : 5,
@@ -344,7 +345,7 @@ export default function MyInfoEdit({route, navigation}) {
               </Text>
             </View>
 
-            <View style= {{flexDirection : 'row'}}>
+            <View style= {{flexDirection : 'row', marginBottom : 10}}>
             <Entypo name="dot-single" size={30} color="black" style = {{paddingTop : 5}}/>
               {selectedValue == 'user_detailNm' ? <TextInput style = {{
                 paddingLeft : 10, borderWidth : 2, borderColor : theme.mColor, width : WidthAndHeight.windowWidth*0.60, borderRadius : 5,
@@ -365,7 +366,7 @@ export default function MyInfoEdit({route, navigation}) {
               </Text>
             </View>
 
-            <View style= {{flexDirection : 'row'}}>
+            <View style= {{flexDirection : 'row', marginBottom : 10}}>
            
             {
               selectedValue == 'user_disease_list' ? 
@@ -406,7 +407,7 @@ export default function MyInfoEdit({route, navigation}) {
                : 
                <View style = {{flexDirection : 'row'}}>
                 <Entypo name="dot-single" size={30} color="black" style = {{paddingTop : 5}}/>
-               <Text style = {styles.info}> 
+              <Text style = {{...styles.info, width : WidthAndHeight.windowWidth*0.8}}> 
                 {DList != '' ? DList : '앓고 계신 증상/병이 없어요'}
               </Text>
               </View>
@@ -504,7 +505,27 @@ export default function MyInfoEdit({route, navigation}) {
                        .then(function (response){
     
                         console.log(response.data);
-                      
+                        let dName = '';
+                        for(let i = 0; i < render_dis.length; i++)
+                        {
+                          if(i != render_dis.length - 1)
+                          {
+                            if(render_dis[i] == true)
+                            {
+                              dName = dName + dList[i] + ', ';
+                            }
+                          }
+                          else{
+                            if(render_dis[i] == true)
+                            {
+                              dName = dName + dList[i];
+                            }
+                          }        
+                        } 
+                        
+                        console.log(dName);
+                        setDlist(dName.replace(/,$/, '')); 
+
                         setSelected('');
                        })
                        .catch(function (error){
@@ -686,7 +707,7 @@ const styles = StyleSheet.create({
 
   },
   info : {
-    fontSize : 18,
+    fontSize : 22,
     fontFamily : 'IBMMe',
   },
   gridMargin : {

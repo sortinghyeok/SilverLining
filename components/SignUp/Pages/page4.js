@@ -13,7 +13,7 @@ export default function Page4({navigation}) {
   const [phone, setPhone] = useState('');
   const [validInput, setVInput] = useState(null);
   const [validNum, setValid] = useState(null);
-  const [confirm, setConfirm] = useState(false);
+  const [confirm, setConfirm] = useState(true);//true시 이동 가능
   const su_phone = (val) => {
     setPhone(val);
     AsyncStorage.setItem('su_phone', val, () => {
@@ -22,14 +22,25 @@ export default function Page4({navigation}) {
   };
 
   const sendMessageToPhone = () => {
-    axios.get('https://prod.asherchiv.shop/app/users/phone-validation?recipient=' + phone)
-    .then(function (response){
-      console.log('전화번호 전송')
-      console.log('문자메시지 : ' + response)
-      setValid(response)
-  }).catch(function (error){
-    console.log(error);
-  })
+    Alert.alert('인증번호 전송', '다음 번호로 메시지를 보냅니다.\n' + phone, [
+      {
+        text : '인증번호 전송',
+        onPress : () => {
+          axios.get('https://prod.asherchiv.shop/app/users/phone-validation?recipient=' + phone)
+          .then(function (response){
+            console.log('전화번호 전송')
+            console.log('문자메시지 : ' + response)
+            setValid(response)
+          }).catch(function (error){
+            console.log(error);
+          })
+        }
+      },
+      {
+        text : '취소'
+      }
+    ])
+    
   }
 
   const numberSetter = (val) => {
@@ -48,7 +59,7 @@ export default function Page4({navigation}) {
       navigation.navigate('회원가입4');
       break;
       case 5 :
-        console.log(validNum.data.contents)
+        console.log(validNum)
         if(confirm)
         {
           navigation.navigate('회원가입5');

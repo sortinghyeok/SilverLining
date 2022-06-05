@@ -140,7 +140,7 @@ export default function JobInfo({route, navigation}) {
         <View style ={{borderWidth : 3,  borderColor : theme.mColor}}></View>
       
         <SafeAreaView>
-          <ScrollView style = {{height : WidthAndHeight.windowHeight*0.6}}>
+          <ScrollView style = {{height : WidthAndHeight.windowHeight*0.6, }}>
           <View style  = {{marginVertical : '3%', marginLeft : '7%'}}>
           <Text style = {{fontSize : 23, fontFamily : 'IBMMe'}}>근무 조건</Text>
             <View style= {{flexDirection : 'row', width : WidthAndHeight.windowWidth*0.9}}>
@@ -163,7 +163,7 @@ export default function JobInfo({route, navigation}) {
             </View>
             <View style= {{flexDirection : 'row', width : WidthAndHeight.windowWidth*0.9}}>
               <Entypo name="dot-single" size={30} color="black" style = {{paddingTop : 6}} />
-              <Text style = {{fontSize : 18, fontFamily : 'IBMMe'}}> 
+              <Text style = {{fontSize : 18, fontFamily : 'IBMMe', width : WidthAndHeight.windowWidth*0.8}}> 
                 근무 상세 : {content != null ? content.job_detail: ''}
               </Text>
             </View>

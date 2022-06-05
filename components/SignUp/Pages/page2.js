@@ -1,8 +1,8 @@
 import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View, TextInput, TouchableOpacity} from 'react-native';
+import { StyleSheet, Text, View, TextInput, TouchableOpacity, Alert} from 'react-native';
 import { theme } from '../../../shared/theme';
 import Header from '../../../shared/header';
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import Arrow from '../../../shared/Arrow';
 import { MaterialCommunityIcons, Entypo } from '@expo/vector-icons'; 
 import { WidthAndHeight } from '../../../shared/Dimension';
@@ -17,6 +17,9 @@ export default function Page2({navigation}) {
       console.log('비밀번호 실시간 변화 저장 : ' + val)
     })
   };
+  useEffect(() => {
+    console.log(password)
+  }, [password])
   const numberSetter = (val) => {
     switch (val)
     {
@@ -86,7 +89,23 @@ export default function Page2({navigation}) {
         
       </View>
       <View style = {{bottom : -10}}>
-      <Arrow leftArrow = {() => numberSetter(1)} rightArrow = {() =>numberSetter(3)}></Arrow>
+      <Arrow leftArrow = {() => numberSetter(1)} rightArrow = {() =>
+        {
+          Alert.alert('알림', '현재 비밀번호 :' + password, [
+            {
+              text : '다음 단계로',
+              onPress : () => {
+                numberSetter(3)
+              },
+              style : 'default'
+            },
+            {
+              text : '비밀번호 수정',
+              style : 'cancel'
+            }
+          ])
+        }
+       }></Arrow>
       </View>
    
     </View>

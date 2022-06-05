@@ -71,6 +71,7 @@ export default function Interested({navigation}) {
   useEffect(() =>{
     console.log(contents)
   }, [contents])
+  
   return (
     <View style={styles.container}>
        <View style = {{position : 'absolute', top : '6%', right : '10%', flexDirection : 'row'}}>
@@ -90,7 +91,7 @@ export default function Interested({navigation}) {
     </View>
     <Text style = {{left : '10%', fontFamily : 'IBMMe'}}>당신의 홀로 서기를 돕습니다.</Text>
     
-    <View style = {{borderWidth : 1, width : windowWidth*0.8, left :'10%', marginBottom : 10, borderColor : theme.mColor}}></View>
+    <View style = {{fontSize :16, borderWidth : 1, width : windowWidth*0.5, left :'10%', marginBottom : 10, borderColor : theme.mColor}}></View>
     <Text style = {{left : '10%', fontFamily : 'IBMMe', fontSize : 18}}>내가 관심있는 지원정책</Text>
         <SafeAreaView>
             <ScrollView style = {styles.gathering}> 
@@ -104,8 +105,8 @@ export default function Interested({navigation}) {
                 }>  
                     <View>
                         <View style = {{ width : windowWidth*0.75, borderWidth : 2, borderColor : 'white', borderBottomColor : theme.mColor,}}>
-                            <Text style = {{fontFamily : 'IBMMe',fontSize : 17, fontFamily : 'IBMMe'}}>{info.policy_name}</Text>
-                            <Text style = {{fontFamily : 'IBMMe',fontSize : 13, fontFamily : 'IBMMe'}}>- 문의 번호 : {info.policy_phone}</Text>
+                            <Text style = {{fontFamily : 'IBMMe',fontSize : 22, fontFamily : 'IBMMe'}}>{info.policy_name}</Text>
+                            <Text style = {{fontFamily : 'IBMMe',fontSize : 15, fontFamily : 'IBMMe'}}>- 문의 번호 : {info.policy_phone}</Text>
                         </View>
                     </View>                                           
                 </TouchableOpacity>)

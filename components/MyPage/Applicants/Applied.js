@@ -66,14 +66,14 @@ export default function Applied({navigation}) {
       
     <View style = {{left : '10%'}}>
     <Text style = {{...styles.bannerText, 
-        fontSize : 30, 
+        fontSize : 35, 
         fontFamily : 'Sans',
-        marginVertical : 10
+        marginVertical : 15
         }}>SilverLining</Text>
     </View>
-    <Text style = {{left : '10%', fontFamily : 'IBMMe'}}>당신의 홀로 서기를 돕습니다.</Text>
+    <Text style = {{fontSize : 16, left : '10%', fontFamily : 'IBMMe'}}>당신의 홀로 서기를 돕습니다.</Text>
     
-    <View style = {{borderWidth : 1, width : windowWidth*0.8, left :'10%', marginBottom : 10, borderColor : theme.mColor}}></View>
+    <View style = {{borderWidth : 1, width : windowWidth*0.5, left :'10%', marginBottom : 10, borderColor : theme.mColor}}></View>
     <Text style = {{left : '10%', fontFamily : 'IBMMe', fontSize : 18}}>내가 지원한 공고</Text>
         <SafeAreaView>
             <ScrollView style = {styles.gathering}> 
@@ -88,9 +88,9 @@ export default function Applied({navigation}) {
                 }>  
                     <View>
                         <View style = {{ width : windowWidth*0.75, borderWidth : 2, borderColor : 'white', borderBottomColor : theme.mColor,}}>
-                            <Text style = {{fontFamily : 'IBMMe',fontSize : 17, fontFamily : 'IBMMe'}}>{info.job_title}</Text>
+                            <Text style = {{fontFamily : 'IBMMe',fontSize : 22, fontFamily : 'IBMMe'}}>{info.job_title}</Text>
                           
-                            <Text style = {{fontFamily : 'IBMMe',fontSize : 13, fontFamily : 'IBMMe'}}>- 업체명 : {info.company_name}</Text>
+                            <Text style = {{fontFamily : 'IBMMe',fontSize : 15, fontFamily : 'IBMMe'}}>- 업체명 : {info.company_name}</Text>
                         </View>
                     </View>                                           
                 </TouchableOpacity>)

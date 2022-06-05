@@ -11,7 +11,6 @@ import Arrow from '../../../shared/Arrow';
 import { WidthAndHeight } from '../../../shared/Dimension';
 export default function S_Page4({navigation}) {
 
- 
   const navi = useNavigation();
   const [ins, setins] = useState(0)
   const [car, setCar] = useState(0)
@@ -44,7 +43,7 @@ export default function S_Page4({navigation}) {
   
     <View style = {{  }}>   
         <TouchableOpacity style = {{marginVertical : 5}} onPress = {() => insSetter(1)}>
-          <View style = {{borderWidth : 4, borderColor : theme.mColor, borderRadius : 5,  width :  WidthAndHeight.windowWidth*0.8}}>
+          <View style = {{...styles.button, backgroundColor : ins == 0 ? 'white' :theme.mColor}}>
           <Text style = {{fontSize : 18, padding : 5, fontFamily : 'IBMMe'}}>
             저는 보험에 가입되어 있어요.
           </Text>
@@ -52,7 +51,7 @@ export default function S_Page4({navigation}) {
         </TouchableOpacity>
         
         <TouchableOpacity style = {{marginVertical : 5}} onPress = {() => insSetter(0)}>
-        <View style = {{borderWidth : 4, borderColor : theme.mColor, borderRadius : 5,  width :  WidthAndHeight.windowWidth*0.8}}>
+        <View style = {{...styles.button,  backgroundColor : ins == 1 ? 'white' :theme.mColor}}>
         <Text style = {{fontSize : 18, padding : 5, fontFamily : 'IBMMe'}}>
             저는 보험에 가입되어 있지 않아요.
           </Text>
@@ -66,7 +65,7 @@ export default function S_Page4({navigation}) {
   
     <View style = {{  }}>   
         <TouchableOpacity style = {{marginVertical : 5}} onPress = {() => carSetter(1)}>
-          <View style = {{borderWidth : 4, borderColor : theme.mColor, borderRadius : 5,  width :  WidthAndHeight.windowWidth*0.8}}>
+          <View style = {{...styles.button, backgroundColor : car == 0 ? 'white' :theme.mColor}}>
           <Text style = {{fontSize : 18, padding : 5, fontFamily : 'IBMMe'}}>
             저는 운전면허가 있어요.
           </Text>
@@ -74,7 +73,7 @@ export default function S_Page4({navigation}) {
         </TouchableOpacity>
         
         <TouchableOpacity style = {{marginVertical : 5}} onPress = {() => carSetter(0)}>
-        <View style = {{borderWidth : 4, borderColor : theme.mColor, borderRadius : 5,  width :  WidthAndHeight.windowWidth*0.8}}>
+        <View style = {{...styles.button, backgroundColor : car == 1 ? 'white' :theme.mColor}}>
         <Text style = {{fontSize : 18, padding : 5, fontFamily : 'IBMMe'}}>
             저는 운전면허가 없어요.
           </Text>
@@ -97,6 +96,8 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: 'white',
-
   },
+  button : {
+    borderWidth : 4, borderColor : theme.mColor, borderRadius : 5,  width :  WidthAndHeight.windowWidth*0.8,
+  }
 });

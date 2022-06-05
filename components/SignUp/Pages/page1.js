@@ -1,5 +1,5 @@
 import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View, TextInput, TouchableOpacity } from 'react-native';
+import { StyleSheet, Text, View, TextInput, TouchableOpacity, Button, Alert } from 'react-native';
 import { theme } from '../../../shared/theme';
 import Header from '../../../shared/header';
 import React, {useState, useEffect} from 'react';
@@ -40,6 +40,12 @@ export default function Page1({navigation}) {
     })
   };
   
+  const [curID, setID] = useState('');
+  const [move_flag, setFlag] = useState(false);
+
+  useEffect(() => {
+    console.log(curID)
+  }, [curID])
   const numberSetter = (val) => {
     switch (val)
     {
@@ -63,6 +69,16 @@ export default function Page1({navigation}) {
         break;
         default : 
         break;
+    }
+  }
+
+  const check_email = (str) => {
+    var reg_email = /^([0-9a-zA-Z_\.-]+)@([0-9a-zA-Z_-]+)(\.[0-9a-zA-Z_-]+){1,2}$/;
+    if(!reg_email.test(str)){
+    return false;
+    }
+    else {
+        return true;
     }
   }
   return (
@@ -95,7 +111,7 @@ export default function Page1({navigation}) {
 
       <Text style = {{fontSize : 25,  fontFamily : 'IBMMe', marginBottom : '5%'}}>사용하실 아이디를 입력하세요.</Text>
       <TextInput 
-          onChangeText={text => su_email(text)}
+          onChangeText={text => setID(text)}
           style = {{
           borderWidth : 1,
           borderColor : 'white',
@@ -112,9 +128,51 @@ export default function Page1({navigation}) {
           
           <Text style = {{fontSize : 15, fontFamily : 'IBMMe'}}>{'\n\t\t'}선생님의 정보를 소중히 보관합니다.</Text>
     </View>
-
-    <View style = {{bottom : -10}}>
-    <Arrow leftArrow = {() => navigation.navigate('로그인')} rightArrow = {() =>numberSetter(2)}></Arrow>
+       <TouchableOpacity style = {{left : '10%'}} onPress = { () => {
+         axios.get('https://prod.asherchiv.shop/app/users?user-id=' + curID, {
+          'user-id' : curID
+        })
+        .then(function (response){
+          console.log(response.data.isSuccess);
+          if(response.data.isSuccess == false)
+          {
+            if(check_email(curID))
+            {
+              Alert.alert('알림', '사용하실 수 있는 아이디에요!\n다음으로 넘어가실 수 있어요.')
+              su_email(curID);
+              setFlag(true);
+            }
+            else{
+              setFlag(false);
+              Alert.alert('알림', '형식을 제대로 맞춰주세요.')
+            }
+            
+          }
+          else{
+            setFlag(false);
+            Alert.alert('알림', '이미 다른 사람이 이용하고 있어요!\n다른 아이디로 시도해보세요.')
+          }
+        })
+        .catch(function (error) {
+          console.log(error)
+        })
+       }
+         
+       }>
+         <View style = {{width : 200, height : 60, borderWidth: 2, borderColor : theme.mColor, borderRadius : 5}}>
+            <Text style = {{fontFamily : 'IBMMe', textAlign : 'center', padding : 5, fontSize : 20}}>아이디 중복확인</Text>
+         </View>
+       </TouchableOpacity>
+    <View style = {{bottom : -50}}>
+    <Arrow leftArrow = {() => navigation.navigate('로그인')} rightArrow = {() =>
+      {
+        if(move_flag == true)
+          numberSetter(2)
+        else{
+          Alert.alert('알림', '이메일 중복 확인을 먼저 처리해주세요.')
+        }
+      }
+     }></Arrow>
     </View>
     
     

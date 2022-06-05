@@ -56,13 +56,14 @@ return (
    
     <View style = {{...styles.container}}>
         <Header width = "250" str = "마이 페이지"></Header>
-        <View style= {{borderWidth : 1,}}></View>
+        <View style= {{borderWidth : 1, marginLeft : '10%', width : WidthAndHeight.windowWidth*0.8,
+      borderColor : 'silver'}}></View>
 
         <TouchableOpacity onPress={() => navigation.navigate('내정보수정')}>
         <View style  = {{...styles.gridBox, }}>
             <View style = {{flexDirection : 'row', marginLeft :'10%', display : 'flex', marginTop : '6%'}}>
-                <FontAwesome5 name="address-card" size={55} color="black" />
-                <Text style = {{fontSize : 20, fontFamily : 'IBMMe', paddingTop : 5, marginLeft : '5%'}}>
+                <FontAwesome5 name="address-card" size={50} color="black" />
+                <Text style = {{fontSize : 22, fontFamily : 'IBMMe',  paddingTop : 5, marginLeft : '5%'}}>
                     나의 정보 수정
                 </Text>
             </View>
@@ -73,8 +74,8 @@ return (
         <TouchableOpacity onPress={() => navigation.navigate('지원한공고')}>
         <View style  = {{...styles.gridBox, }}>
             <View style = {{flexDirection : 'row', marginLeft :'10%', display : 'flex', marginTop : '6%'}}>
-                <FontAwesome5 name="briefcase" size={55} color="black" />
-                <Text style = {{fontSize : 20, fontFamily : 'IBMMe', paddingTop : 5, marginLeft : '5%'}}>
+                <FontAwesome5 name="briefcase" size={50} color="black" />
+                <Text style = {{fontSize : 22, fontFamily : 'IBMMe', paddingTop : 5, marginLeft : '5%'}}>
                     내가 지원한 공고
                 </Text>
             </View>
@@ -84,8 +85,8 @@ return (
         <TouchableOpacity onPress={() => navigation.navigate('작성한구인글')}>
         <View style  = {{...styles.gridBox, }}>
             <View style = {{flexDirection : 'row', marginLeft :'10%', display : 'flex', marginTop : '6%'}}>
-                <FontAwesome5 name="briefcase" size={55} color="black" />
-                <Text style = {{fontSize : 20, fontFamily : 'IBMMe', paddingTop : 5, marginLeft : '5%'}}>
+                <FontAwesome5 name="briefcase" size={50} color="black" />
+                <Text style = {{fontSize : 22, fontFamily : 'IBMMe', paddingTop : 5, marginLeft : '5%'}}>
                     내가 등록한 공고
                 </Text>
             </View>
@@ -97,8 +98,8 @@ return (
         <TouchableOpacity onPress={() => navigation.navigate('관심있는공고')}>
         <View style  = {{...styles.gridBox, }}>
             <View style = {{flexDirection : 'row', marginLeft :'10%', display : 'flex', marginTop : '6%'}}>
-            <FontAwesome5 name="bookmark" size={55} color="black" />
-                <Text style = {{fontSize : 20, fontFamily : 'IBMMe', paddingTop : 5, marginLeft : '5%'}}>
+            <FontAwesome5 name="bookmark" size={50} color="black" />
+                <Text style = {{fontSize : 22, fontFamily : 'IBMMe', paddingTop : 5, marginLeft : '5%'}}>
                     내가 관심있는 공고
                 </Text>
             </View>
@@ -126,8 +127,8 @@ const styles = StyleSheet.create({
       height : WidthAndHeight.windowHeight / 7,
       marginLeft : '10%',
       marginTop : '5%',
-      padding : 7,
-    
+      paddingTop : 5,
+      paddingLeft : 5,
     },
     textStyle : {
         fontSize : 18,

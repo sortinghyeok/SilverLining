@@ -17,13 +17,20 @@
       "**/*"
     ],
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": true,
+      "config" : {
+        "googleMaps" : { "apiKey" : "AIzaSyCJQn29lTrDrhdN_EsnzQtUgjg7whS2Kmc" }
+      }
     },
     "android": {
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#FFFFFF"
-      }
+      },
+      "config" : {
+        "googleMaps" : { "apiKey" : "AIzaSyCJQn29lTrDrhdN_EsnzQtUgjg7whS2Kmc" }
+      },
+      "package": "com.sortinghyeok.silverling"
     },
     "web": {
       "favicon": "./assets/favicon.png"

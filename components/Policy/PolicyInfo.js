@@ -126,10 +126,13 @@ export default function PolicyInfo({route, navigation}) {
         <SafeAreaView>
           <ScrollView style = {{height : WidthAndHeight.windowHeight*0.4,}}>
           <View style  = {{marginVertical : '3%', marginLeft : '7%'}}>
-          <Text style = {{fontSize : 18, fontFamily : 'IBMMe'}}>신청 대상</Text>
+          <Text style = {{fontSize : 27, fontFamily : 'IBMMe'}}>신청 대상</Text>
             <View style= {{flexDirection : 'row'}}>
-              <Entypo name="dot-single" size={24} color="black" />
-              <Text style = {{width : WidthAndHeight.windowWidth*0.8, fontFamily : 'IBMMe'}}> 
+              <View style= {{paddingTop : 10}}>
+              <Entypo name="dot-single" size={30} color="black" />
+              </View>
+          
+              <Text style = {{fontSize : 22, width : WidthAndHeight.windowWidth*0.8, fontFamily : 'IBMMe'}}> 
               {content != null ? content.applicant_subject : "불러오는 중..."}
               </Text>
             </View>       
@@ -138,8 +141,10 @@ export default function PolicyInfo({route, navigation}) {
         <View style  = {{marginVertical : '3%', marginLeft : '7%'}}>
           <Text style = {{fontSize : 18, fontFamily : 'IBMMe'}}>주관 기관</Text>
             <View style= {{flexDirection : 'row'}}>
-              <Entypo name="dot-single" size={24} color="black" />
-              <Text style = {{width : WidthAndHeight.windowWidth*0.8, fontFamily : 'IBMMe'}}> 
+            <View style= {{paddingTop : 10}}>
+              <Entypo name="dot-single" size={30} color="black" />
+              </View>
+              <Text style = {{fontSize : 22, width : WidthAndHeight.windowWidth*0.8, fontFamily : 'IBMMe'}}> 
               {content != null ? content.policy_operation : "불러오는 중..."}
               </Text>
             </View>       
@@ -148,14 +153,18 @@ export default function PolicyInfo({route, navigation}) {
         <View style  = {{marginVertical : '3%', marginLeft : '7%'}}>
           <Text style = {{fontSize : 18, fontFamily : 'IBMMe'}}>지원 방법</Text>
           <View style= {{flexDirection : 'row'}}>
-              <Entypo name="dot-single" size={24} color="black" />
-              <Text style = {{width : WidthAndHeight.windowWidth*0.8, fontFamily : 'IBMMe'}}> 
+          <View style= {{paddingTop : 10}}>
+              <Entypo name="dot-single" size={30} color="black" />
+              </View>
+              <Text style = {{fontSize : 22, width : WidthAndHeight.windowWidth*0.8, fontFamily : 'IBMMe'}}> 
               {content != null ? '현장 지원 : ' + content.policy_apply_method : "불러오는 중..."}
               </Text>
             </View>   
             <View style= {{flexDirection : 'row'}}>
-              <Entypo name="dot-single" size={24} color="black" />
-              <Text style = {{width : WidthAndHeight.windowWidth*0.8, fontFamily : 'IBMMe'}}> 
+            <View style= {{paddingTop : 10}}>
+              <Entypo name="dot-single" size={30} color="black" />
+              </View>
+              <Text style = {{fontSize : 22, width : WidthAndHeight.windowWidth*0.8, fontFamily : 'IBMMe'}}> 
               {content != null ? '해당 번호로 전화 : ' + content.poilcy_phone : "불러오는 중..."}
               </Text>
             </View>         
@@ -164,8 +173,10 @@ export default function PolicyInfo({route, navigation}) {
         <View style  = {{marginVertical : '3%', marginLeft : '7%'}}>
           <Text style = {{fontSize : 18, fontFamily : 'IBMMe'}}>지원 정책/사업 상세</Text>
           <View style= {{flexDirection : 'row'}}>
-              <Entypo name="dot-single" size={24} color="black" />
-              <Text style = {{width : WidthAndHeight.windowWidth*0.8, fontFamily : 'IBMMe'}}> 
+          <View style= {{paddingTop : 10}}>
+              <Entypo name="dot-single" size={30} color="black" />
+              </View>
+              <Text style = {{fontSize : 22, width : WidthAndHeight.windowWidth*0.8, fontFamily : 'IBMMe'}}> 
               {content != null ? '현장 지원 : ' + content.policy_support_detail : "불러오는 중..."}
               </Text>
             </View>           
