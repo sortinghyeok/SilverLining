@@ -19,7 +19,7 @@
     "ios": {
       "supportsTablet": true,
       "config" : {
-        "googleMaps" : { "apiKey" : "AIzaSyCJQn29lTrDrhdN_EsnzQtUgjg7whS2Kmc" }
+        "googleMaps" : { "apiKey" : "apikey붙이는곳" }
       }
     },
     "android": {
@@ -28,7 +28,7 @@
         "backgroundColor": "#FFFFFF"
       },
       "config" : {
-        "googleMaps" : { "apiKey" : "AIzaSyCJQn29lTrDrhdN_EsnzQtUgjg7whS2Kmc" }
+        "googleMaps" : { "apiKey" : "apikey붙이는곳" }
       },
       "package": "com.sortinghyeok.silverling"
     },
