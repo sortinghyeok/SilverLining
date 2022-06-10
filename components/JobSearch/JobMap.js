@@ -1,5 +1,5 @@
 import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View, Button, Dimensions, TouchableOpacity } from 'react-native';
+import { StyleSheet, Text, View, Button, Dimensions, TouchableOpacity, ScrollView } from 'react-native';
 import MapView, {PROVIDER_GOOGLE, Marker} from 'react-native-maps';
 import { WidthAndHeight } from '../../shared/Dimension';
 import * as Location from 'expo-location';
@@ -10,13 +10,14 @@ import { Entypo } from '@expo/vector-icons';
 import JobInfo from './JobInfo';
 import axios from 'axios';
 import AsyncStorage from '@react-native-async-storage/async-storage'
+
 export default function JobMap({route, navigation}) {
   const [location, setLocation] = useState(null);
   const [errorMsg, setErrorMsg] = useState(null);
   const [ok, setOK] = useState(true);
 
   const [markerData, setMarkerData] = useState("");
-  const [initialRegion, setInitialRegion] = useState(null);
+  //const [initialRegion, setInitialRegion] = useState(null);
   const [lati, setLatitude] = useState(0);
   const [longi, setLongitude] = useState(0);
   
@@ -127,7 +128,7 @@ export default function JobMap({route, navigation}) {
       getLocation();
       
       setLocation(location);
-      setInitialRegion(location);
+      //setInitialRegion(location);
     })();
   }, []);
 
@@ -151,8 +152,17 @@ export default function JobMap({route, navigation}) {
     setSdetail(detail)
     setSwork(work)
     setSIdx(idx)
-    setLat(lat)
-    setLon(lon)
+    if(route.params.mode == 0)
+    {
+      setLat(lat)
+      setLon(lon)
+    }
+    else{
+      setLatitude(lat)
+      setLongitude(lon)
+    }
+    
+  
   }
 
   return (
@@ -207,47 +217,54 @@ export default function JobMap({route, navigation}) {
       
       <StatusBar style="auto" />
     </View>
+
+
+
     <TouchableOpacity style = {{position : 'absolute', bottom : '12%',}}
     onPress = {() => titleJumper(sel_title)}
     >
-    <View style = {styles.grid} >
+      
+      <View style = {styles.grid} >
 
-        <Text style = {{fontSize : 15, fontFamily : 'IBMMe' }}>
-          {sel_addr ? sel_addr : '마커를 눌러주세요!'}
-        </Text>
-        <Text style = {{fontSize : 20, fontFamily : 'IBMMe' }}>
-          {sel_title ? sel_title :'마커를 누르시면 공고제목이 표시됩니다.'}
-        </Text>
-        
-        <View style= {styles.flexRow}>
-        <Entypo name="dot-single" size={24} color="black" />
-        <Text style = {{fontFamily : 'IBMMe', fontSize : 17}}> 
-          급여 : {sel_wage ? sel_wage : '아직 아무것도 선택되지 않았어요...'}
-        </Text>
-        </View>
-        <View style= {styles.flexRow}>
-        <Entypo name="dot-single" size={24} color="black" />
-        <Text style = {{fontFamily : 'IBMMe', fontSize : 17}}> 
-          근무지역 : {sel_addr ? sel_addr : '지도의 마커를 눌러주세요'}
-        </Text>
-        </View>
-        <View style= {styles.flexRow}>
-        <Entypo name="dot-single" size={24} color="black" />
-        <Text style = {{fontFamily : 'IBMMe', fontSize : 17}}> 
-          근무시간 : {sel_work_time ? sel_work_time : '지도의 마커를 눌러주세요.'}
-        </Text>
-        </View>
-        <View style= {styles.flexRow}>
-        <Entypo name="dot-single" size={24} color="black" />
-        <Text style = {{fontFamily : 'IBMMe', fontSize : 17}}> 
-          기타 : {sel_detail}
-        </Text>
-        </View>
-        
+          <Text style = {{fontSize : 15, fontFamily : 'IBMMe' }}>
+            {sel_addr ? sel_addr : '주소 정보가 없네요...'}
+          </Text>
+          <Text style = {{fontSize : 20, fontFamily : 'IBMMe' }}>
+            {sel_title ? sel_title :'공고 제목이 따로 없습니다.'}
+          </Text>
+          
+          <View style= {styles.flexRow}>
+          <Entypo name="dot-single" size={24} color="black" />
+          <Text style = {{fontFamily : 'IBMMe', fontSize : 17}}> 
+            급여 : {sel_wage ? sel_wage : '급여 정보가 없습니다.'}
+          </Text>
+          </View>
+          <View style= {styles.flexRow}>
+          <Entypo name="dot-single" size={24} color="black" />
+          <Text style = {{fontFamily : 'IBMMe', fontSize : 17}}> 
+            근무지역 : {sel_addr ? sel_addr : '근무 지역 정보가 없습니다..'}
+          </Text>
+          </View>
+          <View style= {styles.flexRow}>
+          <Entypo name="dot-single" size={24} color="black" />
+          <Text style = {{fontFamily : 'IBMMe', fontSize : 17}}> 
+            근무시간 : {sel_work_time ? sel_work_time : '근무 시간 정보가 없습니다..'}
+          </Text>
+          </View>
+          <View style= {styles.flexRow}>
+          <Entypo name="dot-single" size={24} color="black" />
+          <Text style = {{fontFamily : 'IBMMe', fontSize : 17}}> 
+            기타 : {sel_detail}
+          </Text>
+          </View>
+          
+          
+          </View>
+        </TouchableOpacity>
+ 
      
-    </View>
-    </TouchableOpacity>
-    
+
+
     </View>
   );
 }
@@ -263,7 +280,7 @@ const styles = StyleSheet.create({
     height: Dimensions.get('window').height*0.495,
   },
   grid : {
-    width: Dimensions.get('window').width*0.9,
+    width: Dimensions.get('window').width*0.8,
     height: Dimensions.get('window').height*0.25,
     borderWidth : 2,
     borderColor : 'white',
