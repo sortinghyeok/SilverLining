@@ -425,12 +425,12 @@ export default function MyInfoEdit({route, navigation}) {
               {selectedValue == 'user_median_income' ? <TextInput style = {{
                 paddingLeft : 10, borderWidth : 2, borderColor : theme.mColor, width : WidthAndHeight.windowWidth*0.60, borderRadius : 5,
               }}
-              
+              placeholder = "단위 없이 월 소득을 입력해주세요."
               autoFocus = {true}
               onChangeText={(text) => setCurData(text)}
               ></TextInput>
                :  <Text style = {styles.info}> 
-                {userobj.median_income != null ? userobj.median_income : "정보 없음"}
+                {userobj.user_median_income != null && isNaN(parseInt(userobj.user_median_income)) == false ? '평균 소득 대비 ' + userobj.user_median_income + '%' : "추후 분위 확인 가능"}
               </Text>
                 }
             </View>  
@@ -454,6 +454,7 @@ export default function MyInfoEdit({route, navigation}) {
                         { label: "직무 경험", value: "user_experience" },
                         { label: "기타 상세", value:"user_detailNm" },
                         { label: "증상/병", value: "user_disease_list" },
+                        { label: "소득수준", value: "user_median_income" },
                     ]}
                     placeholder = {{
                         label : "수정할 정보 선택"
@@ -533,10 +534,11 @@ export default function MyInfoEdit({route, navigation}) {
                        })
                        break;
 
-                    case 'job_working_time' :
-                      axios.patch('https://prod.asherchiv.shop/app/jobs/1/time',{
+                    case 'user_drive_status' :
+                      axios.patch('https://prod.asherchiv.shop/app/users/' + userobj.user_idx + '/drive-status',{
                 
-                      "job_working_time" : curData
+                      "user_idx" : userobj.user_idx,
+                      "user_drive_status" : curData == '있음' ? 1 : 0
                       }, 
                       {
                       headers : {
@@ -549,7 +551,7 @@ export default function MyInfoEdit({route, navigation}) {
 
                       console.log(response.data);
                     
-                      ob.job_working_time = curData;
+                      userobj.user_drive_status = curData == '있음' ? 1 : 0;
                      
                       setSelected('');
                     })
@@ -558,10 +560,11 @@ export default function MyInfoEdit({route, navigation}) {
                     }) 
                     break;
                     
-                    case 'job_wage' :
-                      axios.patch('https://prod.asherchiv.shop/app/jobs/1/wage',{
+                    case 'user_insurance_status' :
+                      axios.patch('https://prod.asherchiv.shop/app/users/' + userobj.user_idx + '/insurance',{
                      
-                        "job_wage" : curData
+                        "user_idx" : userobj.user_idx,
+                        "user_insurance_status" : curData == '가입' ? 1 : 0
                         }, 
                         {
                         headers : {
@@ -573,7 +576,7 @@ export default function MyInfoEdit({route, navigation}) {
                       .then(function (response){
   
                         console.log(response.data);
-                   
+                        userobj.user_insurance_status = curData == '가입' ? 1 : 0;
                         setSelected('');
                       })
                       .catch(function (error){
@@ -581,10 +584,11 @@ export default function MyInfoEdit({route, navigation}) {
                       }) 
                       break;
 
-                      case 'job_offer_status' :
-                        axios.patch('https://prod.asherchiv.shop/app/jobs/1/offer',{
+                      case 'user_experience' :
+                        axios.patch('https://prod.asherchiv.shop/app/users/' + userobj.user_idx + '/experience',{
                      
-                          "job_offer_status" : curData == '완료' ? 0 : 1
+                          "user_idx" : userobj.user_idx,
+                          "user_experience" : curData
                           }, 
                           {
                           headers : {
@@ -596,7 +600,7 @@ export default function MyInfoEdit({route, navigation}) {
                         .then(function (response){
     
                           console.log(response.data);
-                     
+                          userobj.user_experience = curData;
                           setSelected('');
                         })
                         .catch(function (error){
@@ -604,11 +608,11 @@ export default function MyInfoEdit({route, navigation}) {
                         }) 
                         break;
 
-                        case 'job_age' :
-                          axios.patch('https://prod.asherchiv.shop/app/jobs/1/age',{
-                   
-                            'job_min_age' : parseInt(curData),
-                            "job_max_age" : parseInt(curData2)
+                        case 'user_median_income' :
+                          axios.patch('https://prod.asherchiv.shop/app/users/' + userobj.user_idx + '/income',{
+                            "user_idx" : userobj.user_idx,
+                            "user_income" : curData
+                    
                             }, 
                             {
                             headers : {
@@ -620,7 +624,7 @@ export default function MyInfoEdit({route, navigation}) {
                           .then(function (response){
       
                             console.log(response.data);
-                        
+                            userobj.user_median_income = "(추후 확인가능)";
                             setSelected('');
                           })
                           .catch(function (error){
@@ -628,58 +632,7 @@ export default function MyInfoEdit({route, navigation}) {
                           }) 
                           break;
 
-                        case 'job_gender' :
-                          axios.patch('https://prod.asherchiv.shop/app/jobs/1/gender',{
-                  
-                            'job_gender' : (curData == '남성') ? 0 : 1                      
-                            }, 
-                            {
-                            headers : {
-                              'X-ACCESS-TOKEN' : jwt
-                            }
-                          }
-                          
-                          )
-                          .then(function (response){
-      
-                            console.log(response.data);
-                         
-                            if(curData == '남성')                
-                              ob.job_gender = 0;
-                            else
-                              ob.job_gender = 1;               
-                          
-                            setSelected('');
-                          })
-                          .catch(function (error){
-                            console.log(error);
-                          }) 
-                          break;
-
-                          case 'job_detail' :
-                            axios.patch('https://prod.asherchiv.shop/app/jobs/1/detail',{
-                     
-                              'job_detail' : curData                   
-                              }, 
-                              {
-                              headers : {
-                                'X-ACCESS-TOKEN' : jwt
-                              }
-                            }
-                            
-                            )
-                            .then(function (response){
-        
-                              console.log(response.data);
-                           
-                              ob.job_detail = curData;            
-                       
-                              setSelected('');
-                            })
-                            .catch(function (error){
-                              console.log(error);
-                            }) 
-                            break;
+                    
                    }
                    
                   

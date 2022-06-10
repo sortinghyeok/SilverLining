@@ -81,7 +81,7 @@ export default function Home({navigation}) {
             <MaterialIcons name="policy" size={45} color="black" style = {styles.iconPos}/>
           </View>
         </TouchableOpacity>
-        <TouchableOpacity>
+        <TouchableOpacity onPress={() => navigation.navigate('관계단절메인')}>
           <View style = {styles.gridBox}>
           <Text style = {{fontSize : 18, fontFamily : 'IBMMe'}}>주변 친구와</Text>
           <Text style = {{fontSize : 18, fontFamily : 'IBMMe'}}>알림 주고 받기</Text>

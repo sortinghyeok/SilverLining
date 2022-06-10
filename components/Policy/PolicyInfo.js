@@ -139,7 +139,7 @@ export default function PolicyInfo({route, navigation}) {
         </View>
 
         <View style  = {{marginVertical : '3%', marginLeft : '7%'}}>
-          <Text style = {{fontSize : 18, fontFamily : 'IBMMe'}}>주관 기관</Text>
+        <Text style = {{fontSize : 27, fontFamily : 'IBMMe'}}>주관 기관</Text>
             <View style= {{flexDirection : 'row'}}>
             <View style= {{paddingTop : 10}}>
               <Entypo name="dot-single" size={30} color="black" />
@@ -151,7 +151,7 @@ export default function PolicyInfo({route, navigation}) {
         </View>
 
         <View style  = {{marginVertical : '3%', marginLeft : '7%'}}>
-          <Text style = {{fontSize : 18, fontFamily : 'IBMMe'}}>지원 방법</Text>
+        <Text style = {{fontSize : 27, fontFamily : 'IBMMe'}}>지원 방법</Text>
           <View style= {{flexDirection : 'row'}}>
           <View style= {{paddingTop : 10}}>
               <Entypo name="dot-single" size={30} color="black" />
@@ -171,7 +171,7 @@ export default function PolicyInfo({route, navigation}) {
         </View>
         
         <View style  = {{marginVertical : '3%', marginLeft : '7%'}}>
-          <Text style = {{fontSize : 18, fontFamily : 'IBMMe'}}>지원 정책/사업 상세</Text>
+        <Text style = {{fontSize : 27, fontFamily : 'IBMMe'}}>지원 정책/사업 상세</Text>
           <View style= {{flexDirection : 'row'}}>
           <View style= {{paddingTop : 10}}>
               <Entypo name="dot-single" size={30} color="black" />

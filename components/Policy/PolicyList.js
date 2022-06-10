@@ -87,10 +87,10 @@ export default function PolicyList({navigation}) {
                 }>  
                     <View>
                         <View style = {{ width : windowWidth*0.75, borderWidth : 2, borderColor : 'white', borderBottomColor : theme.mColor,}}>
-                            <Text style = {{fontFamily : 'IBMMe',fontSize : 17, fontFamily : 'IBMMe'}}>{info.policy_name}</Text>
-                            <Text style = {{fontFamily : 'IBMMe',fontSize : 13, fontFamily : 'IBMMe'}}>- 지원대상 : {info.applicant_subject}</Text>
-                            <Text style = {{fontFamily : 'IBMMe',fontSize : 13, fontFamily : 'IBMMe'}}>- 지원주관 : {info.policy_operation}</Text>
-                            <Text style = {{fontFamily : 'IBMMe',fontSize : 13, fontFamily : 'IBMMe'}}>- 문의번호 : {info.poilcy_phone}</Text>  
+                            <Text style = {{fontFamily : 'IBMMe',fontSize : 23, fontFamily : 'IBMMe'}}>{info.policy_name}</Text>
+                            <Text style = {{fontFamily : 'IBMMe',fontSize : 17, fontFamily : 'IBMMe'}}>- 지원대상 : {info.applicant_subject}</Text>
+                            <Text style = {{fontFamily : 'IBMMe',fontSize : 17, fontFamily : 'IBMMe'}}>- 지원주관 : {info.policy_operation}</Text>
+                            <Text style = {{fontFamily : 'IBMMe',fontSize : 17, fontFamily : 'IBMMe'}}>- 문의번호 : {info.poilcy_phone}</Text>  
                         </View>
                     </View>                                           
                 </TouchableOpacity>)

@@ -50,6 +50,10 @@ import HospDetail from './components/Welfare/Hospitals/HospDetail';
 import InstDetail from './components/Welfare/Institutions/InstDetail';
 import PolicyList from './components/Policy/PolicyList';
 import PolicyInfo from './components/Policy/PolicyInfo';
+
+import ChatMain from './components/Chat/ChatMain';
+import Chatroom from './components/Chat/Chatroom';
+
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import * as Font from 'expo-font';
 import AppLoading from 'expo-app-loading'
@@ -131,6 +135,8 @@ export default function App() {
         <Stack.Screen name = '지원한공고' component={Applied} options = {{title : '지원한공고', headerShown : false}}></Stack.Screen>
         <Stack.Screen name = '관심있는공고' component={Interested} options = {{title : '관심있는 공고', headerShown : false}}></Stack.Screen>
 
+        <Stack.Screen name = '관계단절메인' component={ChatMain} options = {{title : '관계단절메인', headerShown : false}}></Stack.Screen>
+        <Stack.Screen name = '관계단절채팅' component={Chatroom} options = {{title : '관계단절채팅', headerShown : false}}></Stack.Screen>
       </Stack.Navigator>
     </NavigationContainer>
   );

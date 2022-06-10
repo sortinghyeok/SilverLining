@@ -17,10 +17,14 @@
       "**/*"
     ],
     "ios": {
+<<<<<<< HEAD
+      "supportsTablet": true
+=======
       "supportsTablet": true,
       "config" : {
         "googleMaps" : { "apiKey" : "apikey붙이는곳" }
       }
+>>>>>>> 3b3eeb02d3c2ca21c9541f0d5b3006fb4301e4b7
     },
     "android": {
       "adaptiveIcon": {
