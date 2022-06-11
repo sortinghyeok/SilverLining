@@ -252,21 +252,17 @@ const ModalButton = () => {
     <FontAwesome5 name="user-friends" size={45} color="black" />
     <View style = {{flexDirection : 'row'}}>
     <Text style = {{ fontFamily : 'IBMMe', fontSize : 25, marginLeft : 20}}>나의 친구 목록</Text>
-    <Text>{'\t\t\t'}</Text><ModalButton></ModalButton>
    
     </View>
- 
-  
     </View>
-    
+
 
         <SafeAreaView>
             <ScrollView style = {styles.gathering}
      
             horizontal
-            persistentScrollbar = {false}
             showsHorizontalScrollIndicator       
-            contentContainerStyle = {{}}
+
             > 
             {contents != null ? contents.map((info) =>   <TouchableOpacity key  = {info.chatroom_idx} style = {{marginTop : 10}} onPress = {() => 
             {   
@@ -345,6 +341,7 @@ const ModalButton = () => {
                
             </ScrollView>
         </SafeAreaView>
+        <ModalButton></ModalButton>
     </View>
   );
 }
@@ -356,7 +353,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
   gathering : {
-    marginTop : 10,
+    marginVertical : 10,
     borderTopWidth :3,
     borderBottomWidth : 3,
     borderTopColor : theme.mColor,
