@@ -44,7 +44,7 @@ export default function Resume({route, navigation}) {
     console.log('jwt : ' + jwt);
 
 
-    axios.post('https://prod.asherchiv.shop/app/jobs/13/application', {}, {headers : {'X-ACCESS-TOKEN' : jwt}})
+    axios.post('https://prod.asherchiv.shop/app/jobs/' +jobidx + '/application', {}, {headers : {'X-ACCESS-TOKEN' : jwt}})
     .then(function (response){
       if(response.data.code == 2031)
       {
@@ -52,7 +52,7 @@ export default function Resume({route, navigation}) {
           {
             text : '지원 취소',
             onPress : () => {
-              console.log('still in development')
+
               navigation.navigate('구인메인')
             } 
           },

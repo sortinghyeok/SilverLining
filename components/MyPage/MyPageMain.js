@@ -100,7 +100,7 @@ return (
             <View style = {{flexDirection : 'row', marginLeft :'10%', display : 'flex', marginTop : '6%'}}>
             <FontAwesome5 name="bookmark" size={50} color="black" />
                 <Text style = {{fontSize : 22, fontFamily : 'IBMMe', paddingTop : 5, marginLeft : '5%'}}>
-                    내가 관심있는 공고
+                    관심 정책/사업
                 </Text>
             </View>
         </View>

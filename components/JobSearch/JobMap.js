@@ -126,8 +126,6 @@ export default function JobMap({route, navigation}) {
       }
       
       getLocation();
-      
-      setLocation(location);
       //setInitialRegion(location);
     })();
   }, []);

@@ -13,7 +13,7 @@ export default function Page4({navigation}) {
   const [phone, setPhone] = useState('');
   const [validInput, setVInput] = useState(null);
   const [validNum, setValid] = useState(null);
-  const [confirm, setConfirm] = useState(true);//true시 이동 가능
+  const [confirm, setConfirm] = useState(false);//true시 이동 가능
   const su_phone = (val) => {
     setPhone(val);
     AsyncStorage.setItem('su_phone', val, () => {
